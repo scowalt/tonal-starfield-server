@@ -45,3 +45,7 @@ Temporary Items
 
 # SublimeText Editor
 sftp-config.json
+
+# PyCharm
+.idea/workspace.xml
+.idea/tasks.xml
