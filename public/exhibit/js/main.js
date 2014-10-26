@@ -97,10 +97,10 @@ document.onclick = spawnStar;
 
 io = io.connect();
 
-io.on('play-note', function(){
+io.on('play-note', function(data){
 	spawnStar({
-		'x': window.innerWidth / 2,
-		'y': window.innerHeight / 2
+		'x': data['x-ratio'] * window.innerWidth,
+		'y': data['y-ratio'] * window.innerHeight
 	})
 })
 

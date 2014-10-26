@@ -22,7 +22,7 @@ app.use('/', express.static(__dirname + '/public'));
  */
 io.on('connection', function onConnect(socket) {
 	socket.on('play-note', function onPlayNote(data) {
-		io.emit('play-note', {});
+		io.emit('play-note', data);
 	})
 })
 
