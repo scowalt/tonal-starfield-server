@@ -15,13 +15,13 @@ var io = require('socket.io')(server);
  * ROUTES
  */
 // serve static content
-app.use('/', express.static(__dirname + '/views'));
+app.use('/', express.static(__dirname + '/public'));
 
 /**
  * SOCKETS
  */
-io.on('connection', function(socket){
-	socket.on('play-note', function(data){
+io.on('connection', function onConnect(socket) {
+	socket.on('play-note', function onPlayNote(data) {
 		io.emit('play-note', {});
 	})
 })
