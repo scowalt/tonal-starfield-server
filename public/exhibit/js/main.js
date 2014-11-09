@@ -11,6 +11,7 @@ var ZOOM_SPEED = 7;
 var maxVolume = 0.5;
 var oldMaxVolume;
 var paused = false;
+var rotationSpeed = 0.05; // speed of camera rotation
 
 /**
  * Scene variables
@@ -18,15 +19,23 @@ var paused = false;
 var sound = new Sound();
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, FIELD_OF_VIEW);
-
 var renderer = new THREE.WebGLRenderer();
+var geometry = new THREE.SphereGeometry(2, 12, 12);
+var rotationCounter = 0;
+
+/**
+ * Setup
+ */
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-var geometry = new THREE.SphereGeometry(2, 12, 12);
 camera.position.z = 5;
 
+/**
+ * render() is used to generate each frame
+ */
 function render() {
+	// debug info
 	stats.begin();
 
 	requestAnimationFrame(render);
@@ -47,7 +56,7 @@ function render() {
 	});
 
 	// add stars to scene
-	if (!paused)
+	if (!paused){
 		for (var i = 0; i < STARS_PER_FRAME; i++) {
 			var material = new THREE.MeshBasicMaterial({
 				color: 0xffffff
@@ -57,7 +66,18 @@ function render() {
 			circle.material.color.setRGB(1, 1, 1);
 			scene.add(circle);
 		}
+	}
+	
+	// rotate camera
+	if (rotationCounter >= rotationSpeed){
+		camera.rotateOnAxis(new THREE.Vector3(0,0,1), degInRad(rotationSpeed));
+		rotationCounter -= rotationSpeed;
+	} else if (rotationCounter <= (-1*rotationSpeed)){
+		camera.rotateOnAxis(new THREE.Vector3(0,0,1), degInRad(-rotationSpeed));
+		rotationCounter += rotationSpeed;
+	}
 
+	// debug info
 	stats.end();
 }
 
@@ -72,6 +92,9 @@ stats.domElement.style.top = '0px';
 stats.domElement.style.display = 'none';
 document.body.appendChild(stats.domElement);
 
+/**
+ * Key press handler
+ */
 document.onkeypress = function onKeyPress(e) {
 	e = e || window.event;
 	console.log(e.keyCode);
@@ -93,10 +116,16 @@ document.onkeypress = function onKeyPress(e) {
 	}
 }
 
+function degInRad(deg){
+	return 0.0174 * deg;
+}
+
 document.onclick = spawnStar;
 
+/**
+ * Socket.io stuff
+ */
 io = io.connect();
-
 io.on('play-note', function(data){
 	spawnStar({
 		'x': data['x-ratio'] * window.innerWidth,
@@ -115,6 +144,10 @@ function spawnStar(e) {
 	sound.playNote(maxVolume / 5);
 	circle.material.color.setRGB(Math.random(), Math.random(), Math.random());
 	scene.add(circle);
+}
+
+function rotate(){
+	rotationCounter += 360;
 }
 
 render();

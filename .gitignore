@@ -45,3 +45,6 @@ Temporary Items
 
 # SublimeText Editor
 sftp-config.json
+
+# Node.js
+node_modules/*
