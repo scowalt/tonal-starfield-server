@@ -1,9 +1,4 @@
 /**
- * CONSTANTS
- */
-PORT = 8080;
-
-/**
  * IMPORTS
  */
 var express = require('express');
@@ -29,7 +24,7 @@ io.on('connection', function onConnect(socket) {
 /**
  * START SERVER
  */
-server.listen(PORT, function listenCallback() {
+server.listen(process.env.PORT || 8080, function listenCallback() {
 	var host = server.address().address;
 	var port = server.address().port;
 
