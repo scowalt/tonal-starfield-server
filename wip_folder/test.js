@@ -88,6 +88,7 @@ function prepareCanvas()
 		var mouseY = e.pageY - this.offsetTop;
 		console.log('mousex:' + mouseX + ' mousey:' + mouseY);
 		$('#test').text('mousex:' + mouseX + ' mousey:' + mouseY);
+		coords.push({x: mouseX, y: mouseY});
 
 		paint = true;
 		addClick(mouseX, mouseY, false);
@@ -101,6 +102,7 @@ function prepareCanvas()
 			addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
 			console.log('mousex:' + mouseX + ' mousey:' + mouseY);
 			$('#test').text('mousex:' + mouseX + ' mousey:' + mouseY);
+			coords.push({x: mouseX, y: mouseY});
 			redraw();
 		}
 	});
@@ -150,42 +152,6 @@ function redraw()
 	
 	clearCanvas();
 	
-	/*var locX;
-	var locY;
-
-	if(curTool == "marker")
-	{
-		// // Draw the marker tool background
-		// context.drawImage(markerBackgroundImage, 0, 0, canvasWidth, canvasHeight);
-		
-		// Purple
-		locX = (curColor == colorPurple) ? 18 : 52;
-		locY = 19;
-		
-		context.beginPath();
-		context.moveTo(locX + 10, locY + 24);
-		context.lineTo(locX + 10, locY + 24);
-		context.lineTo(locX + 22, locY + 16);
-		context.lineTo(locX + 22, locY + 31);
-		context.closePath();
-		context.fillStyle = colorPurple;
-		context.fill();	
-
-	}
-
-	locY = 189;
-	context.beginPath();
-	context.rect(locX, locY, 2, 12);
-	context.closePath();
-	context.fillStyle = '#333333';
-	context.fill();	
-	
-	// Keep the drawing in the drawing area
-	context.save();
-	context.beginPath();
-	context.rect(drawingAreaX, drawingAreaY, drawingAreaWidth, drawingAreaHeight);
-	context.clip();
-		*/
 	var radius;
 	var i = 0;
 	for(; i < clickX.length; i++)
@@ -218,7 +184,6 @@ function redraw()
 		context.stroke();
 		
 	}
-	//context.globalCompositeOperation = "source-over";// To erase instead of draw over with white
 	context.restore();
 	
 }

@@ -40,6 +40,8 @@ var melodyInt;
 var chor1, chor2, chor3, melody, chordGain, melodyGain;
 var isRunning = false;
 
+var coords = Array();
+
 //All browsers, hooray
 context1 = new AudioContext();
 

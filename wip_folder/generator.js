@@ -3,6 +3,7 @@
 //play these notes
 //play these chords
 
+//if sequencer, only use a few of the densely populated grids
 var chordlist = [
 [0,2,4],
 [1,3,5],
@@ -12,7 +13,7 @@ var chordlist = [
 ];
 
 var chord1, chord2, chord3, chord4;
-var coords = Array();
+
 
 function sort(a, b){
 	return a.x - b.x;
@@ -20,9 +21,9 @@ function sort(a, b){
 
 function parseCanvas(){
 	//clickX and clickY are the useful arrays
-	for(var i = 0; i < clickX.length; i++){
+	/*for(var i = 0; i < clickX.length; i++){
 		coords.push({x: clickX[i], y: clickY[i]});
-	}
+	}*/
 	coords.sort(sort);
-	$('#chords').text();
+	$('#coords').text(JSON.stringify(coords));
 }
