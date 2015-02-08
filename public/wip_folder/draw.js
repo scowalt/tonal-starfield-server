@@ -20,9 +20,7 @@ var canvasHeight = 220;
 var padding = 25;
 var lineWidth = 8;
 var colorPurple = "#cb3594";
-var colorGreen = "#659b41";
-var colorYellow = "#ffcf33";
-var colorBrown = "#986928";
+
 var clickX = new Array();
 var clickY = new Array();
 var clickColor = new Array();
@@ -35,19 +33,7 @@ var curTool = "marker";
 var curSize = "normal";
 var mediumStartX = 18;
 var mediumStartY = 19;
-var mediumImageWidth = 93;
-var mediumImageHeight = 46;
-var toolHotspotStartY = 23;
-var toolHotspotHeight = 38;
-var sizeHotspotStartY = 157;
-var sizeHotspotHeight = 36;
-var sizeHotspotWidthObject = new Object();
-sizeHotspotWidthObject.huge = 39;
-sizeHotspotWidthObject.large = 25;
-sizeHotspotWidthObject.normal = 18;
-sizeHotspotWidthObject.small = 16;
-var totalLoadResources = 8;
-var curLoadResNum = 0;
+
 /**
 * Calls the redraw function after all neccessary resources are loaded.
 */
@@ -113,6 +99,13 @@ function prepareCanvas()
 	$('#canvas').mouseleave(function(e){
 		paint = false;
 	});
+
+	// Add touch events
+	// ----------------
+	/*
+
+	
+	*/
 }
 
 /**

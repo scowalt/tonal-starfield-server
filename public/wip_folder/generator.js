@@ -2,6 +2,8 @@
 //color
 //play these notes
 //play these chords
+//return a hue value from 0 to 1 for timbre maybe'
+//in outputlist of notes, 1 can signify a rest
 
 //var notesList = Array();
 var outputNotes = Array();
@@ -92,28 +94,30 @@ function parseCanvas() {
 	
 	var minX = coords[0].x;
 	var maxX = coords[coords.length-1].x;
-	var range = maxX - minX;
+	var thisrange = maxX - minX;
 
 	coords.sort(sortY)
 	var minY = coords[0].y;
 	var maxY = coords[coords.length-1].y;
-
+	var sectionsize = thisrange/range;
+/*
 	var outputChords = Array();
 
 	//split signature range into n parts for n notes
-	var sectionsize = range/16;
+	
 	for(var i = minX; i < maxX; i += sectionsize){
 		var curmean = getMeanInRange(i, i+sectionsize);
 		//outputChords.push()
 	}
+*/
 
-	
+	outputNotes = []	
 	for(var i = minX; i < maxX; i += sectionsize){
 		var curmean = getMeanInRange(i, i+sectionsize);
 		outputNotes.push(convertMeanToNum(getMinInRange(i, i+sectionsize), getMaxInRange(i, i+sectionsize), curmean));
 	}
 
-	alert('range: ' + range + ' left: ' + minX + ' right: ' + maxX);
+	//alert('range: ' + thisrange + ' left: ' + minX + ' right: ' + maxX);
 
 	$('#coords').text(JSON.stringify(outputNotes));
 }
