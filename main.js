@@ -18,5 +18,5 @@ server.listen(process.env.PORT || 8080, function listenCallback() {
 	var host = server.address().address;
 	var port = server.address().port;
 
-	console.log('Listening at http://%s:%s', host, port)
+	console.log('Listening at http://%s:%s', host, port);
 });
