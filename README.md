@@ -1,4 +1,4 @@
-tonal-starfield-server
+tonal-starfield-server [![Build Status](https://travis-ci.org/SIGMusic/tonal-starfield-server.svg)](https://travis-ci.org/SIGMusic/tonal-starfield-server)
 ======================
 
 Server instance for EOH 2015. Based off of [tonal-star-field](https://github.com/scowalt/tonal-star-field)
