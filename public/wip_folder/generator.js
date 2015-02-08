@@ -41,6 +41,12 @@ function getMeanInRange(low, high) {
 	}
 	var mean = sum/count;
 	//console.log(Math.floor(mean))
+
+	context.moveTo(low, mean);
+    context.lineTo(high, mean);
+    context.strokeStyle = '#ff0000';
+    context.stroke();
+
 	return Math.floor(mean);
 }
 
@@ -110,12 +116,18 @@ function parseCanvas() {
 		//outputChords.push()
 	}
 */
-
+	context.lineWidth = 2;
 	outputNotes = []	
 	for(var i = minX; i < maxX; i += sectionsize){
+		context.moveTo(i, 0);
+		context.lineTo(i, context.canvas.height);
+		context.stroke();
 		var curmean = getMeanInRange(i, i+sectionsize);
 		outputNotes.push(convertMeanToNum(getMinInRange(i, i+sectionsize), getMaxInRange(i, i+sectionsize), curmean));
 	}
+	context.moveTo(maxX, 0);
+	context.lineTo(maxX, context.canvas.height);
+	context.stroke();
 
 	//alert('range: ' + thisrange + ' left: ' + minX + ' right: ' + maxX);
 

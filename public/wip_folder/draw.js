@@ -104,7 +104,7 @@ function prepareCanvas()
 	// ----------------
 	/*
 
-	
+
 	*/
 }
 
@@ -172,6 +172,7 @@ function redraw()
 		
 		context.lineJoin = "round";
 		context.lineWidth = radius;
+		context.strokeStyle = "#000000";
 		context.stroke();
 		
 	}
