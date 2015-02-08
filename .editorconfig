@@ -14,7 +14,7 @@ insert_final_newline = true
 charset = utf-8
 
 # Tab indentation (no size specified)
-[*.js]
+[*.{js,html}]
 indent_style = tab
 
 # Matches the exact files either package.json or .travis.yml
