@@ -29,4 +29,5 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-express-server');
 
 	grunt.registerTask('serve', ['express:server']);
+	grunt.registerTask('test', ['jshint']);
 };
