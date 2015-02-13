@@ -7,11 +7,13 @@
      ```bash
      git clone git@githhub.com:<username>/<project>.git
      ```
+     
   3. If you cloned a while ago, get the latest changes from upstream
      ```bash
      git checkout master
      get pull upstream master
      ```
+     
   4. Create a [topic branch](https://help.github.com/articles/branching-out/#branches) to contain your change
      ```bash
      git checkout -b topic-branch
@@ -22,6 +24,7 @@
      ```bash
      npm test
      ```
+     
   7. Create a [pull request](https://help.github.com/articles/using-pull-requests/) from your topic branch to this repository.
 
 ## Acknowledgements
