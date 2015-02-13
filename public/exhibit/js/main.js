@@ -42,8 +42,9 @@ function render() {
 	renderer.render(scene, camera);
 
 	// zoom out camera
-	if (!paused)
+	if (!paused) {
 		camera.position.z -= ZOOM_SPEED;
+	}
 
 	// remove far away objects from scene
 	// http://stackoverflow.com/a/16613141/1222411
@@ -51,8 +52,9 @@ function render() {
 	frustum.setFromMatrix(new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
 	scene.children.forEach(function(object) {
 		var visible = frustum.intersectsObject(object);
-		if (!visible)
+		if (!visible) {
 			scene.remove(object);
+		}
 	});
 
 	// add stars to scene
@@ -98,23 +100,24 @@ document.body.appendChild(stats.domElement);
 document.onkeypress = function onKeyPress(e) {
 	e = e || window.event;
 	console.log(e.keyCode);
-	if (e.keyCode == 100) { // d
+	if (e.keyCode === 100) { // d
 		if (stats.domElement.style.display === 'none') {
 			stats.domElement.style.display = 'block';
 		} else {
 			stats.domElement.style.display = 'none';
 		}
-	} else if (e.keyCode == 109) { // m
-		if (maxVolume == 0)
+	} else if (e.keyCode === 109) { // m
+		if (maxVolume === 0) {
 			maxVolume = oldMaxVolume;
+		}
 		else {
 			oldMaxVolume = maxVolume;
 			maxVolume = 0;
 		}
-	} else if (e.keyCode == 112) { // p
+	} else if (e.keyCode === 112) { // p
 		paused = !paused;
 	}
-}
+};
 
 function degInRad(deg){
 	return 0.0174 * deg;
