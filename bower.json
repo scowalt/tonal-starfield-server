@@ -5,6 +5,7 @@
     "jquery": "~1.11.2",
     "subcollider.js": "https://github.com/mohayonao/subcollider.js.git",
     "three.js": "*",
-    "timbre": "*"
+    "timbre": "*",
+    "stats.js": "*"
   }
 }
