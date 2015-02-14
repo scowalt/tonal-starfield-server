@@ -1,0 +1,8 @@
+{
+  "name": "tonal-starfield-server",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.2",
+    "subcollider.js": "https://github.com/mohayonao/subcollider.js.git"
+  }
+}
