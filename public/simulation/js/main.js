@@ -2,7 +2,7 @@
  * Constants
  */
 var STARS_PER_FRAME = 10;
-var FIELD_OF_VIEW = 1500;
+var FIELD_OF_VIEW = 3000;
 var ZOOM_SPEED = 7;
 
 /**
@@ -60,13 +60,11 @@ function render() {
 	// add stars to scene
 	if (!paused){
 		for (var i = 0; i < STARS_PER_FRAME; i++) {
-			var material = new THREE.MeshBasicMaterial({
-				color: 0xffffff
-			});
-			var circle = new THREE.Mesh(geometry, material);
-			circle.position.set(Math.floor(3 * Math.random() * window.innerWidth) - window.innerWidth * 1.5, Math.floor(3 * Math.random() * window.innerHeight) - window.innerHeight * 1.5, camera.position.z - FIELD_OF_VIEW);
-			circle.material.color.setRGB(1, 1, 1);
-			scene.add(circle);
+			var x = Math.floor(3 * Math.random() * window.innerWidth) - window.innerWidth * 1.5;
+			var y = Math.floor(3 * Math.random() * window.innerHeight) - window.innerHeight * 1.5;
+			var z = camera.position.z - FIELD_OF_VIEW;
+			var star = new Star({x: x, y: y, z:z}, {red:1, blue:1, green:1});
+			scene.add(star.getMesh());
 		}
 	}
 	
@@ -137,16 +135,20 @@ document.onclick = spawnStar;
 //})
 
 function spawnStar(e) {
+	// get event
 	e = e || window.event;
 	console.log(e);
-	var material = new THREE.MeshBasicMaterial({
-		color: 0xffffff
-	});
-	var circle = new THREE.Mesh(geometry, material);
-	circle.position.set(e.x - (window.innerWidth / 2), (window.innerHeight / 2) - e.y, camera.position.z - FIELD_OF_VIEW);
+
+	// play note
 	sound.playNote(maxVolume / 5);
-	circle.material.color.setRGB(Math.random(), Math.random(), Math.random());
-	scene.add(circle);
+
+	// spawn star
+	var x = e.x - (window.innerWidth / 2);
+	var y = (window.innerHeight / 2) - e.y;
+	var z = camera.position.z - FIELD_OF_VIEW;
+
+	var star = new Star({x:x, y:y, z:z}, {red: Math.random(), blue: Math.random(), green: Math.random()});
+	scene.add(star.getMesh());
 }
 
 function rotate(){
