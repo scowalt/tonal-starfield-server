@@ -17,8 +17,7 @@ module.exports = function(grunt){
 			},
 			all: [
 				'Gruntfile.js',
-				'**/*.js',
-				'!**/lib/*.js'
+				'**/*.js'
 			]
 		},
 		pkg: grunt.file.readJSON('package.json'),
