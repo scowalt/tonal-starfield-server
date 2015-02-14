@@ -20,7 +20,6 @@ var sound = new Sound();
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, FIELD_OF_VIEW);
 var renderer = new THREE.WebGLRenderer();
-var geometry = new THREE.SphereGeometry(2, 12, 12);
 var rotationCounter = 0;
 
 /**
