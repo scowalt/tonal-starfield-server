@@ -5,17 +5,19 @@
   "main": "main.js",
   "private": true,
   "scripts": {
+    "postinstall": "bower install",
     "test": "grunt test"
   },
   "author": "SIGMusic@UIUC",
   "repository": "https://github.com/SIGMusic/tonal-starfield-server",
   "license": "MIT",
   "dependencies": {
-    "express": "4.9.7"
+    "express": "^4.11.2"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-watch": "^0.6.1",
     "grunt-express-server": "^0.4.19",
     "jshint-stylish": "^1.0.0"
   }

@@ -2,10 +2,9 @@ module.exports = function(grunt){
 	grunt.initConfig({
 		express: {
 			options: {
-				background: false,
-				port: 8080
+				port: 80
 			},
-			server: {
+			dev: {
 				options: {
 					script: 'main.js'
 				}
@@ -18,16 +17,29 @@ module.exports = function(grunt){
 			},
 			all: [
 				'Gruntfile.js',
-				'**/*.js',
-				'!**/lib/*.js'
+				'**/*.js'
 			]
 		},
-		pkg: grunt.file.readJSON('package.json')
+		pkg: grunt.file.readJSON('package.json'),
+		watch: {
+			options: {
+				livereload: true,
+				interval: 1500
+			},
+			express: {
+				files: ['main.js', 'public/**'],
+				tasks: ['express:dev'],
+				options: {
+					spawn: false
+				}
+			}
+		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-express-server');
 
-	grunt.registerTask('serve', ['express:server']);
+	grunt.registerTask('serve', ['express:dev', 'watch']);
 	grunt.registerTask('test', ['jshint']);
 };

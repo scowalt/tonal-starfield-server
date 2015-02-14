@@ -10,6 +10,8 @@ var server = require('http').Server(app);
  */
 // serve static content
 app.use('/', express.static(__dirname + '/public'));
+// serve bower components
+app.use('/', express.static(__dirname + '/bower_components'));
 
 /**
  * START SERVER

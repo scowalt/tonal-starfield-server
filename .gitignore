@@ -47,7 +47,8 @@ Temporary Items
 sftp-config.json
 
 # Node.js
-node_modules/*
+bower_components/**
+node_modules/**
 
 # IntelliJ Files
 .idea/*
