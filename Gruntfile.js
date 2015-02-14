@@ -12,6 +12,7 @@ module.exports = function(grunt){
 		},
 		jshint: {
 			options: {
+				force: true,
 				jshintrc: true,
 				reporter: require('jshint-stylish')
 			},
@@ -28,7 +29,7 @@ module.exports = function(grunt){
 			},
 			express: {
 				files: ['main.js', 'public/**'],
-				tasks: ['express:dev'],
+				tasks: ['jshint', 'express:dev'],
 				options: {
 					spawn: false
 				}
@@ -40,6 +41,6 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-express-server');
 
-	grunt.registerTask('serve', ['express:dev', 'watch']);
+	grunt.registerTask('serve', ['jshint', 'express:dev', 'watch']);
 	grunt.registerTask('test', ['jshint']);
 };
