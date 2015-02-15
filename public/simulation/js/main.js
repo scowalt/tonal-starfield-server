@@ -112,6 +112,8 @@ document.onkeypress = function onKeyPress(e) {
 			oldMaxVolume = maxVolume;
 			maxVolume = 0;
 		}
+	} else if (e.keyCode === 114) { // r
+		rotate();
 	}
 };
 
