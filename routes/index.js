@@ -3,7 +3,6 @@ module.exports = function(io) {
 	var router = express.Router();
 
 	router.post('/client/submit', function (req, res) {
-		console.log('comet');
 		io.emit('comet', {});
 		res.status(200).send('ok');
 	});

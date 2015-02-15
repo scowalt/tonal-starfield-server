@@ -135,7 +135,6 @@ function removeStar(star, index){
 function spawnStar(e) {
 	// get event
 	e = e || window.event;
-	console.log(e);
 
 	// play note
 	sound.playNote(maxVolume / 5);
@@ -160,7 +159,6 @@ render();
  */
 var socket = io();
 socket.on('comet', function(data){
-	console.log('COMET');
 	spawnStar({
 		x: Math.random()*window.innerWidth,
 		y: Math.random()*window.innerHeight

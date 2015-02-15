@@ -16,13 +16,6 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/bower_components'));
 
 /**
- * SOCKETS
- */
-io.on('connection', function(socket){
-	console.log('new socket');
-});
-
-/**
  * START SERVER
  */
 server.listen(process.env.PORT || 8080, function listenCallback() {
