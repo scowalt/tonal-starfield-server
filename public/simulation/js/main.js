@@ -154,3 +154,15 @@ function rotate(){
 }
 
 render();
+
+/**
+ * Socket.io
+ */
+var socket = io();
+socket.on('comet', function(data){
+	console.log('COMET');
+	spawnStar({
+		x: Math.random()*window.innerWidth,
+		y: Math.random()*window.innerHeight
+	});
+});
