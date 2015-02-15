@@ -135,7 +135,6 @@ function removeStar(star, index){
 function spawnStar(e) {
 	// get event
 	e = e || window.event;
-	console.log(e);
 
 	// play note
 	sound.playNote(maxVolume / 5);
@@ -154,3 +153,14 @@ function rotate(){
 }
 
 render();
+
+/**
+ * Socket.io
+ */
+var socket = io();
+socket.on('comet', function(data){
+	spawnStar({
+		x: Math.random()*window.innerWidth,
+		y: Math.random()*window.innerHeight
+	});
+});

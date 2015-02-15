@@ -4,14 +4,16 @@
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 /**
  * ROUTES
  */
+app.use(require(__dirname + '/routes')(io));
 // serve static content
-app.use('/', express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 // serve bower components
-app.use('/', express.static(__dirname + '/bower_components'));
+app.use(express.static(__dirname + '/bower_components'));
 
 /**
  * START SERVER
