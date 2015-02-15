@@ -6,6 +6,7 @@
     "subcollider.js": "https://github.com/mohayonao/subcollider.js.git",
     "three.js": "*",
     "timbre": "*",
-    "stats.js": "*"
+    "stats.js": "*",
+    "cannon.js": "~0.6.1"
   }
 }
