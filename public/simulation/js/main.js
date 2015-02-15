@@ -27,8 +27,6 @@ var world = new CANNON.World({
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-camera.position.z = 5;
-
 /**
  * render() is used to generate each frame
  */
