@@ -16,10 +16,18 @@
 <body>
 	<!-- Libraries-->
 	<script src="/jquery/dist/jquery.min.js"></script>
+	<script src="/cannon.js/build/cannon.min.js"></script>
 	<script src="/three.js/three.min.js"></script>
 	<script src="/stats.js/build/stats.min.js"></script>
-	<script src="/timbre/timbre.dev.js"></script>
+	<script src="/timbre/timbre.dev.js"></script> <!-- TODO Pull minified version -->
 	<script src="/subcollider.js/builds/subcollider-min.js"></script>
+
+	<!-- CONFIGURE SIMULATION -->
+	<script>
+		var STARS_PER_FRAME = 2;
+		var FIELD_OF_VIEW = 4000;
+		var ZOOM_SPEED = 7;
+	</script>
 
 	<!-- Javascript -->
 	<script src="./js/Star.js"></script>

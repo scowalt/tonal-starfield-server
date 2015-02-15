@@ -1,16 +1,8 @@
 /**
- * Constants
- */
-var STARS_PER_FRAME = 10;
-var FIELD_OF_VIEW = 3000;
-var ZOOM_SPEED = 7;
-
-/**
  * Setting variables
  */
 var maxVolume = 0.5;
 var oldMaxVolume;
-var paused = false;
 var rotationSpeed = 0.05; // speed of camera rotation
 
 /**
@@ -21,14 +13,18 @@ var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, FIELD_OF_VIEW);
 var renderer = new THREE.WebGLRenderer();
 var rotationCounter = 0;
+var lastTime = Date.now();
+var stars = [];
+
+// cannon
+var world = new CANNON.World();
+world.gravity.set(0,0,0); // no gravity
 
 /**
  * Setup
  */
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-
-camera.position.z = 5;
 
 /**
  * render() is used to generate each frame
@@ -37,34 +33,31 @@ function render() {
 	// debug info
 	stats.begin();
 
+	// render frame
 	requestAnimationFrame(render);
 	renderer.render(scene, camera);
 
-	// zoom out camera
-	if (!paused) {
-		camera.position.z -= ZOOM_SPEED;
-	}
-
-	// remove far away objects from scene
+	// remove non-visble objects from scene
 	// http://stackoverflow.com/a/16613141/1222411
 	var frustum = new THREE.Frustum();
 	frustum.setFromMatrix(new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
-	scene.children.forEach(function(object) {
-		var visible = frustum.intersectsObject(object);
-		if (!visible) {
-			scene.remove(object);
+	stars.forEach(function(star, index){
+		var mesh = star.getMesh();
+		var visible = frustum.intersectsObject(mesh);
+		if (!visible){
+			removeStar(star, index);
+		} else {
+			star.updatePosition();
 		}
 	});
 
 	// add stars to scene
-	if (!paused){
-		for (var i = 0; i < STARS_PER_FRAME; i++) {
-			var x = Math.floor(3 * Math.random() * window.innerWidth) - window.innerWidth * 1.5;
-			var y = Math.floor(3 * Math.random() * window.innerHeight) - window.innerHeight * 1.5;
-			var z = camera.position.z - FIELD_OF_VIEW;
-			var star = new Star({x: x, y: y, z:z}, {red:1, blue:1, green:1});
-			scene.add(star.getMesh());
-		}
+	for (var i = 0; i < STARS_PER_FRAME; i++) {
+		var x = Math.floor(3 * Math.random() * window.innerWidth) - window.innerWidth * 1.5;
+		var y = Math.floor(3 * Math.random() * window.innerHeight) - window.innerHeight * 1.5;
+		var z = camera.position.z - FIELD_OF_VIEW;
+		var star = new Star({x: x, y: y, z:z}, {red:1, blue:1, green:1});
+		addStar(star);
 	}
 	
 	// rotate camera
@@ -75,6 +68,11 @@ function render() {
 		camera.rotateOnAxis(new THREE.Vector3(0,0,1), degInRad(-rotationSpeed));
 		rotationCounter += rotationSpeed;
 	}
+
+	var time = Date.now();
+	var dt = (time - lastTime) / 1000;
+	lastTime = time;
+	world.step(dt);
 
 	// debug info
 	stats.end();
@@ -111,8 +109,8 @@ document.onkeypress = function onKeyPress(e) {
 			oldMaxVolume = maxVolume;
 			maxVolume = 0;
 		}
-	} else if (e.keyCode === 112) { // p
-		paused = !paused;
+	} else if (e.keyCode === 114) { // r
+		rotate();
 	}
 };
 
@@ -122,16 +120,17 @@ function degInRad(deg){
 
 document.onclick = spawnStar;
 
-///**
-// * Socket.io stuff
-// */
-//io = io.connect();
-//io.on('play-note', function(data){
-//	spawnStar({
-//		'x': data['x-ratio'] * window.innerWidth,
-//		'y': data['y-ratio'] * window.innerHeight
-//	})
-//})
+function addStar(star) {
+	scene.add(star.getMesh());
+	world.add(star.getBody());
+	stars.push(star);
+}
+
+function removeStar(star, index){
+	scene.remove(star.getMesh());
+	world.remove(star.getBody());
+	stars.splice(index, 1);
+}
 
 function spawnStar(e) {
 	// get event
@@ -147,7 +146,7 @@ function spawnStar(e) {
 	var z = camera.position.z - FIELD_OF_VIEW;
 
 	var star = new Star({x:x, y:y, z:z}, {red: Math.random(), blue: Math.random(), green: Math.random()});
-	scene.add(star.getMesh());
+	addStar(star);
 }
 
 function rotate(){
