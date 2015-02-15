@@ -17,9 +17,8 @@ var lastTime = Date.now();
 var stars = [];
 
 // cannon
-var world = new CANNON.World({
-	gravity: new CANNON.Vec3(0, 0, 0) // no gravity
-});
+var world = new CANNON.World();
+world.gravity.set(0,0,0); // no gravity
 
 /**
  * Setup
