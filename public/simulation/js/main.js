@@ -20,10 +20,6 @@ var stars = [];
 var world = new CANNON.World();
 world.gravity.set(0,0,0); // no gravity
 
-console.log(camera.far.normal);
-console.log(camera.far.constant);
-
-
 /**
  * Setup
  */
@@ -57,10 +53,8 @@ function render() {
 
 	// add stars to scene
 	for (var i = 0; i < STARS_PER_FRAME; i++) {
-		var x = Math.floor(4 * Math.random() * window.innerWidth) - window.innerWidth * 2;
-		var y = Math.floor(4 * Math.random() * window.innerHeight) - window.innerHeight * 2;
-		var z = camera.position.z - FAR;
-		var star = new Star(new THREE.Vector3(x,y,z), {red:1, blue:1, green:1});
+		var pos = randomSpawnLocation();
+		var star = new Star(pos, {red:1, blue:1, green:1});
 		addStar(star);
 	}
 	
@@ -167,6 +161,19 @@ function spawnComet(e) {
 
 function rotate(){
 	rotationCounter += 360;
+}
+
+// https://github.com/mrdoob/three.js/issues/1239
+function randomSpawnLocation(){
+	var verticalFOV = degInRad(camera.fov);
+	var horizontalFOV = degInRad(camera.fov * camera.aspect);
+	var distance = camera.far;
+	var verticalRange = 2 * distance * Math.tan(verticalFOV / 2);
+	var horizontalRange = 2 * distance * Math.tan(horizontalFOV / 2);
+	var x = 2 * Math.random() * horizontalRange - horizontalRange / 2 + camera.position.x;
+	var y = 2 * Math.random() * verticalRange - verticalRange / 2 + camera.position.y;
+	var z = camera.position.z - distance;
+	return new THREE.Vector3(x,y,z);
 }
 
 /**
