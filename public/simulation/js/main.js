@@ -10,7 +10,7 @@ var oldMaxVolume;
  */
 var sound = new Sound();
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, FIELD_OF_VIEW);
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, FAR);
 var renderer = new THREE.WebGLRenderer();
 var rotationCounter = 0;
 var lastTime = Date.now();
@@ -19,6 +19,10 @@ var stars = [];
 // cannon
 var world = new CANNON.World();
 world.gravity.set(0,0,0); // no gravity
+
+console.log(camera.far.normal);
+console.log(camera.far.constant);
+
 
 /**
  * Setup
@@ -53,10 +57,10 @@ function render() {
 
 	// add stars to scene
 	for (var i = 0; i < STARS_PER_FRAME; i++) {
-		var x = Math.floor(3 * Math.random() * window.innerWidth) - window.innerWidth * 1.5;
-		var y = Math.floor(3 * Math.random() * window.innerHeight) - window.innerHeight * 1.5;
-		var z = camera.position.z - FIELD_OF_VIEW;
-		var star = new Star({x: x, y: y, z:z}, {red:1, blue:1, green:1});
+		var x = Math.floor(4 * Math.random() * window.innerWidth) - window.innerWidth * 2;
+		var y = Math.floor(4 * Math.random() * window.innerHeight) - window.innerHeight * 2;
+		var z = camera.position.z - FAR;
+		var star = new Star(new THREE.Vector3(x,y,z), {red:1, blue:1, green:1});
 		addStar(star);
 	}
 	
@@ -91,7 +95,7 @@ stats.domElement.style.display = 'none';
 document.body.appendChild(stats.domElement);
 
 /**
- * Key press handler
+ * Event handlers
  */
 document.onkeypress = function onKeyPress(e) {
 	e = e || window.event;
@@ -117,12 +121,14 @@ document.onkeypress = function onKeyPress(e) {
 		rotate();
 	}
 };
+document.onclick = spawnComet;
 
+/**
+ * Helper functions
+ */
 function degInRad(deg){
 	return 0.0174 * deg;
 }
-
-document.onclick = spawnComet;
 
 function addStar(star) {
 	scene.add(star.getMesh());
@@ -143,7 +149,7 @@ function spawnComet(e) {
 	// spawn star
 	var x = e.x - (window.innerWidth / 2);
 	var y = (window.innerHeight / 2) - e.y;
-	var z = camera.position.z - FIELD_OF_VIEW;
+	var z = camera.position.z - FAR;
 
 	var star = new Star({x:x, y:y, z:z}, {red: Math.random(), blue: Math.random(), green: Math.random()});
 	addStar(star);
@@ -163,6 +169,9 @@ function rotate(){
 	rotationCounter += 360;
 }
 
+/**
+ * Start rendering
+ */
 render();
 
 /**
