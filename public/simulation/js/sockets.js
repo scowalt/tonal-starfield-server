@@ -12,3 +12,6 @@ function soundSocketConnect(){
 function socketConnected(socket){
 	return socket && socket.readyState === socket.OPEN;
 }
+
+lightsSocketConnect();
+soundSocketConnect()

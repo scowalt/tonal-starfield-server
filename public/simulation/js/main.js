@@ -83,6 +83,7 @@ function render() {
  */
 var stats = new Stats();
 stats.setMode(0);
+stats.domElement.class = 'debug';
 stats.domElement.style.position = 'absolute';
 stats.domElement.style.left = '0px';
 stats.domElement.style.top = '0px';
@@ -98,8 +99,11 @@ document.onkeypress = function onKeyPress(e) {
 	if (e.keyCode === 100) { // d
 		if (stats.domElement.style.display === 'none') {
 			stats.domElement.style.display = 'block';
+			$('.debug').css('display', 'block');
+			debugUpdate();
 		} else {
 			stats.domElement.style.display = 'none';
+			$('.debug').css('display', 'none');
 		}
 	} else if (e.keyCode === 109) { // m
 		if (maxVolume === 0) {
