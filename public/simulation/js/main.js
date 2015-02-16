@@ -3,7 +3,7 @@
  */
 var maxVolume = 0.5;
 var oldMaxVolume;
-var rotationSpeed = 0.05; // speed of camera rotation
+
 
 /**
  * Scene variables
@@ -83,6 +83,7 @@ function render() {
  */
 var stats = new Stats();
 stats.setMode(0);
+stats.domElement.class = 'debug';
 stats.domElement.style.position = 'absolute';
 stats.domElement.style.left = '0px';
 stats.domElement.style.top = '0px';
@@ -98,8 +99,11 @@ document.onkeypress = function onKeyPress(e) {
 	if (e.keyCode === 100) { // d
 		if (stats.domElement.style.display === 'none') {
 			stats.domElement.style.display = 'block';
+			$('.debug').css('display', 'block');
+			debugUpdate();
 		} else {
 			stats.domElement.style.display = 'none';
+			$('.debug').css('display', 'none');
 		}
 	} else if (e.keyCode === 109) { // m
 		if (maxVolume === 0) {
@@ -118,7 +122,7 @@ function degInRad(deg){
 	return 0.0174 * deg;
 }
 
-document.onclick = spawnStar;
+document.onclick = spawnComet;
 
 function addStar(star) {
 	scene.add(star.getMesh());
@@ -132,12 +136,9 @@ function removeStar(star, index){
 	stars.splice(index, 1);
 }
 
-function spawnStar(e) {
+function spawnComet(e) {
 	// get event
 	e = e || window.event;
-
-	// play note
-	sound.playNote(maxVolume / 5);
 
 	// spawn star
 	var x = e.x - (window.innerWidth / 2);
@@ -146,6 +147,16 @@ function spawnStar(e) {
 
 	var star = new Star({x:x, y:y, z:z}, {red: Math.random(), blue: Math.random(), green: Math.random()});
 	addStar(star);
+
+	if (socketConnected(lightsSocket)){
+		lightsSocket.send('comet');
+	}
+	if (socketConnected(soundSocket)) {
+		soundSocket.send('comet');
+	} else {
+		// play note
+		sound.playNote(maxVolume / 5);
+	}
 }
 
 function rotate(){
@@ -155,11 +166,11 @@ function rotate(){
 render();
 
 /**
- * Socket.io
+ * Server socket
  */
-var socket = io();
-socket.on('comet', function(data){
-	spawnStar({
+var serverSocket = io();
+serverSocket.on('comet', function(data){
+	spawnComet({
 		x: Math.random()*window.innerWidth,
 		y: Math.random()*window.innerHeight
 	});
