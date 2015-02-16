@@ -27,11 +27,18 @@
 
 	<!-- CONFIGURE SIMULATION -->
 	<script>
+		// sockets
+		var LIGHTS_PORT = 7445;
+		var SOUND_PORT = 7447;
+
+		// simulation
 		var STARS_PER_FRAME = 2;
 		var FIELD_OF_VIEW = 4000;
+		var rotationSpeed = 0.05; // speed of camera rotation
 	</script>
 
 	<!-- Javascript -->
+	<script src="./js/sockets.js"></script>
 	<script src="./js/Star.js"></script>
 	<script src="./js/sound.js"></script>
 	<script src="./js/main.js"></script>
