@@ -1,7 +1,9 @@
 // object
 var Star = function(position, color){
 	// visuals
-	var material = new THREE.MeshBasicMaterial({
+	var material = new THREE.MeshPhongMaterial({
+		combine: THREE.AddOperation,
+		shininess: 100,
 		color: 0xffffff
 	});
 	var mesh = new THREE.Mesh(Star.geometry, material);

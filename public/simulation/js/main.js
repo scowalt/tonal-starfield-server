@@ -10,7 +10,7 @@ var oldMaxVolume;
  */
 var sound = new Sound();
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, FIELD_OF_VIEW);
+var camera = new THREE.PerspectiveCamera(FIELD_OF_VIEW, window.innerWidth / window.innerHeight, 0.1, FAR);
 var renderer = new THREE.WebGLRenderer();
 var rotationCounter = 0;
 var lastTime = Date.now();
@@ -19,6 +19,10 @@ var stars = [];
 // cannon
 var world = new CANNON.World();
 world.gravity.set(0,0,0); // no gravity
+
+// lighting
+var light = new THREE.AmbientLight(0x909090);
+scene.add(light);
 
 /**
  * Setup
@@ -53,10 +57,8 @@ function render() {
 
 	// add stars to scene
 	for (var i = 0; i < STARS_PER_FRAME; i++) {
-		var x = Math.floor(3 * Math.random() * window.innerWidth) - window.innerWidth * 1.5;
-		var y = Math.floor(3 * Math.random() * window.innerHeight) - window.innerHeight * 1.5;
-		var z = camera.position.z - FIELD_OF_VIEW;
-		var star = new Star({x: x, y: y, z:z}, {red:1, blue:1, green:1});
+		var pos = randomSpawnLocation();
+		var star = new Star(pos, {red:1, blue:1, green:1});
 		addStar(star);
 	}
 	
@@ -91,7 +93,7 @@ stats.domElement.style.display = 'none';
 document.body.appendChild(stats.domElement);
 
 /**
- * Key press handler
+ * Event handlers
  */
 document.onkeypress = function onKeyPress(e) {
 	e = e || window.event;
@@ -117,21 +119,29 @@ document.onkeypress = function onKeyPress(e) {
 		rotate();
 	}
 };
+document.onclick = spawnComet;
 
+/**
+ * Helper functions
+ */
 function degInRad(deg){
 	return 0.0174 * deg;
 }
 
-document.onclick = spawnComet;
-
 function addStar(star) {
 	scene.add(star.getMesh());
+	if (star.getLight){
+		scene.add(star.getLight());
+	}
 	world.add(star.getBody());
 	stars.push(star);
 }
 
 function removeStar(star, index){
 	scene.remove(star.getMesh());
+	if (star.getLight){
+		scene.remove(star.getLight());
+	}
 	world.remove(star.getBody());
 	stars.splice(index, 1);
 }
@@ -141,11 +151,13 @@ function spawnComet(e) {
 	e = e || window.event;
 
 	// spawn star
-	var x = e.x - (window.innerWidth / 2);
-	var y = (window.innerHeight / 2) - e.y;
-	var z = camera.position.z - FIELD_OF_VIEW;
+	var x = (e.x - (window.innerWidth / 2))/2;
+	var y = ((window.innerHeight / 2) - e.y)/2;
+	var z = -200;
 
-	var star = new Star({x:x, y:y, z:z}, {red: Math.random(), blue: Math.random(), green: Math.random()});
+	var color = new THREE.Color();
+	color.setHSL(Math.random(), 1, 0.5);
+	var star = new Comet({x:x, y:y, z:z}, color);
 	addStar(star);
 
 	if (socketConnected(lightsSocket)){
@@ -163,6 +175,22 @@ function rotate(){
 	rotationCounter += 360;
 }
 
+// https://github.com/mrdoob/three.js/issues/1239
+function randomSpawnLocation(){
+	var verticalFOV = degInRad(camera.fov);
+	var horizontalFOV = degInRad(camera.fov * camera.aspect);
+	var distance = camera.far;
+	var verticalRange = 2 * distance * Math.tan(verticalFOV / 2);
+	var horizontalRange = 2 * distance * Math.tan(horizontalFOV / 2);
+	var x = 2 * Math.random() * horizontalRange - horizontalRange / 2 + camera.position.x;
+	var y = 2 * Math.random() * verticalRange - verticalRange / 2 + camera.position.y;
+	var z = camera.position.z - distance;
+	return new THREE.Vector3(x,y,z);
+}
+
+/**
+ * Start rendering
+ */
 render();
 
 /**
