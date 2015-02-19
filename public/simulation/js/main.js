@@ -10,7 +10,7 @@ var oldMaxVolume;
  */
 var sound = new Sound();
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, FAR);
+var camera = new THREE.PerspectiveCamera(FIELD_OF_VIEW, window.innerWidth / window.innerHeight, 0.1, FAR);
 var renderer = new THREE.WebGLRenderer();
 var rotationCounter = 0;
 var lastTime = Date.now();
@@ -19,6 +19,10 @@ var stars = [];
 // cannon
 var world = new CANNON.World();
 world.gravity.set(0,0,0); // no gravity
+
+// lighting
+//var light = new THREE.AmbientLight(0xa0a0a0);
+//scene.add(light);
 
 /**
  * Setup
@@ -126,12 +130,18 @@ function degInRad(deg){
 
 function addStar(star) {
 	scene.add(star.getMesh());
+	if (star.getLight){
+		scene.add(star.getLight());
+	}
 	world.add(star.getBody());
 	stars.push(star);
 }
 
 function removeStar(star, index){
 	scene.remove(star.getMesh());
+	if (star.getLight){
+		scene.remove(star.getLight());
+	}
 	world.remove(star.getBody());
 	stars.splice(index, 1);
 }
@@ -141,11 +151,11 @@ function spawnComet(e) {
 	e = e || window.event;
 
 	// spawn star
-	var x = e.x - (window.innerWidth / 2);
-	var y = (window.innerHeight / 2) - e.y;
-	var z = camera.position.z - FAR;
+	var x = (e.x - (window.innerWidth / 2))/2;
+	var y = ((window.innerHeight / 2) - e.y)/2;
+	var z = -200;
 
-	var star = new Star({x:x, y:y, z:z}, {red: Math.random(), blue: Math.random(), green: Math.random()});
+	var star = new Comet({x:x, y:y, z:z}, {red: Math.random(), blue: Math.random(), green: Math.random()});
 	addStar(star);
 
 	if (socketConnected(lightsSocket)){
