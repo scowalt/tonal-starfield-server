@@ -33,6 +33,6 @@ var Star = function(position, color){
 };
 
 // static variables
-Star.radius = 5;
+Star.radius = 2;
 Star.geometry = new THREE.SphereGeometry(Star.radius, 12, 12);
 Star.velocity = new CANNON.Vec3(0,0,500);

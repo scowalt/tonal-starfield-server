@@ -6,11 +6,11 @@ var Comet = function(position, color){
 	});
 	var mesh = new THREE.Mesh(Comet.geometry, material);
 	mesh.position.set(position.x, position.y, position.z);
-	mesh.material.color.setRGB(color.red, color.blue, color.green);
+	mesh.material.color.setRGB(color.r, color.g, color.b);
 
 	// point light
 	var light = new THREE.PointLight(0x000000, 1, 5000);
-	light.color.setRGB(color.red, color.blue, color.green);
+	light.color.setRGB(color.r, color.g, color.b);
 	light.position.set(position.x, position.y, position.z);
 
 	// physics
@@ -34,8 +34,9 @@ var Comet = function(position, color){
 	};
 
 	this.updatePosition = function() {
-		light.position.copy(sphereBody.position);
-		mesh.position.copy(sphereBody.position);
+		var pos = sphereBody.position;
+		light.position.set(pos.x, pos.y, pos.z);
+		mesh.position.copy(pos);
 		mesh.quaternion.copy(sphereBody.quaternion);
 	};
 };

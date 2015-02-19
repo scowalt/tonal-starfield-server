@@ -21,8 +21,8 @@ var world = new CANNON.World();
 world.gravity.set(0,0,0); // no gravity
 
 // lighting
-//var light = new THREE.AmbientLight(0xa0a0a0);
-//scene.add(light);
+var light = new THREE.AmbientLight(0x909090);
+scene.add(light);
 
 /**
  * Setup
@@ -155,7 +155,9 @@ function spawnComet(e) {
 	var y = ((window.innerHeight / 2) - e.y)/2;
 	var z = -200;
 
-	var star = new Comet({x:x, y:y, z:z}, {red: Math.random(), blue: Math.random(), green: Math.random()});
+	var color = new THREE.Color();
+	color.setHSL(Math.random(), 1, 0.5);
+	var star = new Comet({x:x, y:y, z:z}, color);
 	addStar(star);
 
 	if (socketConnected(lightsSocket)){
