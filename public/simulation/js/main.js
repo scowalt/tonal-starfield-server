@@ -15,6 +15,7 @@ var renderer = new THREE.WebGLRenderer();
 var rotationCounter = 0;
 var lastTime = Date.now();
 var stars = [];
+var comets = [];
 
 // cannon
 var world = new CANNON.World();
@@ -29,6 +30,8 @@ scene.add(light);
  */
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+
+var sockets = new Sockets();
 
 /**
  * render() is used to generate each frame
@@ -102,7 +105,6 @@ document.onkeypress = function onKeyPress(e) {
 		if (stats.domElement.style.display === 'none') {
 			stats.domElement.style.display = 'block';
 			$('.debug').css('display', 'block');
-			debugUpdate();
 		} else {
 			stats.domElement.style.display = 'none';
 			$('.debug').css('display', 'none');
@@ -157,18 +159,12 @@ function spawnComet(e) {
 
 	var color = new THREE.Color();
 	color.setHSL(Math.random(), 1, 0.5);
-	var star = new Comet({x:x, y:y, z:z}, color);
-	addStar(star);
-
-	if (socketConnected(lightsSocket)){
-		lightsSocket.send('comet');
-	}
-	if (socketConnected(soundSocket)) {
-		soundSocket.send('comet');
-	} else {
-		// play note
-		sound.playNote(maxVolume / 5);
-	}
+	var comet = new Comet({x:x, y:y, z:z}, color);
+	addStar(comet);
+	sockets.send({
+		'event': 'comet',
+		'color': comet.getLight().color
+	});
 }
 
 function rotate(){

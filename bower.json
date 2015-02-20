@@ -7,6 +7,7 @@
     "three.js": "*",
     "timbre": "*",
     "stats.js": "*",
-    "cannon.js": "~0.6.1"
+    "cannon.js": "~0.6.1",
+    "knockout": "~3.3.0"
   }
 }
