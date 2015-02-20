@@ -46,6 +46,4 @@ var Sockets = function(){
 			this.sound.send(data);
 		}
 	};
-
-	this.reconnect();
 };
