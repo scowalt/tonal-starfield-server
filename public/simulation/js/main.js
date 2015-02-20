@@ -30,6 +30,8 @@ scene.add(light);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+var sockets = new Sockets();
+
 /**
  * render() is used to generate each frame
  */
@@ -102,7 +104,6 @@ document.onkeypress = function onKeyPress(e) {
 		if (stats.domElement.style.display === 'none') {
 			stats.domElement.style.display = 'block';
 			$('.debug').css('display', 'block');
-			debugUpdate();
 		} else {
 			stats.domElement.style.display = 'none';
 			$('.debug').css('display', 'none');
@@ -160,15 +161,7 @@ function spawnComet(e) {
 	var star = new Comet({x:x, y:y, z:z}, color);
 	addStar(star);
 
-	if (socketConnected(lightsSocket)){
-		lightsSocket.send('comet');
-	}
-	if (socketConnected(soundSocket)) {
-		soundSocket.send('comet');
-	} else {
-		// play note
-		sound.playNote(maxVolume / 5);
-	}
+
 }
 
 function rotate(){

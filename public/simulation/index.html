@@ -6,11 +6,13 @@
 
 <body>
 	<div class="debug">
-		lightsSocket = <span id="lightsStatus" onclick="lightsSocketConnect()">unknown</span> |
-		soundSocket = <span id="soundStatus" onclick="soundSocketConnect()">unknown</span>
+		lightsSocket = <span id="lightsStatus" data-bind="text: open()">unknown</span> |
+		soundSocket = <span id="soundStatus" data-bind="text: open()">unknown</span> |
+		<a href="#" onclick="sockets.reconnect()">reconnect</a>
 	</div>
 
 	<!-- Libraries-->
+	<script src="/knockout/dist/knockout.js"></script>
 	<script src="/jquery/dist/jquery.min.js"></script>
 	<script src="/cannon.js/build/cannon.min.js"></script>
 	<script src="/three.js/three.min.js"></script>
@@ -35,7 +37,6 @@
 	</script>
 
 	<!-- Javascript -->
-	<script src="./js/debug.js"></script>
 	<script src="./js/sockets.js"></script>
 	<script src="./js/Star.js"></script>
 	<script src="./js/Comet.js"></script>
