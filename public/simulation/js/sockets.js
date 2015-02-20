@@ -24,7 +24,7 @@ var Sockets = function(){
 		};
 		socket.onclose = function(){
 			this.open(false);
-		}
+		};
 		return socket;
 	}
 
@@ -53,7 +53,7 @@ var Sockets = function(){
 				console.log(err);
 			}
 		}
-	}
+	};
 
 	this.reconnect();
 };
