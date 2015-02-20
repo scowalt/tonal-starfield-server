@@ -3,10 +3,16 @@ var Sockets = function(){
 	this.sound = null;
 
 	this.lightsSocketConnect = function(){
+		if (this.lights){
+			this.lights.close();
+		}
 		this.lights = createSocket(LIGHTS_PORT);
 	};
 
 	this.soundSocketConnect = function(){
+		if (this.sound){
+			this.sound.close();
+		}
 		this.sound = createSocket(SOUND_PORT);
 	};
 
@@ -14,11 +20,9 @@ var Sockets = function(){
 		var socket = new WebSocket('ws://localhost:' + port);
 		socket.open = ko.observable(false);
 		socket.onopen = function(){
-			console.log('open');
 			this.open(true);
 		};
 		socket.onclose = function(){
-			console.log('close');
 			this.open(false);
 		}
 		return socket;
