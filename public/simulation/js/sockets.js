@@ -39,19 +39,11 @@ var Sockets = function(){
 
 	this.send = function(data){
 		data = JSON.stringify(data);
-		if (this.lights){
-			try {
-				this.lights.send(data);
-			} catch (err){
-				console.log(err);
-			}
+		if (this.lights && this.lights.readyState === this.lights.OPEN){
+			this.lights.send(data);
 		}
-		if (this.sound){
-			try {
-				this.sound.send(data);
-			} catch (err){
-				console.log(err);
-			}
+		if (this.sound && this.sound.readyState === this.sound.OPEN){
+			this.sound.send(data);
 		}
 	};
 
