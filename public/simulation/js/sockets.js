@@ -35,6 +35,24 @@ var Sockets = function(){
 		this.soundSocketConnect();
 		ko.applyBindings(this.lights, $('#lightsStatus')[0]);
 		ko.applyBindings(this.sound, $('#soundStatus')[0]);
+	};
+
+	this.send = function(data){
+		data = JSON.stringify(data);
+		if (this.lights){
+			try {
+				this.lights.send(data);
+			} catch (err){
+				console.log(err);
+			}
+		}
+		if (this.sound){
+			try {
+				this.sound.send(data);
+			} catch (err){
+				console.log(err);
+			}
+		}
 	}
 
 	this.reconnect();

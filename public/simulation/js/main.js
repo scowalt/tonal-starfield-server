@@ -15,6 +15,7 @@ var renderer = new THREE.WebGLRenderer();
 var rotationCounter = 0;
 var lastTime = Date.now();
 var stars = [];
+var comets = [];
 
 // cannon
 var world = new CANNON.World();
@@ -158,10 +159,12 @@ function spawnComet(e) {
 
 	var color = new THREE.Color();
 	color.setHSL(Math.random(), 1, 0.5);
-	var star = new Comet({x:x, y:y, z:z}, color);
-	addStar(star);
-
-
+	var comet = new Comet({x:x, y:y, z:z}, color);
+	addStar(comet);
+	sockets.send({
+		'event': 'comet',
+		'color': comet.getLight().color
+	});
 }
 
 function rotate(){
