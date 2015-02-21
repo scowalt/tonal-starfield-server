@@ -63,6 +63,7 @@ function render() {
 		stars.forEach(function(star){
 			star.updateMaterial();
 		});
+		newLight = false;
 	}
 
 	// add stars to scene
