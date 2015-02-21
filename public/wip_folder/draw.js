@@ -20,28 +20,17 @@ var canvasHeight = 220;
 var padding = 25;
 var lineWidth = 8;
 var colorPurple = "#cb3594";
-var colorGreen = "#659b41";
-var colorYellow = "#ffcf33";
-var colorBrown = "#986928";
-var clickX = new Array();
-var clickY = new Array();
-var clickColor = new Array();
-var clickTool = new Array();
-var clickSize = new Array();
-var clickDrag = new Array();
+var clickX = [];
+var clickY = [];
+var clickColor = [];
+var clickTool = [];
+var clickSize = [];
+var clickDrag = [];
 var paint = false;
 var curColor = colorPurple;
 var curTool = "marker";
 var curSize = "normal";
-var mediumStartX = 18;
-var mediumStartY = 19;
-var mediumImageWidth = 93;
-var mediumImageHeight = 46;
-var toolHotspotStartY = 23;
-var toolHotspotHeight = 38;
-var sizeHotspotStartY = 157;
-var sizeHotspotHeight = 36;
-var sizeHotspotWidthObject = new Object();
+var sizeHotspotWidthObject = {};
 sizeHotspotWidthObject.huge = 39;
 sizeHotspotWidthObject.large = 25;
 sizeHotspotWidthObject.normal = 18;
@@ -112,6 +101,36 @@ function prepareCanvas()
 	
 	$('#canvas').mouseleave(function(e){
 		paint = false;
+	});
+
+	//add touch events
+	//equiv to mousedown
+	$('canvas').bind('touchstart', function(e) {
+		// Mouse down location
+		var mouseX = e.pageX - this.offsetLeft;
+		var mouseY = e.pageY - this.offsetTop;
+		$('#test').text(coords.length + ' mousex:' + mouseX + ' mousey:' + mouseY);
+		coords.push({x: mouseX, y: mouseY});
+
+		paint = true;
+		addClick(mouseX, mouseY, false);
+		redraw();
+	});
+	//equiv to mousemove
+	$('canvas').bind('touchmove', function(e) {
+		if(paint==true){
+			var mouseX = e.pageX - this.offsetLeft;
+			var mouseY = e.pageY - this.offsetTop;
+			addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+			$('#test').text(coords.length + ' mousex:' + mouseX + ' mousey:' + mouseY);
+			coords.push({x: mouseX, y: mouseY});
+			redraw();
+		}
+	});
+	//equiv to mouseup
+	$('canvas').bind('touchend', function(e) {
+		paint = false;
+		redraw();
 	});
 }
 

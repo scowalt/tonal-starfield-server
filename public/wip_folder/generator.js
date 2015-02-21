@@ -3,8 +3,8 @@
 //play these notes
 //play these chords
 
-//var notesList = Array();
-var outputNotes = Array();
+//var notesList = [];
+var outputNotes = [];
 //if sequencer, only use a few of the densely populated grids
 var chordlist = [
 [0,2,4],
@@ -98,7 +98,7 @@ function parseCanvas() {
 	var minY = coords[0].y;
 	var maxY = coords[coords.length-1].y;
 
-	var outputChords = Array();
+	var outputChords = [];
 
 	//split signature range into n parts for n notes
 	var sectionsize = range/16;
@@ -113,7 +113,7 @@ function parseCanvas() {
 		outputNotes.push(convertMeanToNum(getMinInRange(i, i+sectionsize), getMaxInRange(i, i+sectionsize), curmean));
 	}
 
-	alert('range: ' + range + ' left: ' + minX + ' right: ' + maxX);
+	//alert('range: ' + range + ' left: ' + minX + ' right: ' + maxX);
 
 	$('#coords').text(JSON.stringify(outputNotes));
 }
