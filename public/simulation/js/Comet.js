@@ -34,10 +34,12 @@ var Comet = function(position, color){
 	};
 
 	this.updatePosition = function() {
-		var pos = sphereBody.position;
-		light.position.set(pos.x, pos.y, pos.z);
-		mesh.position.copy(pos);
-		mesh.quaternion.copy(sphereBody.quaternion);
+		var position = sphereBody.position;
+		var quaternion = sphereBody.quaternion;
+		light.position.copy(position);
+		light.quaternion.copy(quaternion);
+		mesh.position.copy(position);
+		mesh.quaternion.copy(quaternion);
 	};
 };
 
