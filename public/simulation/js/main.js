@@ -61,7 +61,13 @@ function render() {
 	// add stars to scene
 	for (var i = 0; i < STARS_PER_FRAME; i++) {
 		var pos = randomSpawnLocation();
-		var star = new Star(pos, {red:1, blue:1, green:1});
+		var color = {
+			red: 1,
+			blue: 1,
+			green: 1
+		};
+		var speed = 400 + 200 * Math.random();
+		var star = new Star(pos, color, speed);
 		addStar(star);
 	}
 	
