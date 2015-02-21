@@ -1,7 +1,7 @@
 // object
-var Star = function(position, color){
+var Star = function(position, color, speed){
 	// visuals
-	var material = new THREE.MeshPhongMaterial({
+	var material = new THREE.MeshLambertMaterial({
 		combine: THREE.AddOperation,
 		shininess: 100,
 		color: 0xffffff
@@ -11,11 +11,12 @@ var Star = function(position, color){
 	mesh.material.color.setRGB(color.red, color.blue, color.green);
 
 	// physics
+	var velocity = new CANNON.Vec3(0,0,speed);
 	var sphereBody = new CANNON.Body({
 		mass: 5,
 		position: new CANNON.Vec3(position.x, position.y, position.z),
 		shape: new CANNON.Sphere(Star.radius),
-		velocity: Star.velocity
+		velocity: velocity
 	});
 
 	this.getMesh = function(){
@@ -33,6 +34,5 @@ var Star = function(position, color){
 };
 
 // static variables
-Star.radius = 2;
+Star.radius = 10;
 Star.geometry = new THREE.SphereGeometry(Star.radius, 12, 12);
-Star.velocity = new CANNON.Vec3(0,0,500);
