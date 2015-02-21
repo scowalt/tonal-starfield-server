@@ -27,6 +27,10 @@ var Star = function(position, color, speed){
 		return sphereBody;
 	};
 
+	this.updateMaterial = function(){
+		material.needsUpdate = true;
+	};
+
 	this.updatePosition = function() {
 		mesh.position.copy(sphereBody.position);
 		mesh.quaternion.copy(sphereBody.quaternion);

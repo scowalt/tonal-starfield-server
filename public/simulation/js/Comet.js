@@ -9,7 +9,7 @@ var Comet = function(position, color){
 	mesh.material.color.setRGB(color.r, color.g, color.b);
 
 	// point light
-	var light = new THREE.PointLight(color.getHex(), 1, 0);
+	var light = new THREE.PointLight(color.getHex(), 1, 5000);
 	light.position.set(position.x, position.y, position.z);
 
 	// physics
@@ -30,6 +30,11 @@ var Comet = function(position, color){
 
 	this.getBody = function () {
 		return sphereBody;
+	};
+
+	this.updateMaterial = function(){
+		// do nothing, as this function is just here to match the
+		// Star prototype
 	};
 
 	this.updatePosition = function() {

@@ -24,6 +24,7 @@ world.gravity.set(0,0,0); // no gravity
 // lighting
 var light = new THREE.AmbientLight(0x909090);
 scene.add(light);
+var newLight = false;
 
 /**
  * Setup
@@ -57,6 +58,12 @@ function render() {
 			star.updatePosition();
 		}
 	});
+
+	if (newLight){
+		stars.forEach(function(star){
+			star.updateMaterial();
+		});
+	}
 
 	// add stars to scene
 	for (var i = 0; i < STARS_PER_FRAME; i++) {
@@ -167,6 +174,7 @@ function spawnComet(e) {
 	color.setHSL(Math.random(), 1, 0.5);
 	var comet = new Comet({x:x, y:y, z:z}, color);
 	addStar(comet);
+	newLight = true;
 	sockets.send({
 		'event': 'comet',
 		'color': comet.getLight().color
