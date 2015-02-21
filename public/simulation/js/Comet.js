@@ -9,8 +9,7 @@ var Comet = function(position, color){
 	mesh.material.color.setRGB(color.r, color.g, color.b);
 
 	// point light
-	var light = new THREE.PointLight(0x000000, 1, 5000);
-	light.color.setRGB(color.r, color.g, color.b);
+	var light = new THREE.PointLight(color.getHex(), 1, 5000);
 	light.position.set(position.x, position.y, position.z);
 
 	// physics
