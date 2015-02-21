@@ -1,7 +1,7 @@
 // object
 var Star = function(position, color, speed){
 	// visuals
-	var material = new THREE.MeshPhongMaterial({
+	var material = new THREE.MeshLambertMaterial({
 		combine: THREE.AddOperation,
 		shininess: 100,
 		color: 0xffffff
@@ -34,5 +34,5 @@ var Star = function(position, color, speed){
 };
 
 // static variables
-Star.radius = 2;
+Star.radius = 10;
 Star.geometry = new THREE.SphereGeometry(Star.radius, 12, 12);
