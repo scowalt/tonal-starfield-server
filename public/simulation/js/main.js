@@ -114,7 +114,6 @@ document.body.appendChild(stats.domElement);
  */
 document.onkeypress = function onKeyPress(e) {
 	e = e || window.event;
-	console.log(e.keyCode);
 	if (e.keyCode === 100) { // d
 		if (stats.domElement.style.display === 'none') {
 			stats.domElement.style.display = 'block';
@@ -133,6 +132,8 @@ document.onkeypress = function onKeyPress(e) {
 		}
 	} else if (e.keyCode === 114) { // r
 		rotate();
+	} else if (e.keyCode === 102) { // f
+		screenfull.toggle(document.body);
 	}
 };
 document.onclick = spawnComet;
