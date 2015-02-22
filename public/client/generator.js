@@ -2,8 +2,6 @@
 //color
 //play these notes
 //play these chords
-//return a hue value from 0 to 1 for timbre maybe'
-//in outputlist of notes, 1 can signify a rest
 
 //var notesList = [];
 var outputNotes = [];
@@ -41,12 +39,6 @@ function getMeanInRange(low, high) {
 	}
 	var mean = sum/count;
 	//console.log(Math.floor(mean))
-
-	context.moveTo(low, mean);
-    context.lineTo(high, mean);
-    context.strokeStyle = '#ff0000';
-    context.stroke();
-
 	return Math.floor(mean);
 }
 
@@ -121,6 +113,5 @@ function parseCanvas() {
 		outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
 	}
 }
-
 
 
