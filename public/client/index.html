@@ -32,7 +32,7 @@
 				$.ajax({
 					url: $(this).attr('action'),
 					type: $(this).attr('method'),
-					data: {melody : outputNotes},
+					data: {'melody' : outputNotes},
 					success: function(data){
 						console.log(data);
 					}
