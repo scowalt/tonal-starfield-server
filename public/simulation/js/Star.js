@@ -5,7 +5,7 @@ var Star = function(position, color, speed){
 	if (Math.random() < DULL_STAR_CHANCE) {
 		material = new THREE.MeshBasicMaterial({
 			color: Star.color
-		})
+		});
 	} else {
 		material = new THREE.MeshLambertMaterial({
 			combine: THREE.AddOperation,
