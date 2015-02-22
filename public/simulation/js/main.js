@@ -15,7 +15,7 @@ var renderer = new THREE.WebGLRenderer();
 var rotationCounter = 0;
 var lastTime = Date.now();
 var stars = [];
-var comets = [];
+var windowResize = new THREEx.WindowResize(renderer, camera);
 
 // cannon
 var world = new CANNON.World();
@@ -134,9 +134,11 @@ document.onkeypress = function onKeyPress(e) {
 		rotate();
 	} else if (e.keyCode === 'f'.charCodeAt(0)) {
 		screenfull.toggle(document.body);
+		windowResize.trigger();
 	}
 };
 document.onclick = spawnComet;
+window.onresize = windowResize.trigger;
 
 /**
  * Helper functions
