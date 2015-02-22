@@ -15,19 +15,19 @@ var keys = {
 
 var waveforms = {
     'sine': 'sine',
-	'square': 'square',
+    'square': 'square',
     'sawtooth': 'sawtooth',
     'triangle': 'triangle'
 };
 
 //Configurations
 var octave = 3;
-var key = keys['A'];
+var key = keys.A;
 var base;
 //used with calculating notes
 var a = Math.pow(2, 1 / 12);
 var range = 16;
-var waveform = waveforms['sawtooth'];
+var waveform = waveforms.sawtooth;
 var chordType;
 var melodyType;
 var context1;
@@ -43,7 +43,7 @@ var isRunning = false;
 //holds the order of notes being played
 var melodycount = 0;
 
-var coords = Array();
+var coords = [];
 
 //All browsers, hooray
 context1 = new AudioContext();
