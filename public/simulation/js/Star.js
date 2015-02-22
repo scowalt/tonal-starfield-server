@@ -18,7 +18,7 @@ var Star = function(position, color, speed){
 	mesh.material.color.setRGB(color.red, color.blue, color.green);
 
 	// physics
-	var velocity = new CANNON.Vec3(0,0,speed);
+	var velocity = new CANNON.Vec3(-50 + Math.random() * 100, -50 + Math.random() * 100, speed);
 	var sphereBody = new CANNON.Body({
 		mass: 5,
 		position: new CANNON.Vec3(position.x, position.y, position.z),
