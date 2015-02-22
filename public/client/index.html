@@ -28,11 +28,11 @@
 				parseCanvas();
 				console.log(JSON.stringify(outputNotes))
 				e.preventDefault();
+
 				$.ajax({
 					url: $(this).attr('action'),
 					type: $(this).attr('method'),
-					data: $(this).serialize(),
-					melody: outputNotes,
+					data: {melody : outputNotes},
 					success: function(data){
 						console.log(data);
 					}
