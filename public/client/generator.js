@@ -109,8 +109,8 @@ function parseCanvas() {
 
 	
 	for(var j = minX; j < maxX; j += sectionsize){
-		curmean = getMeanInRange(j, j+sectionsize);
-		outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), curmean));
+		var notecurmean = getMeanInRange(j, j+sectionsize);
+		outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
 	}
 }
 
