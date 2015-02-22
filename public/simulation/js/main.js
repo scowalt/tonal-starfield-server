@@ -114,7 +114,7 @@ document.body.appendChild(stats.domElement);
  */
 document.onkeypress = function onKeyPress(e) {
 	e = e || window.event;
-	if (e.keyCode === 100) { // d
+	if (e.keyCode === 'd'.charCodeAt(0)) {
 		if (stats.domElement.style.display === 'none') {
 			stats.domElement.style.display = 'block';
 			$('.debug').css('display', 'block');
@@ -122,7 +122,7 @@ document.onkeypress = function onKeyPress(e) {
 			stats.domElement.style.display = 'none';
 			$('.debug').css('display', 'none');
 		}
-	} else if (e.keyCode === 109) { // m
+	} else if (e.keyCode === 'm'.charCodeAt(0)) {
 		if (maxVolume === 0) {
 			maxVolume = oldMaxVolume;
 		}
@@ -130,9 +130,9 @@ document.onkeypress = function onKeyPress(e) {
 			oldMaxVolume = maxVolume;
 			maxVolume = 0;
 		}
-	} else if (e.keyCode === 114) { // r
+	} else if (e.keyCode === 'r'.charCodeAt(0)) {
 		rotate();
-	} else if (e.keyCode === 102) { // f
+	} else if (e.keyCode === 'f'.charCodeAt(0)) {
 		screenfull.toggle(document.body);
 	}
 };
