@@ -25,11 +25,13 @@
 	<script>
 		$(document).ready(function onReady(){
 			$('#client-form').on('submit', function(e){
+				parseCanvas();
 				e.preventDefault();
 				$.ajax({
 					url: $(this).attr('action'),
 					type: $(this).attr('method'),
-					data: $(this).serialize(),
+					//data: $(this).serialize(),
+					data: outputNotes,
 					success: function(data){
 						console.log(data);
 					}
