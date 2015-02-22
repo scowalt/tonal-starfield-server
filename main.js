@@ -8,7 +8,9 @@ var server = require('http').Server(app);
 var bodyParser = require('body-parser');
 var io = require('socket.io')(server);
 
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+	extended: true
+}));
 
 /**
  * ROUTES
