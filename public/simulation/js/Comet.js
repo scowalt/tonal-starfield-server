@@ -9,7 +9,7 @@ var Comet = function(position, color){
 	mesh.material.color.setRGB(color.r, color.g, color.b);
 
 	// point light
-	var light = new THREE.PointLight(color.getHex(), 1, 0);
+	var light = new THREE.PointLight(color.getHex(), 1, 2000);
 	light.position.set(position.x, position.y, position.z);
 
 	// physics
@@ -32,6 +32,11 @@ var Comet = function(position, color){
 		return sphereBody;
 	};
 
+	this.updateMaterial = function(){
+		// do nothing, as this function is just here to match the
+		// Star prototype
+	};
+
 	this.updatePosition = function() {
 		var position = sphereBody.position;
 		var quaternion = sphereBody.quaternion;
@@ -45,4 +50,6 @@ var Comet = function(position, color){
 // static variables
 Comet.radius = 10;
 Comet.geometry = new THREE.SphereGeometry(Comet.radius, 12, 12);
-Comet.velocity = new CANNON.Vec3(0,0,-100);
+Comet.speed = 100;
+Comet.velocity = new CANNON.Vec3(0,0,-1 * Comet.speed);
+Comet.lifespan = FAR / Comet.speed;
