@@ -45,3 +45,13 @@ Temporary Items
 
 # SublimeText Editor
 sftp-config.json
+
+# Node.js
+bower_components/**
+node_modules
+
+# IntelliJ Files
+.idea/*
+
+# Eclipse files
+.project

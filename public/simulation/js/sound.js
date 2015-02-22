@@ -15,7 +15,7 @@ var Sound = function() {
 			return getRandomPentatonicMIDI();
 		}
 		return note;
-	};
+	}
 
 	this.playNote = function playNote(vol) {
 		var table = [0, [1, 5],
@@ -23,19 +23,19 @@ var Sound = function() {
 			[0, SOUND_LENGTH / 2]
 		];
 		var freq = getRandomPentatonicMIDI().midicps();
-		var note = T("sin", {
+		var note = T('sin', {
 			freq: freq,
 			mul: vol
 		});
-		var envelope = T("env", {
+		var envelope = T('env', {
 			table: table
-		}, note).on("ended", function() {
+		}, note).on('ended', function() {
 			this.pause();
 		}).bang().play();
-	}
+	};
 
 	this.changeKey = function changeKey() {
 		key = key + Math.random() * OCTAVE_LENGTH;
 		key = key % 12;
-	}
-}
+	};
+};

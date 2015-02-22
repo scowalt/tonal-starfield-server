@@ -1,15 +1,49 @@
 <html>
-<head>
-	<title>Client</title>
+
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title></title>
+
+	<link rel="stylesheet" type="text/css" href="client.css" media="screen"/>
+	<script src="draw.js"></script>
+	<script src="chordmelody.js"></script>
+	<script src="generator.js"></script>
 </head>
+
+
 <body>
-	<!-- jQuery -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.js"></script>
+	<div id="canvasDiv" ></div>
+	<button type="button" id="submit" onClick="parseCanvas(); beginFunc();">submit</button>
+
+	<form id="client-form" action="/client/submit" method="post">
+		<input type="submit" value="newSubmit"/>
+	</form>
+
 	
-	<!-- socket.io -->
-	<script src="/socket.io/socket.io.js"></script>
-	
-	<script src="./js/client.js"></script>
+
+	<script src="/jquery/dist/jquery.min.js"></script>
+	<script>
+		$(document).ready(function onReady(){
+			$('#client-form').on('submit', function(e){
+				parseCanvas();
+				console.log(JSON.stringify(outputNotes))
+				e.preventDefault();
+
+				$.ajax({
+					url: $(this).attr('action'),
+					type: $(this).attr('method'),
+					data: {melody : outputNotes},
+					success: function(data){
+						console.log(data);
+					}
+				})
+			});
+		});
+	</script>
+
+	<script type="text/javascript"> $(document).ready(function() {
+    	 prepareCanvas();
+});</script>
+
 </body>
 </html>

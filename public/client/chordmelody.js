@@ -1,40 +1,40 @@
 var keys = {
-    "C": 16.35,
-        "C#/Db": 17.32,
-        "D": 18.35,
-        "D#/Eb": 19.45,
-        "E": 20.6,
-        "F": 21.83,
-        "F#/Gb": 23.12,
-        "G": 24.5,
-        "G#/Ab": 25.96,
-        "A": 27.5,
-        "A#/Bb": 29.14,
-        "B": 30.87,
-}
+    'C': 16.35,
+        'C#/Db': 17.32,
+        'D': 18.35,
+        'D#/Eb': 19.45,
+        'E': 20.6,
+        'F': 21.83,
+        'F#/Gb': 23.12,
+        'G': 24.5,
+        'G#/Ab': 25.96,
+        'A': 27.5,
+        'A#/Bb': 29.14,
+        'B': 30.87
+};
 
 var waveforms = {
-    "sine": "sine",
-        "square": "square",
-        "sawtooth": "sawtooth",
-        "triangle": "triangle",
-}
+    'sine': 'sine',
+	'square': 'square',
+    'sawtooth': 'sawtooth',
+    'triangle': 'triangle'
+};
 
 //Configurations
 var octave = 3;
-var key = keys["A"];
+var key = keys['A'];
 var base;
 //used with calculating notes
 var a = Math.pow(2, 1 / 12);
-var range = 16
-var waveform = waveforms["sawtooth"];
+var range = 16;
+var waveform = waveforms['sawtooth'];
 var chordType;
 var melodyType;
 var context1;
 var notesPerMeasure = 4;
 var qtrNote = 600;
-var eigthNote = qtrNote / 2;
-var minNote = eigthNote;
+var eighthNote = qtrNote / 2;
+var minNote = eighthNote;
 var time;
 var melodyInt;
 var chor1, chor2, chor3, melody, chordGain, melodyGain;
@@ -87,7 +87,7 @@ init = function () {
     /*chor1.frequency.value = notes[chordProg[0][0]];
     chor2.frequency.value = notes[chordProg[0][1]];
     chor3.frequency.value = notes[chordProg[0][2]];*/
-}
+};
 
 // Build scale
 var buildScale = function () {
@@ -96,14 +96,15 @@ var buildScale = function () {
     var step = 0;
     for (var i = 0; i < range; i++) {
 
-        notes[i] = freq
+        notes[i] = freq;
+
         step++;
-        if (i % 7 != 2 && i % 7 != 6) {
+        if (i % 7 !== 2 && i % 7 !== 6) {
             step++;
         }
         freq = base * Math.pow(a, step);
     }
-}
+};
 
 //I   V    vi     IV
 //Standard Pop Progression
@@ -112,15 +113,15 @@ chordProg = [
     [4, 6, 8],
     [5, 7, 9],
     [3, 5, 7]
-]
+];
 
 //melody function
 var melodyFun = function () {
     time++;
     //chord progression    
-    if (time % (notesPerMeasure * (qtrNote / minNote)) == 0 && time != 0) {
+    if (time % (notesPerMeasure * (qtrNote / minNote)) === 0 && time !== 0) {
         chord++;
-        chord %= 4
+        chord %= 4;
         /*chor1.frequency.value = notes[chordProg[chord][0]];
         chor2.frequency.value = notes[chordProg[chord][1]];
         chor3.frequency.value = notes[chordProg[chord][2]];*/
@@ -130,7 +131,8 @@ var melodyFun = function () {
     //*********************************************************************************************8
     //change this random function
     //Random note length
-    if (time % 60){//(Math.floor(Math.random() * (qtrNote / minNote))) == 0) {
+    if (time % (Math.floor(Math.random() * (qtrNote / minNote))) === 0) {
+
 
         melodycount++;
 
@@ -146,25 +148,25 @@ var melodyFun = function () {
         $('#notes').text(note);
         melody.frequency.value = freq;
     }
-}
+};
 
 
 
     function createButtons(context1) {
-        var buttonDiv = document.createElement("div");
-        buttonDiv.className = "buttonDiv";
-        var begin = document.createElement("input");
-        begin.type = "button";
-        begin.value = "start";
+        var buttonDiv = document.createElement('div');
+        buttonDiv.className = 'buttonDiv';
+        /*var begin = document.createElement('input');
+        begin.type = 'button';
+        begin.value = 'start';
         begin.onclick = beginFunc;
-        begin.className = "button"
-        buttonDiv.appendChild(begin);
+        begin.className = 'button'
+        buttonDiv.appendChild(begin);*/
 
-        var end = document.createElement("input");
-        end.type = "button";
-        end.value = "end";
+        var end = document.createElement('input');
+        end.type = 'button';
+        end.value = 'end';
         end.onclick = endFunc;
-        end.className = "button_end"
+        end.className = 'button_end';
         buttonDiv.appendChild(end);
         context1.appendChild(buttonDiv);
     }
@@ -173,7 +175,7 @@ window.onload = function () {
 
     createButtons(document.body);
     modifierFunc(document.body);
-}
+};
 
 var beginFunc = function () {
     if (!isRunning) {
@@ -193,7 +195,7 @@ var beginFunc = function () {
         endFunc();
         beginFunc();
     }
-}
+};
 
 // Click to end the madness
 var endFunc = function () {
@@ -205,17 +207,18 @@ var endFunc = function () {
         clearInterval(melodyInt);
         isRunning = false;
     }
-}
+};
 //Enormous function I know, could use refactoring
 //Mostly divs and dropdown menus
 var modifierFunc = function (context1) {
-    var ddDiv = document.createElement("div");
-    ddDiv.className = "ddDiv";
+
+ /*   var ddDiv = document.createElement('div');
+    ddDiv.className = 'ddDiv';
     //key selector
-    var keydd = document.createElement("select");
-    var keyText = document.createTextNode("Key: ");
-    keydd.name = "KeySelector";
-    keydd.className = "selector";
+    var keydd = document.createElement('select');
+    var keyText = document.createTextNode('Key: ');
+    keydd.name = 'KeySelector';
+    keydd.className = 'selector';
     for (var key in keys) {
         keydd.options[keydd.length] = new Option(key, keys[key]);
     }
@@ -230,10 +233,10 @@ var modifierFunc = function (context1) {
     ddDiv.appendChild(keydd);
 
     //octave selector
-    var octavedd = document.createElement("select");
-    var octaveText = document.createTextNode("Octave: ");
-    octavedd.name = "OctaveSelector";
-    octavedd.className = "selector";
+    var octavedd = document.createElement('select');
+    var octaveText = document.createTextNode('Octave: ');
+    octavedd.name = 'OctaveSelector';
+    octavedd.className = 'selector';
     for (var i = 0; i < 6; i++) {
         octavedd.options[octavedd.length] = new Option(i, i);
     }
@@ -246,10 +249,10 @@ var modifierFunc = function (context1) {
     ddDiv.appendChild(octavedd);
 
     //range selector
-    var rangedd = document.createElement("select");
-    var rangeText = document.createTextNode("Range: ");
-    rangedd.name = "RangeSelector";
-    rangedd.className = "selector";
+    var rangedd = document.createElement('select');
+    var rangeText = document.createTextNode('Range: ');
+    rangedd.name = 'RangeSelector';
+    rangedd.className = 'selector';
     for (var i = 1; i < 5; i++) {
         rangedd.options[rangedd.length] = new Option(i, i);
     }
@@ -264,10 +267,10 @@ var modifierFunc = function (context1) {
     ddDiv.appendChild(rangedd);
 
     //waveform selector
-    var waveformdd = document.createElement("select");
-    var waveformText = document.createTextNode("WaveForm: ");
-    waveformdd.name = "WaveformSelector";
-    waveformdd.className = "selector";
+    var waveformdd = document.createElement('select');
+    var waveformText = document.createTextNode('WaveForm: ');
+    waveformdd.name = 'WaveformSelector';
+    waveformdd.className = 'selector';
     for (var waveform in waveforms) {
         waveformdd.options[waveformdd.length] = new Option(waveform, waveforms[waveform]);
         restart();
@@ -282,11 +285,11 @@ var modifierFunc = function (context1) {
     ddDiv.appendChild(waveformdd);
 
     //bpm selector
-    var bpmdd = document.createElement("input");
-    var bpmText = document.createTextNode("BPM: ");
-    bpmdd.name = "BPMInput";
-    bpmdd.className = "textInput";
-    bpmdd.type = "text";
+    var bpmdd = document.createElement('input');
+    var bpmText = document.createTextNode('BPM: ');
+    bpmdd.name = 'BPMInput';
+    bpmdd.className = 'textInput';
+    bpmdd.type = 'text';
 
     bpmdd.onchange = function () {
         checkBpmInput(bpmdd)
@@ -299,22 +302,22 @@ var modifierFunc = function (context1) {
     ddDiv.appendChild(bpmText);
     ddDiv.appendChild(bpmdd);
 
-    context1.appendChild(ddDiv);
+    context1.appendChild(ddDiv);*/
 
-}
+};
 
 var updateBase = function () {
     base = key * Math.pow(2, octave);
-}
+};
 var updateWaveformType = function () {
     chordType = waveform;
     melodyType = waveform;
-}
+};
 
     function checkBpmInput(ob) {
-        var invalidChars = /[^0-9]/gi
+        var invalidChars = /[^0-9]/gi;
         if (invalidChars.test(ob.value)) {
-            ob.value = ob.value.replace(invalidChars, "");
+            ob.value = ob.value.replace(invalidChars, '');
         }
         if (ob.value < 40) {
             ob.value = 40;
@@ -330,3 +333,4 @@ var updateWaveformType = function () {
             beginFunc();
         }
     }
+

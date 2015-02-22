@@ -5,8 +5,8 @@
 //return a hue value from 0 to 1 for timbre maybe'
 //in outputlist of notes, 1 can signify a rest
 
-//var notesList = Array();
-var outputNotes = Array();
+//var notesList = [];
+var outputNotes = [];
 //if sequencer, only use a few of the densely populated grids
 var chordlist = [
 [0,2,4],
@@ -55,8 +55,9 @@ function getMaxInRange(low, high) {
 	
 	for(var i = 0; i < coords.length; i++){
 		if(coords[i].x > low && coords[i].x < high){
-			if(coords[i].y > curMax)
+			if(coords[i].y > curMax){
 				curMax = coords[i].y;
+			}
 		}
 	}
 	return curMax;
@@ -67,8 +68,9 @@ function getMinInRange(low, high) {
 	
 	for(var i = 0; i < coords.length; i++){
 		if(coords[i].x > low && coords[i].x < high){
-			if(coords[i].y < curMin)
-			curMin = coords[i].y;
+			if(coords[i].y < curMin){
+				curMin = coords[i].y;
+			}
 		}
 	}
 	return curMin;
@@ -80,13 +82,13 @@ function pseudorandom(){
 
 function convertMeanToNum(minY, maxY, mean){
 	//divide into n sections
-	var n = 10
+	var n = 10;
 	var sectionsize = (maxY-minY)/n;
-	var num = 1
+	var num = 1;
 	for(var i = minY; i < maxY; i+=sectionsize){
 
 		if(mean > i && mean < (i + sectionsize)){
-			console.log(num);
+			//console.log(num);
 			return num;
 		}
 		num++;
@@ -96,40 +98,29 @@ function convertMeanToNum(minY, maxY, mean){
 
 function parseCanvas() {
 	coords.sort(sortX);
-	//$('#coords').text(JSON.stringify(coords));
 	
 	var minX = coords[0].x;
 	var maxX = coords[coords.length-1].x;
-	var thisrange = maxX - minX;
+	var range = maxX - minX;
 
-	coords.sort(sortY)
+	coords.sort(sortY);
 	var minY = coords[0].y;
 	var maxY = coords[coords.length-1].y;
-	var sectionsize = thisrange/range;
-/*
-	var outputChords = Array();
+
+	var outputChords = [];
 
 	//split signature range into n parts for n notes
+	var sectionsize = range/16;
+	for(var i = minX; i < maxX; i += sectionsize){
+		var curmean = getMeanInRange(i, i+sectionsize);
+	}
+
 	
-	for(var i = minX; i < maxX; i += sectionsize){
-		var curmean = getMeanInRange(i, i+sectionsize);
-		//outputChords.push()
+	for(var j = minX; j < maxX; j += sectionsize){
+		var notecurmean = getMeanInRange(j, j+sectionsize);
+		outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
 	}
-*/
-	context.lineWidth = 2;
-	outputNotes = []	
-	for(var i = minX; i < maxX; i += sectionsize){
-		context.moveTo(i, 0);
-		context.lineTo(i, context.canvas.height);
-		context.stroke();
-		var curmean = getMeanInRange(i, i+sectionsize);
-		outputNotes.push(convertMeanToNum(getMinInRange(i, i+sectionsize), getMaxInRange(i, i+sectionsize), curmean));
-	}
-	context.moveTo(maxX, 0);
-	context.lineTo(maxX, context.canvas.height);
-	context.stroke();
-
-	//alert('range: ' + thisrange + ' left: ' + minX + ' right: ' + maxX);
-
-	$('#coords').text(JSON.stringify(outputNotes));
 }
+
+
+

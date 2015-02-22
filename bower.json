@@ -1,0 +1,15 @@
+{
+  "name": "tonal-starfield-server",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.2",
+    "subcollider.js": "https://github.com/mohayonao/subcollider.js.git",
+    "three.js": "*",
+    "timbre": "*",
+    "stats.js": "*",
+    "cannon.js": "~0.6.1",
+    "knockout": "~3.3.0",
+    "screenfull": "~2.0.0",
+    "threex.windowresize": "*"
+  }
+}

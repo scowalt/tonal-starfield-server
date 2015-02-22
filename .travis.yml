@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+- '0.10'
+before_install: npm install -g grunt-cli bower
+install: npm install
+notifications:
+  email: false
+deploy:
+  provider: heroku
+  app: tonal-starfield
+  api_key:
+    secure: iyl4Y3/4qXnj16/ksZTQsvvkTHbovZgKrwdaB4NVjRZu0PYDe4SKT+dnYKmosnIQ/AUfHdOne1INdcbTJg3Dk32mEEtutjVIe4QNQmbVZ97JrYuns2RvE3a5VpSzkH8wss0cJh6fqnCPTaqivRsgBtDuk0uv8sp1Q4Pk5yZAEjY=

@@ -1,9 +1,4 @@
 /**
- * CONSTANTS
- */
-PORT = 8080;
-
-/**
  * IMPORTS
  */
 var express = require('express');
@@ -14,24 +9,18 @@ var io = require('socket.io')(server);
 /**
  * ROUTES
  */
+app.use(require(__dirname + '/routes')(io));
 // serve static content
-app.use('/', express.static(__dirname + '/public'));
-
-/**
- * SOCKETS
- */
-io.on('connection', function onConnect(socket) {
-	socket.on('play-note', function onPlayNote(data) {
-		io.emit('play-note', data);
-	})
-})
+app.use(express.static(__dirname + '/public'));
+// serve bower components
+app.use(express.static(__dirname + '/bower_components'));
 
 /**
  * START SERVER
  */
-server.listen(PORT, function listenCallback() {
+server.listen(process.env.PORT || 8080, function listenCallback() {
 	var host = server.address().address;
 	var port = server.address().port;
 
-	console.log('Listening at http://%s:%s', host, port)
+	console.log('Listening at http://%s:%s', host, port);
 });
