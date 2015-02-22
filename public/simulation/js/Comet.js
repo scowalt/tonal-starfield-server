@@ -22,7 +22,11 @@ var Comet = function(position, color){
 		mass: 5,
 		position: new CANNON.Vec3(position.x, position.y, position.z),
 		shape: new CANNON.Sphere(Comet.radius),
-		velocity: Comet.velocity
+		velocity: new CANNON.Vec3(
+			-20 + 40 * Math.random(),
+			-20 + 40 * Math.random(),
+			-1 * Comet.speed
+		)
 	});
 
 	this.getLight = function(){
@@ -47,8 +51,6 @@ var Comet = function(position, color){
 		var quaternion = sphereBody.quaternion;
 		light.position.copy(position);
 		light.quaternion.copy(quaternion);
-		mesh.position.copy(position);
-		mesh.quaternion.copy(quaternion);
 		sprite.position.copy(position);
 		sprite.quaternion.copy(quaternion);
 	};
@@ -58,5 +60,4 @@ var Comet = function(position, color){
 Comet.radius = 10;
 Comet.geometry = new THREE.SphereGeometry(Comet.radius, 12, 12);
 Comet.speed = 100;
-Comet.velocity = new CANNON.Vec3(0,0,-1 * Comet.speed);
 Comet.lifespan = FAR / Comet.speed;
