@@ -50,4 +50,6 @@ var Comet = function(position, color){
 // static variables
 Comet.radius = 10;
 Comet.geometry = new THREE.SphereGeometry(Comet.radius, 12, 12);
-Comet.velocity = new CANNON.Vec3(0,0,-100);
+Comet.speed = 100;
+Comet.velocity = new CANNON.Vec3(0,0,-1 * Comet.speed);
+Comet.lifespan = FAR / Comet.speed;

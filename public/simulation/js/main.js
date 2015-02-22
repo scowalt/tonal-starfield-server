@@ -178,7 +178,8 @@ function spawnComet(e) {
 	newLight = true;
 	sockets.send({
 		'event': 'comet',
-		'color': comet.getLight().color
+		'color': comet.getLight().color,
+		'lifespan': Comet.lifespan
 	});
 }
 
