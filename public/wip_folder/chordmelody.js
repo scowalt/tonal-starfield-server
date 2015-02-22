@@ -152,12 +152,12 @@ var melodyFun = function () {
     function createButtons(context1) {
         var buttonDiv = document.createElement('div');
         buttonDiv.className = 'buttonDiv';
-        var begin = document.createElement('input');
+        /*var begin = document.createElement('input');
         begin.type = 'button';
         begin.value = 'start';
         begin.onclick = beginFunc;
         begin.className = 'button'
-        buttonDiv.appendChild(begin);
+        buttonDiv.appendChild(begin);*/
 
         var end = document.createElement('input');
         end.type = 'button';
@@ -208,7 +208,8 @@ var endFunc = function () {
 //Enormous function I know, could use refactoring
 //Mostly divs and dropdown menus
 var modifierFunc = function (context1) {
-    var ddDiv = document.createElement('div');
+    
+ /*   var ddDiv = document.createElement('div');
     ddDiv.className = 'ddDiv';
     //key selector
     var keydd = document.createElement('select');
@@ -298,7 +299,7 @@ var modifierFunc = function (context1) {
     ddDiv.appendChild(bpmText);
     ddDiv.appendChild(bpmdd);
 
-    context1.appendChild(ddDiv);
+    context1.appendChild(ddDiv);*/
 
 }
 
