@@ -15,7 +15,7 @@ var renderer = new THREE.WebGLRenderer();
 var rotationCounter = 0;
 var lastTime = Date.now();
 var stars = [];
-var comets = [];
+var windowResize = new THREEx.WindowResize(renderer, camera);
 
 // cannon
 var world = new CANNON.World();
@@ -114,8 +114,7 @@ document.body.appendChild(stats.domElement);
  */
 document.onkeypress = function onKeyPress(e) {
 	e = e || window.event;
-	console.log(e.keyCode);
-	if (e.keyCode === 100) { // d
+	if (e.keyCode === 'd'.charCodeAt(0)) {
 		if (stats.domElement.style.display === 'none') {
 			stats.domElement.style.display = 'block';
 			$('.debug').css('display', 'block');
@@ -123,7 +122,7 @@ document.onkeypress = function onKeyPress(e) {
 			stats.domElement.style.display = 'none';
 			$('.debug').css('display', 'none');
 		}
-	} else if (e.keyCode === 109) { // m
+	} else if (e.keyCode === 'm'.charCodeAt(0)) {
 		if (maxVolume === 0) {
 			maxVolume = oldMaxVolume;
 		}
@@ -131,11 +130,15 @@ document.onkeypress = function onKeyPress(e) {
 			oldMaxVolume = maxVolume;
 			maxVolume = 0;
 		}
-	} else if (e.keyCode === 114) { // r
+	} else if (e.keyCode === 'r'.charCodeAt(0)) {
 		rotate();
+	} else if (e.keyCode === 'f'.charCodeAt(0)) {
+		screenfull.toggle(document.body);
+		windowResize.trigger();
 	}
 };
 document.onclick = spawnComet;
+window.onresize = windowResize.trigger;
 
 /**
  * Helper functions
