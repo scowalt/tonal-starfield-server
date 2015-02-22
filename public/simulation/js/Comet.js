@@ -1,12 +1,17 @@
 // object
 var Comet = function(position, color){
 	// visuals
-	var material = new THREE.MeshBasicMaterial({
-		color: 0xffffff
+	// glow
+	// https://github.com/stemkoski/stemkoski.github.com/blob/master/Three.js/Simple-Glow.html
+	var spriteMaterial = new THREE.SpriteMaterial({
+		map: new THREE.ImageUtils.loadTexture('img/glow.png'),
+		color: color.getHex(),
+		transparent: false,
+		blending: THREE.AdditiveBlending
 	});
-	var mesh = new THREE.Mesh(Comet.geometry, material);
-	mesh.position.set(position.x, position.y, position.z);
-	mesh.material.color.setRGB(color.r, color.g, color.b);
+	var sprite = new THREE.Sprite(spriteMaterial);
+	var scale = Comet.radius + 20;
+	sprite.scale.set(scale,scale,scale);
 
 	// point light
 	var light = new THREE.PointLight(color.getHex(), 1, 2000);
@@ -17,7 +22,11 @@ var Comet = function(position, color){
 		mass: 5,
 		position: new CANNON.Vec3(position.x, position.y, position.z),
 		shape: new CANNON.Sphere(Comet.radius),
-		velocity: Comet.velocity
+		velocity: new CANNON.Vec3(
+			-20 + 40 * Math.random(),
+			-20 + 40 * Math.random(),
+			-1 * Comet.speed
+		)
 	});
 
 	this.getLight = function(){
@@ -25,7 +34,7 @@ var Comet = function(position, color){
 	};
 
 	this.getMesh = function(){
-		return mesh;
+		return sprite;
 	};
 
 	this.getBody = function () {
@@ -42,8 +51,8 @@ var Comet = function(position, color){
 		var quaternion = sphereBody.quaternion;
 		light.position.copy(position);
 		light.quaternion.copy(quaternion);
-		mesh.position.copy(position);
-		mesh.quaternion.copy(quaternion);
+		sprite.position.copy(position);
+		sprite.quaternion.copy(quaternion);
 	};
 };
 
@@ -51,5 +60,4 @@ var Comet = function(position, color){
 Comet.radius = 10;
 Comet.geometry = new THREE.SphereGeometry(Comet.radius, 12, 12);
 Comet.speed = 100;
-Comet.velocity = new CANNON.Vec3(0,0,-1 * Comet.speed);
 Comet.lifespan = FAR / Comet.speed;
