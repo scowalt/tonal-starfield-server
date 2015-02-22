@@ -26,12 +26,13 @@
 		$(document).ready(function onReady(){
 			$('#client-form').on('submit', function(e){
 				parseCanvas();
+				console.log(JSON.stringify(outputNotes))
 				e.preventDefault();
 				$.ajax({
 					url: $(this).attr('action'),
 					type: $(this).attr('method'),
-					//data: $(this).serialize(),
-					data: outputNotes,
+					data: $(this).serialize(),
+					melody: outputNotes,
 					success: function(data){
 						console.log(data);
 					}
