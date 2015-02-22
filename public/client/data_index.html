@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+	<form id="client-form" action="/client/submit" method="post">
+		<input type="submit" value="Submit">
+	</form>
+
+	<script src="/jquery/dist/jquery.min.js"></script>
+	<script>
+		$(document).ready(function onReady(){
+			$('#client-form').on('submit', function(e){
+				e.preventDefault();
+				$.ajax({
+					url: $(this).attr('action'),
+					type: $(this).attr('method'),
+					data: $(this).serialize(),
+					success: function(data){
+						console.log(data);
+					}
+				})
+			});
+		});
+	</script>
+</body>
+</html>

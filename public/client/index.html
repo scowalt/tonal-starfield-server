@@ -1,23 +1,37 @@
-<!DOCTYPE html>
 <html>
+
 <head lang="en">
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title></title>
+
+	<link rel="stylesheet" type="text/css" href="client.css" media="screen"/>
+	<script src="draw.js"></script>
+	<script src="chordmelody.js"></script>
+	<script src="generator.js"></script>
 </head>
+
+
 <body>
+	<div id="canvasDiv" ></div>
+	<button type="button" id="submit" onClick="parseCanvas(); beginFunc();">submit</button>
+
 	<form id="client-form" action="/client/submit" method="post">
-		<input type="submit" value="Submit">
+		<input type="submit" value="newSubmit"/>
 	</form>
+
+	
 
 	<script src="/jquery/dist/jquery.min.js"></script>
 	<script>
 		$(document).ready(function onReady(){
 			$('#client-form').on('submit', function(e){
+				parseCanvas();
 				e.preventDefault();
 				$.ajax({
 					url: $(this).attr('action'),
 					type: $(this).attr('method'),
-					data: $(this).serialize(),
+					//data: $(this).serialize(),
+					data: outputNotes,
 					success: function(data){
 						console.log(data);
 					}
@@ -25,5 +39,10 @@
 			});
 		});
 	</script>
+
+	<script type="text/javascript"> $(document).ready(function() {
+    	 prepareCanvas();
+});</script>
+
 </body>
 </html>
