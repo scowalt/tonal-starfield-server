@@ -11,14 +11,14 @@ var keys = {
         'A': 27.5,
         'A#/Bb': 29.14,
         'B': 30.87
-}
+};
 
 var waveforms = {
     'sine': 'sine',
 	'square': 'square',
     'sawtooth': 'sawtooth',
     'triangle': 'triangle'
-}
+};
 
 //Configurations
 var octave = 3;
@@ -26,7 +26,7 @@ var key = keys['A'];
 var base;
 //used with calculating notes
 var a = Math.pow(2, 1 / 12);
-var range = 16
+var range = 16;
 var waveform = waveforms['sawtooth'];
 var chordType;
 var melodyType;
@@ -87,7 +87,7 @@ init = function () {
     /*chor1.frequency.value = notes[chordProg[0][0]];
     chor2.frequency.value = notes[chordProg[0][1]];
     chor3.frequency.value = notes[chordProg[0][2]];*/
-}
+};
 
 // Build scale
 var buildScale = function () {
@@ -95,14 +95,14 @@ var buildScale = function () {
     var freq = base;
     var step = 0;
     for (var i = 0; i < range; i++) {
-        notes[i] = freq
+        notes[i] = freq;
         step++;
-        if (i % 7 != 2 && i % 7 != 6) {
+        if (i % 7 !== 2 && i % 7 !== 6) {
             step++;
         }
         freq = base * Math.pow(a, step);
     }
-}
+};
 
 //I   V    vi     IV
 //Standard Pop Progression
@@ -111,13 +111,13 @@ chordProg = [
     [4, 6, 8],
     [5, 7, 9],
     [3, 5, 7]
-]
+];
 
 //melody function
 var melodyFun = function () {
     time++;
     //chord progression    
-    if (time % (notesPerMeasure * (qtrNote / minNote)) == 0 && time != 0) {
+    if (time % (notesPerMeasure * (qtrNote / minNote)) === 0 && time !== 0) {
         chord++;
         chord %= 4
         /*chor1.frequency.value = notes[chordProg[chord][0]];
@@ -145,7 +145,7 @@ var melodyFun = function () {
         $('#notes').text(note);
         melody.frequency.value = freq;
     }
-}
+};
 
 
 
@@ -163,7 +163,7 @@ var melodyFun = function () {
         end.type = 'button';
         end.value = 'end';
         end.onclick = endFunc;
-        end.className = 'button_end'
+        end.className = 'button_end';
         buttonDiv.appendChild(end);
         context1.appendChild(buttonDiv);
     }
@@ -172,7 +172,7 @@ window.onload = function () {
 
     createButtons(document.body);
     modifierFunc(document.body);
-}
+};
 
 var beginFunc = function () {
     if (!isRunning) {
@@ -192,7 +192,7 @@ var beginFunc = function () {
         endFunc();
         beginFunc();
     }
-}
+};
 
 // Click to end the madness
 var endFunc = function () {
@@ -204,11 +204,11 @@ var endFunc = function () {
         clearInterval(melodyInt);
         isRunning = false;
     }
-}
+};
 //Enormous function I know, could use refactoring
 //Mostly divs and dropdown menus
 var modifierFunc = function (context1) {
-    
+
  /*   var ddDiv = document.createElement('div');
     ddDiv.className = 'ddDiv';
     //key selector
@@ -301,18 +301,18 @@ var modifierFunc = function (context1) {
 
     context1.appendChild(ddDiv);*/
 
-}
+};
 
 var updateBase = function () {
     base = key * Math.pow(2, octave);
-}
+};
 var updateWaveformType = function () {
     chordType = waveform;
     melodyType = waveform;
-}
+};
 
     function checkBpmInput(ob) {
-        var invalidChars = /[^0-9]/gi
+        var invalidChars = /[^0-9]/gi;
         if (invalidChars.test(ob.value)) {
             ob.value = ob.value.replace(invalidChars, '');
         }

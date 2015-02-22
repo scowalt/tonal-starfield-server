@@ -47,8 +47,9 @@ function getMaxInRange(low, high) {
 	
 	for(var i = 0; i < coords.length; i++){
 		if(coords[i].x > low && coords[i].x < high){
-			if(coords[i].y > curMax)
+			if(coords[i].y > curMax){
 				curMax = coords[i].y;
+			}
 		}
 	}
 	return curMax;
@@ -59,8 +60,9 @@ function getMinInRange(low, high) {
 	
 	for(var i = 0; i < coords.length; i++){
 		if(coords[i].x > low && coords[i].x < high){
-			if(coords[i].y < curMin)
-			curMin = coords[i].y;
+			if(coords[i].y < curMin){
+				curMin = coords[i].y;
+			}
 		}
 	}
 	return curMin;
@@ -72,9 +74,9 @@ function pseudorandom(){
 
 function convertMeanToNum(minY, maxY, mean){
 	//divide into n sections
-	var n = 10
+	var n = 10;
 	var sectionsize = (maxY-minY)/n;
-	var num = 1
+	var num = 1;
 	for(var i = minY; i < maxY; i+=sectionsize){
 
 		if(mean > i && mean < (i + sectionsize)){
@@ -108,9 +110,9 @@ function parseCanvas() {
 	}
 
 	
-	for(var i = minX; i < maxX; i += sectionsize){
-		var curmean = getMeanInRange(i, i+sectionsize);
-		outputNotes.push(convertMeanToNum(getMinInRange(i, i+sectionsize), getMaxInRange(i, i+sectionsize), curmean));
+	for(var j = minX; j < maxX; j += sectionsize){
+		var curmean = getMeanInRange(j, j+sectionsize);
+		outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), curmean));
 	}
 
 	//alert('range: ' + range + ' left: ' + minX + ' right: ' + maxX);
