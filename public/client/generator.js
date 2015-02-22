@@ -80,7 +80,7 @@ function convertMeanToNum(minY, maxY, mean){
 	for(var i = minY; i < maxY; i+=sectionsize){
 
 		if(mean > i && mean < (i + sectionsize)){
-			console.log(num);
+			//console.log(num);
 			return num;
 		}
 		num++;
@@ -109,24 +109,9 @@ function parseCanvas() {
 
 	
 	for(var j = minX; j < maxX; j += sectionsize){
-		var curmean = getMeanInRange(j, j+sectionsize);
-		outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), curmean));
+		var notecurmean = getMeanInRange(j, j+sectionsize);
+		outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
 	}
-	//$('#coords').text(JSON.stringify(outputNotes));
-
-/*	
-	$('#client-form').on('submit', function(e){
-		e.preventDefault();
-		$.ajax({
-			//url: $(this).attr('action'),
-			type: 'comet',
-			melody: outputNotes,
-			success: function(melody){
-				console.log(melody);
-			}
-		})
-	});
-		*/
 }
 
 
