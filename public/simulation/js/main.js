@@ -22,8 +22,9 @@ var world = new CANNON.World();
 world.gravity.set(0,0,0); // no gravity
 
 // lighting
-var light = new THREE.AmbientLight(0x909090);
+var light = new THREE.AmbientLight(0x5E5E5E);
 scene.add(light);
+var newLight = false;
 
 /**
  * Setup
@@ -58,6 +59,13 @@ function render() {
 		}
 	});
 
+	if (newLight){
+		stars.forEach(function(star){
+			star.updateMaterial();
+		});
+		newLight = false;
+	}
+
 	// add stars to scene
 	for (var i = 0; i < STARS_PER_FRAME; i++) {
 		var pos = randomSpawnLocation();
@@ -66,7 +74,7 @@ function render() {
 			blue: 1,
 			green: 1
 		};
-		var speed = 400 + 200 * Math.random();
+		var speed = STAR_MIN_SPEED + STAR_SPEED_RANGE * Math.random();
 		var star = new Star(pos, color, speed);
 		addStar(star);
 	}
@@ -167,9 +175,11 @@ function spawnComet(e) {
 	color.setHSL(Math.random(), 1, 0.5);
 	var comet = new Comet({x:x, y:y, z:z}, color);
 	addStar(comet);
+	newLight = true;
 	sockets.send({
 		'event': 'comet',
-		'color': comet.getLight().color
+		'color': comet.getLight().color,
+		'lifespan': Comet.lifespan
 	});
 }
 
