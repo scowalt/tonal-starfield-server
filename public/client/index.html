@@ -1,22 +1,42 @@
 <html>
-<head>
-	<head lang="en">
-    <meta charset="UTF-8">
+
+<head lang="en">
+    <meta charset="UTF-8"/>
     <title></title>
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
 	<link rel="stylesheet" type="text/css" href="client.css" media="screen"/>
 	<script src="draw.js"></script>
 	<script src="chordmelody.js"></script>
 	<script src="generator.js"></script>
 </head>
+
+
 <body>
 	<div id="canvasDiv" ></div>
 	<button type="button" id="submit" onClick="parseCanvas(); beginFunc();">submit</button>
 
 	<form id="client-form" action="/client/submit" method="post">
-		<input type="submit" value="newSubmit">
+		<input type="submit" value="newSubmit"/>
 	</form>
+
+	
+
+	<script src="/jquery/dist/jquery.min.js"></script>
+	<script>
+		$(document).ready(function onReady(){
+			$('#client-form').on('submit', function(e){
+				e.preventDefault();
+				$.ajax({
+					url: $(this).attr('action'),
+					type: $(this).attr('method'),
+					data: $(this).serialize(),
+					success: function(data){
+						console.log(data);
+					}
+				})
+			});
+		});
+	</script>
 
 	<script type="text/javascript"> $(document).ready(function() {
     	 prepareCanvas();

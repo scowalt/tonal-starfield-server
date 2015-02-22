@@ -119,11 +119,11 @@ var melodyFun = function () {
     //chord progression    
     if (time % (notesPerMeasure * (qtrNote / minNote)) === 0 && time !== 0) {
         chord++;
-        chord %= 4
+        chord %= 4;
         /*chor1.frequency.value = notes[chordProg[chord][0]];
         chor2.frequency.value = notes[chordProg[chord][1]];
         chor3.frequency.value = notes[chordProg[chord][2]];*/
-    }
+    };
     //
 
     //*********************************************************************************************8
@@ -330,3 +330,4 @@ var updateWaveformType = function () {
             beginFunc();
         }
     }
+

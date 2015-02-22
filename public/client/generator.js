@@ -95,7 +95,7 @@ function parseCanvas() {
 	var maxX = coords[coords.length-1].x;
 	var range = maxX - minX;
 
-	coords.sort(sortY)
+	coords.sort(sortY);
 	var minY = coords[0].y;
 	var maxY = coords[coords.length-1].y;
 
@@ -114,14 +114,19 @@ function parseCanvas() {
 	}
 	//$('#coords').text(JSON.stringify(outputNotes));
 
-	e.preventDefault();
-	$.ajax({
-		//url: $(this).attr('action'),
-		type: 'comet',
-		melody: outputNotes,
-		success: function(melody){
-			console.log(melody);
-		}
-	})
-		
+/*	
+	$('#client-form').on('submit', function(e){
+		e.preventDefault();
+		$.ajax({
+			//url: $(this).attr('action'),
+			type: 'comet',
+			melody: outputNotes,
+			success: function(melody){
+				console.log(melody);
+			}
+		})
+	});
+		*/
 }
+
+
