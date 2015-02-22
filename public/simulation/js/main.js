@@ -165,7 +165,7 @@ function removeStar(star, index){
 	stars.splice(index, 1);
 }
 
-function spawnComet(e) {
+function spawnComet(e, data) {
 	// get event
 	e = e || window.event;
 
@@ -182,7 +182,8 @@ function spawnComet(e) {
 	sockets.send({
 		'event': 'comet',
 		'color': comet.getLight().color,
-		'lifespan': Comet.lifespan
+		'lifespan': Comet.lifespan,
+		'melody': data.melody
 	});
 }
 
@@ -216,5 +217,5 @@ serverSocket.on('comet', function(data){
 	spawnComet({
 		x: Math.random()*window.innerWidth,
 		y: Math.random()*window.innerHeight
-	});
+	}, data);
 });
