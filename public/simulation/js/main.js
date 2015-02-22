@@ -74,7 +74,7 @@ function render() {
 			blue: 1,
 			green: 1
 		};
-		var speed = 400 + 200 * Math.random();
+		var speed = STAR_MIN_SPEED + STAR_SPEED_RANGE * Math.random();
 		var star = new Star(pos, color, speed);
 		addStar(star);
 	}
