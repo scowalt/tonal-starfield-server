@@ -21,7 +21,6 @@ var tempHeight = window.innerHeight;
 var canvasHeight = (tempHeight - 200);
 var padding = 25;
 var lineWidth = 8;
-
 var colorPurple = '#cb3594';
 var clickX = [];
 var clickY = [];
@@ -108,7 +107,38 @@ function prepareCanvas()
 	$('#canvas').mouseleave(function(e){
 		paint = false;
 	});
+/*
+	//add touch events
+	//equiv to mousedown
+	$('#canvas').bind('touchstart', function(e) {
+		// Mouse down location
+		var mouseX = e.targetTouches[0].pageX - this.offsetLeft;
+		var mouseY = e.targetTouches[0].pageY - this.offsetTop;
+		$('#test').text(coords.length + ' mousex:' + mouseX + ' mousey:' + mouseY);
+		coords.push({x: mouseX, y: mouseY});
 
+		paint = true;
+		addClick(mouseX, mouseY, false);
+		redraw();
+	});
+	//equiv to mousemove
+	$('#canvas').bind('touchmove', function(e) {
+		if(paint===true){
+			var mouseX = e.targetTouches[0].pageX - this.offsetLeft;
+			var mouseY = e.targetTouches[0].pageY - this.offsetTop;
+			addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+			$('#test').text(coords.length + ' mousex:' + mouseX + ' mousey:' + mouseY);
+			coords.push({x: mouseX, y: mouseY});
+			redraw();
+		}
+	});
+	//equiv to mouseup
+	$('#canvas').bind('touchend', function(e) {
+		paint = false;
+		redraw();
+	});
+
+	*/
 }
 
 function doTouchEnd(e){
@@ -139,7 +169,6 @@ function doTouchMove(e){
 			coords.push({x: mouseX, y: mouseY});
 			redraw();
 		}
-
 }
 
 /**
@@ -206,7 +235,6 @@ function redraw()
 		
 		context.lineJoin = 'round';
 		context.lineWidth = radius;
-		context.strokeStyle = "#000000";
 		context.stroke();
 		
 	}

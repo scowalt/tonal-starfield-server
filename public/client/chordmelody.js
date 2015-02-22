@@ -15,7 +15,7 @@ var keys = {
 
 var waveforms = {
     'sine': 'sine',
-	'square': 'square',
+    'square': 'square',
     'sawtooth': 'sawtooth',
     'triangle': 'triangle'
 };
@@ -95,9 +95,7 @@ var buildScale = function () {
     var freq = base;
     var step = 0;
     for (var i = 0; i < range; i++) {
-
         notes[i] = freq;
-
         step++;
         if (i % 7 !== 2 && i % 7 !== 6) {
             step++;
@@ -132,7 +130,6 @@ var melodyFun = function () {
     //change this random function
     //Random note length
     if (time % (Math.floor(Math.random() * (qtrNote / minNote))) === 0) {
-
 
         melodycount++;
 
