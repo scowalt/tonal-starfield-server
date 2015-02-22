@@ -22,7 +22,7 @@ var world = new CANNON.World();
 world.gravity.set(0,0,0); // no gravity
 
 // lighting
-var light = new THREE.AmbientLight(0x5E5E5E);
+var light = new THREE.AmbientLight(0x3e3e3e);
 scene.add(light);
 var newLight = false;
 
