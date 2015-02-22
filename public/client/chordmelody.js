@@ -123,13 +123,13 @@ var melodyFun = function () {
         /*chor1.frequency.value = notes[chordProg[chord][0]];
         chor2.frequency.value = notes[chordProg[chord][1]];
         chor3.frequency.value = notes[chordProg[chord][2]];*/
-    };
+    }
     //
 
     //*********************************************************************************************8
     //change this random function
     //Random note length
-    if (time % (Math.floor(Math.random() * (qtrNote / minNote))) == 0) {
+    if (time % (Math.floor(Math.random() * (qtrNote / minNote))) === 0) {
 
         melodycount++;
 
