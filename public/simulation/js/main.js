@@ -11,7 +11,9 @@ var oldMaxVolume;
 var sound = new Sound();
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(FIELD_OF_VIEW, window.innerWidth / window.innerHeight, 0.1, FAR);
-var renderer = new THREE.WebGLRenderer();
+var renderer = new THREE.WebGLRenderer({
+	alpha: true
+});
 var rotationCounter = 0;
 var lastTime = Date.now();
 var stars = [];
@@ -193,14 +195,15 @@ function rotate(){
 
 // https://github.com/mrdoob/three.js/issues/1239
 function randomSpawnLocation(){
-	var verticalFOV = degInRad(camera.fov);
-	var horizontalFOV = degInRad(camera.fov * camera.aspect);
-	var distance = camera.far;
-	var verticalRange = 2 * distance * Math.tan(verticalFOV / 2);
-	var horizontalRange = 2 * distance * Math.tan(horizontalFOV / 2);
-	var x = 2 * Math.random() * horizontalRange - horizontalRange / 2 + camera.position.x;
-	var y = 2 * Math.random() * verticalRange - verticalRange / 2 + camera.position.y;
-	var z = camera.position.z - distance;
+	var aspect = camera.aspect;
+	var vFOV = degInRad(camera.fov);
+	var hFOV = 2 * Math.atan( Math.tan( vFOV / 2 ) * aspect );
+	var dist = camera.far;
+	var height = 2 * Math.tan( ( vFOV / 2 ) ) * dist;
+	var width = 2 * Math.tan( ( hFOV / 2 ) ) * dist;
+	var x = 2 * Math.random() * width - width / 2 + camera.position.x;
+	var y = 2 * Math.random() * height - height / 2 + camera.position.y;
+	var z = camera.position.z - dist;
 	return new THREE.Vector3(x,y,z);
 }
 
