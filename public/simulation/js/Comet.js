@@ -14,7 +14,7 @@ var Comet = function(position, color){
 	sprite.scale.set(scale,scale,scale);
 
 	// point light
-	var light = new THREE.PointLight(color.getHex(), 1, 2000);
+	var light = new THREE.PointLight(color.getHex(), 1, 5000);
 	light.position.set(position.x, position.y, position.z);
 
 	// physics
@@ -23,8 +23,8 @@ var Comet = function(position, color){
 		position: new CANNON.Vec3(position.x, position.y, position.z),
 		shape: new CANNON.Sphere(Comet.radius),
 		velocity: new CANNON.Vec3(
-			-20 + 40 * Math.random(),
-			-20 + 40 * Math.random(),
+			-100 + 200 * Math.random(),
+			-100 + 200 * Math.random(),
 			-1 * Comet.speed
 		)
 	});
@@ -57,7 +57,7 @@ var Comet = function(position, color){
 };
 
 // static variables
-Comet.radius = 10;
+Comet.radius = 30;
 Comet.geometry = new THREE.SphereGeometry(Comet.radius, 12, 12);
 Comet.speed = 100;
 Comet.lifespan = FAR / Comet.speed;
