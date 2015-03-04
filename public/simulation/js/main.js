@@ -17,6 +17,7 @@ var renderer = new THREE.WebGLRenderer({
 var rotationCounter = 0;
 var lastTime = Date.now();
 var stars = [];
+var comets = [];
 var windowResize = new THREEx.WindowResize(renderer, camera);
 
 // cannon
@@ -58,6 +59,16 @@ function render() {
 			removeStar(star, index);
 		} else {
 			star.updatePosition();
+		}
+	});
+
+	comets.forEach(function(comet, index){
+		var mesh = comet.getMesh();
+		var visible = frustum.intersectsObject(mesh);
+		if (mesh.position.z < camera.position.z - 200 && !visible){
+			removeComet(comet, index);
+		} else {
+			comet.updatePosition();
 		}
 	});
 
@@ -158,6 +169,13 @@ function addStar(star) {
 	stars.push(star);
 }
 
+function addComet(comet){
+	scene.add(comet.getMesh());
+	scene.add(comet.getLight());
+	world.add(comet.getBody());
+	comets.push(comet);
+}
+
 function removeStar(star, index){
 	scene.remove(star.getMesh());
 	if (star.getLight){
@@ -167,6 +185,13 @@ function removeStar(star, index){
 	stars.splice(index, 1);
 }
 
+function removeComet(comet, index){
+	scene.remove(comet.getMesh());
+	scene.remove(comet.getLight());
+	world.remove(comet.getBody());
+	comets.splice(index, 1);
+}
+
 function spawnComet(e, data) {
 	// get event
 	e = e || window.event;
@@ -174,19 +199,22 @@ function spawnComet(e, data) {
 	// spawn star
 	var x = (e.x - (window.innerWidth / 2))/2;
 	var y = ((window.innerHeight / 2) - e.y)/2;
-	var z = -200;
+	var z = -100;
 
 	var color = new THREE.Color();
 	color.setHSL(Math.random(), 1, 0.5);
 	var comet = new Comet({x:x, y:y, z:z}, color);
-	addStar(comet);
+	addComet(comet);
 	newLight = true;
-	sockets.send({
+	var message = {
 		'event': 'comet',
 		'color': comet.getLight().color,
-		'lifespan': Comet.lifespan,
-		'melody': data.melody
-	});
+		'lifespan': Comet.lifespan
+	};
+	if (data){
+		message.melody = data.melody;
+	}
+	sockets.send(message);
 }
 
 function rotate(){
