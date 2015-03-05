@@ -4,8 +4,8 @@
     <meta charset="UTF-8"/>
     <title></title>
 
-	<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="css/client.css" media="screen"/>
+<!-- 	<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/client.css" media="screen"/> -->
 	<script src="js/draw.js"></script>
 	<script src="js/chordmelody.js"></script>
 	<script src="js/generator.js"></script>
@@ -15,10 +15,11 @@
 <body>
 	<div class="container">
 		<div id="canvasDiv" ></div>
-		<button type="button" id="submit" onClick="parseCanvas(); beginFunc();">submit</button>
+		<!-- <button type="button" id="submit" onClick="parseCanvas(); beginFunc();">submit</button> -->
 
 		<form id="client-form" action="/client/submit" method="post">
-			<input type="submit" value="newSubmit"/>
+			<input type="submit" value="Send!"/>
+			<input type="color" id="colorpicker" name="color" value="#ff0000"/>
 		</form>
 	</div>
 
@@ -39,7 +40,7 @@
 					}
 				})
 			});
-		});
+		}); 
 	</script>
 
 	<script type="text/javascript"> $(document).ready(function() {
