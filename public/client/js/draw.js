@@ -21,7 +21,6 @@ var tempHeight = window.innerHeight;
 var canvasHeight = (tempHeight - 200);
 var padding = 25;
 var lineWidth = 8;
-var colorPurple = '#cb3594';
 var clickX = [];
 var clickY = [];
 var clickColor = [];
@@ -29,7 +28,7 @@ var clickTool = [];
 var clickSize = [];
 var clickDrag = [];
 var paint = false;
-var curColor = colorPurple;
+var curColor = '#ff0000';
 var curTool = 'marker';
 var curSize = 'normal';
 var sizeHotspotWidthObject = {};
@@ -179,6 +178,7 @@ function doTouchMove(e){
 */
 function addClick(x, y, dragging)
 {
+	curColor = $('#colorpicker').val();
 	clickX.push(x);
 	clickY.push(y);
 	clickTool.push(curTool);
@@ -235,6 +235,10 @@ function redraw()
 		
 		context.lineJoin = 'round';
 		context.lineWidth = radius;
+
+		//setcolor
+		context.strokeStyle = curColor;
+
 		context.stroke();
 		
 	}

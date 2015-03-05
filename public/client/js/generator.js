@@ -112,6 +112,8 @@ function parseCanvas() {
 		var notecurmean = getMeanInRange(j, j+sectionsize);
 		outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
 	}
+
+	alert(outputNotes);
 }
 
 
