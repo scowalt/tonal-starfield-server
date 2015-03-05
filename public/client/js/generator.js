@@ -68,10 +68,6 @@ function getMinInRange(low, high) {
 	return curMin;
 }
 
-function pseudorandom(){
-	return 0.5;
-}
-
 function convertMeanToNum(minY, maxY, mean){
 	//divide into n sections
 	var n = 10;

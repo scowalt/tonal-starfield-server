@@ -4,8 +4,8 @@
     <meta charset="UTF-8"/>
     <title></title>
 
-<!-- 	<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="css/client.css" media="screen"/> -->
+	<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/client.css" media="screen"/>
 	<script src="js/draw.js"></script>
 	<script src="js/chordmelody.js"></script>
 	<script src="js/generator.js"></script>
@@ -20,11 +20,21 @@
 		<form id="client-form" action="/client/submit" method="post">
 			<input type="submit" value="Send!"/>
 			<input type="color" id="colorpicker" name="color" value="#ff0000"/>
+			<input type="button" onClick="erase()" value="Clear"/>
 		</form>
 	</div>
 
 	<script src="/jquery/dist/jquery.min.js"></script>
 	<script>
+		$('#colorpicker').on('change', function() {  
+			paint = true;
+
+			//LOL this is how I update the color...
+			addClick(0,0,0);
+			
+		    redraw();  
+		    paint = false;
+		});  
 		$(document).ready(function onReady(){
 			$('#client-form').on('submit', function(e){
 				parseCanvas();

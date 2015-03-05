@@ -31,11 +31,7 @@ var paint = false;
 var curColor = '#ff0000';
 var curTool = 'marker';
 var curSize = 'normal';
-var sizeHotspotWidthObject = {};
-sizeHotspotWidthObject.huge = 39;
-sizeHotspotWidthObject.large = 25;
-sizeHotspotWidthObject.normal = 18;
-sizeHotspotWidthObject.small = 16;
+
 var totalLoadResources = 8;
 var curLoadResNum = 0;
 /**
@@ -43,9 +39,7 @@ var curLoadResNum = 0;
 */
 function resourceLoaded()
 {
-	//if(++curLoadResNum >= totalLoadResources){
-		redraw();
-	//}
+	redraw();
 }
 
 /**
@@ -79,7 +73,6 @@ function prepareCanvas()
 		// Mouse down location
 		var mouseX = e.pageX - this.offsetLeft;
 		var mouseY = e.pageY - this.offsetTop;
-		$('#test').text(coords.length + ' mousex:' + mouseX + ' mousey:' + mouseY);
 		coords.push({x: mouseX, y: mouseY});
 
 		paint = true;
@@ -92,7 +85,6 @@ function prepareCanvas()
 			var mouseX = e.pageX - this.offsetLeft;
 			var mouseY = e.pageY - this.offsetTop;
 			addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-			$('#test').text(coords.length + ' mousex:' + mouseX + ' mousey:' + mouseY);
 			coords.push({x: mouseX, y: mouseY});
 			redraw();
 		}
@@ -106,38 +98,6 @@ function prepareCanvas()
 	$('#canvas').mouseleave(function(e){
 		paint = false;
 	});
-/*
-	//add touch events
-	//equiv to mousedown
-	$('#canvas').bind('touchstart', function(e) {
-		// Mouse down location
-		var mouseX = e.targetTouches[0].pageX - this.offsetLeft;
-		var mouseY = e.targetTouches[0].pageY - this.offsetTop;
-		$('#test').text(coords.length + ' mousex:' + mouseX + ' mousey:' + mouseY);
-		coords.push({x: mouseX, y: mouseY});
-
-		paint = true;
-		addClick(mouseX, mouseY, false);
-		redraw();
-	});
-	//equiv to mousemove
-	$('#canvas').bind('touchmove', function(e) {
-		if(paint===true){
-			var mouseX = e.targetTouches[0].pageX - this.offsetLeft;
-			var mouseY = e.targetTouches[0].pageY - this.offsetTop;
-			addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-			$('#test').text(coords.length + ' mousex:' + mouseX + ' mousey:' + mouseY);
-			coords.push({x: mouseX, y: mouseY});
-			redraw();
-		}
-	});
-	//equiv to mouseup
-	$('#canvas').bind('touchend', function(e) {
-		paint = false;
-		redraw();
-	});
-
-	*/
 }
 
 function doTouchEnd(e){
@@ -190,6 +150,17 @@ function addClick(x, y, dragging)
 /**
 * Clears the canvas.
 */
+
+function erase()
+{
+	clickX = [];
+	clickY = [];
+	clickDrag = []
+	coords = [];
+	outputNotes = [];
+	context.clearRect(0, 0, canvasWidth, canvasHeight);
+}
+
 function clearCanvas()
 {
 	context.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -199,11 +170,7 @@ function clearCanvas()
 * Redraws the canvas.
 */
 function redraw()
-{
-	// parse what's on the canvas atm
-	//parseCanvas();
-	
-	
+{	
 	clearCanvas();
 	
 	var radius;
