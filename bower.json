@@ -10,6 +10,7 @@
     "cannon.js": "~0.6.1",
     "knockout": "~3.3.0",
     "screenfull": "~2.0.0",
-    "threex.windowresize": "*"
+    "threex.windowresize": "*",
+    "bootstrap": "~3.3.2"
   }
 }
