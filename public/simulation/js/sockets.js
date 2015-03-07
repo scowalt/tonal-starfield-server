@@ -1,6 +1,7 @@
 var Sockets = function(){
 	this.lights = null;
 	this.sound = null;
+	this.kinect = null;
 
 	this.lightsSocketConnect = function(){
 		if (this.lights){
@@ -14,6 +15,16 @@ var Sockets = function(){
 			this.sound.close();
 		}
 		this.sound = createSocket(SOUND_PORT);
+	};
+
+	this.kinectSocketConnect = function(){
+		if (this.kinect){
+			this.kinect.close();
+		}
+		this.kinect = createSocket(KINECT_PORT);
+		this.kinect.onmessage = function(message){
+			console.log(message.data);
+		}
 	};
 
 	function createSocket(port){
@@ -31,10 +42,13 @@ var Sockets = function(){
 	this.reconnect = function(){
 		ko.cleanNode($('#lightsStatus')[0]);
 		ko.cleanNode($('#soundStatus')[0]);
+		ko.cleanNode($('#kinectStatus')[0]);
 		this.lightsSocketConnect();
 		this.soundSocketConnect();
+		this.kinectSocketConnect();
 		ko.applyBindings(this.lights, $('#lightsStatus')[0]);
 		ko.applyBindings(this.sound, $('#soundStatus')[0]);
+		ko.applyBindings(this.kinect, $('#kinectStatus')[0]);
 	};
 
 	this.send = function(data){

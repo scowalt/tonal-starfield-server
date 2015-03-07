@@ -8,6 +8,7 @@
 	<div class="debug">
 		lightsSocket = <span id="lightsStatus" data-bind="text: open()">unknown</span> |
 		soundSocket = <span id="soundStatus" data-bind="text: open()">unknown</span> |
+		kinectSocket = <span id="kinectStatus" data-bind="text: open()">unknown</span> |
 		<a href="#" onclick="sockets.reconnect()">reconnect</a>
 	</div>
 
@@ -30,6 +31,7 @@
 		// sockets
 		var LIGHTS_PORT = 7445;
 		var SOUND_PORT = 7447;
+		var KINECT_PORT = 7446;
 
 		// simulation
 		var STARS_PER_FRAME = 15;
