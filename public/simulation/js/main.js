@@ -222,7 +222,11 @@ function spawnComet(e, data) {
 	var z = -100;
 
 	var color = new THREE.Color();
-	color.setHSL(Math.random(), 1, 0.5);
+	if (data) {
+		color.setHex(parseInt(data.color.replace('#', ''), 16));
+	} else {
+		color.setHSL(Math.random(), 1, 0.5);
+	}
 	var comet = new Comet({x:x, y:y, z:z}, color);
 	addComet(comet);
 	newLight = true;
