@@ -99,15 +99,14 @@ function render() {
 	var bodies = kinect.getBodies();
 	for (var id in bodies){
 		var body = bodies[id];
-		var comet = comets[index];
-		if (comet){
-			index++;
-			comet.interactWith(body.Joints.HandLeft);
-		}
-		comet = comets[index];
-		if (comet){
-			index++;
-			comet.interactWith(body.Joints.HandRight);
+		for (var hand in [body.Joints.HandLeft, body.Joints.HandRight]){
+			var comet = comets[index];
+			if (comet){
+				index++;
+				comet.interactWith(hand);
+			}
+
+
 		}
 	}
 
@@ -248,16 +247,27 @@ function rotate(){
 
 // https://github.com/mrdoob/three.js/issues/1239
 function randomSpawnLocation(){
+	var dist = camera.far;
+	var dimensions = getBackdropDimensions();
+	var width = dimensions.width;
+	var height = dimensions.height;
+	var x = 2 * Math.random() * width - width / 2 + camera.position.x;
+	var y = 2 * Math.random() * height - height / 2 + camera.position.y;
+	var z = camera.position.z - dist;
+	return new THREE.Vector3(x,y,z);
+}
+
+function getBackdropDimensions(){
 	var aspect = camera.aspect;
 	var vFOV = degInRad(camera.fov);
 	var hFOV = 2 * Math.atan( Math.tan( vFOV / 2 ) * aspect );
 	var dist = camera.far;
 	var height = 2 * Math.tan( ( vFOV / 2 ) ) * dist;
 	var width = 2 * Math.tan( ( hFOV / 2 ) ) * dist;
-	var x = 2 * Math.random() * width - width / 2 + camera.position.x;
-	var y = 2 * Math.random() * height - height / 2 + camera.position.y;
-	var z = camera.position.z - dist;
-	return new THREE.Vector3(x,y,z);
+	return {
+		width: width,
+		height: height
+	}
 }
 
 /**
