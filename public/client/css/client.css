@@ -7,7 +7,3 @@ html, body {
   overflow: hidden; /*  Disable scrollbars */
   display: block;  /* No floating content on sides */
 }
-
-
-#client-form {
-}

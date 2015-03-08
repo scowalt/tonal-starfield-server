@@ -4,6 +4,7 @@
 //play these chords
 
 var coords = [];
+var outputNotes = [];
 
 //sort ascending x
 function sortX(a, b) {
@@ -84,7 +85,7 @@ function parseCanvas() {
 	var minY = coords[0].y;
 	var maxY = coords[coords.length-1].y;
 
-	var outputNotes = [];
+	outputNotes = [];
 
 	//split signature range into n parts for n notes
 	var sectionsize = range/16;
