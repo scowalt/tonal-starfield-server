@@ -155,7 +155,7 @@ function erase()
 {
 	clickX = [];
 	clickY = [];
-	clickDrag = []
+	clickDrag = [];
 	coords = [];
 	outputNotes = [];
 	context.clearRect(0, 0, canvasWidth, canvasHeight);
