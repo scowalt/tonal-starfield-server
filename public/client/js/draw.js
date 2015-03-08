@@ -15,9 +15,9 @@
 
 var canvas;
 var context;
-var canvasWidth = window.innerWidth;
+var canvasWidth = window.innerWidth - 15;
 var tempHeight = window.innerHeight;
-var canvasHeight = (tempHeight - 100);
+var canvasHeight = (tempHeight - 150);
 var padding = 0;
 var lineWidth = 8;
 var clickX = [];
@@ -49,7 +49,7 @@ function prepareCanvas()
 	// Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
 	var canvasDiv = document.getElementById('canvasDiv');
 	canvas = document.createElement('canvas');
-	canvas.setAttribute('width', canvasWidth);
+	canvas.setAttribute('width', canvasDiv.offsetWidth);
 	canvas.setAttribute('height', canvasHeight);
 	canvas.setAttribute('id', 'canvas');
 	canvas.setAttribute('style', 'left: 0px; top: 0px; border: 1px solid #000000;');
@@ -104,10 +104,12 @@ function resizeCanvas() {
 	console.log('resized to' + window.innerWidth + 'x' + window.innerHeight);
 	var canvasDiv = document.getElementById('canvasDiv');
 	var canvas = document.getElementById('canvas');
-	canvasDiv.width = window.innerWidth;
+	canvasDiv.width = canvasDiv.offsetWidth
 	canvasDiv.height = window.innerHeight - 100;
-	canvas.width = window.innerWidth;
+	canvas.width = canvasDiv.offsetWidth
 	canvas.height = window.innerHeight - 100;
+	canvasWidth = canvasDiv.offsetWidth
+	canvasHeight = window.innerHeight - 100;
 	redraw();
 }
 
