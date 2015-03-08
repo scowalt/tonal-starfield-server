@@ -152,13 +152,6 @@ var melodyFun = function () {
     function createButtons(context1) {
         var buttonDiv = document.createElement('div');
         buttonDiv.className = 'buttonDiv';
-        /*var begin = document.createElement('input');
-        begin.type = 'button';
-        begin.value = 'start';
-        begin.onclick = beginFunc;
-        begin.className = 'button'
-        buttonDiv.appendChild(begin);*/
-
         var end = document.createElement('input');
         end.type = 'button';
         end.value = 'end';
