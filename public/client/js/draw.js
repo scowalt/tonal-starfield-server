@@ -105,11 +105,11 @@ function resizeCanvas() {
 	var canvasDiv = document.getElementById('canvasDiv');
 	var canvas = document.getElementById('canvas');
 	canvasDiv.width = canvasDiv.offsetWidth
-	canvasDiv.height = window.innerHeight - 100;
+	canvasDiv.height = window.innerHeight - 150;
 	canvas.width = canvasDiv.offsetWidth
-	canvas.height = window.innerHeight - 100;
+	canvas.height = window.innerHeight - 150;
 	canvasWidth = canvasDiv.offsetWidth
-	canvasHeight = window.innerHeight - 100;
+	canvasHeight = window.innerHeight - 150;
 	redraw();
 }
 
