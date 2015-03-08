@@ -99,15 +99,19 @@ function render() {
 	var bodies = kinect.getBodies();
 	for (var id in bodies){
 		var body = bodies[id];
-		for (var hand in [body.Joints.HandLeft, body.Joints.HandRight]){
+		var hands = [body.Joints.HandLeft, body.Joints.HandRight];
+		hands.forEach(function(hand){
 			var comet = comets[index];
 			if (comet){
 				index++;
 				comet.interactWith(hand);
 			}
+			var dimensions = getBackdropDimensions();
+			var x = hand.Position.X * dimensions.width / 2 + (dimensions.width / 2);
+			var y = hand.Position.Y * dimensions.height / 2 + (dimensions.height / 2);
+			var z = camera.far;
 
-
-		}
+		});
 	}
 
 	
@@ -267,7 +271,7 @@ function getBackdropDimensions(){
 	return {
 		width: width,
 		height: height
-	}
+	};
 }
 
 /**
