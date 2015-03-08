@@ -18,7 +18,7 @@ var context;
 var canvasWidth = window.innerWidth;
 var tempHeight = window.innerHeight;
 var canvasHeight = (tempHeight - 100);
-var padding = 25;
+var padding = 0;
 var lineWidth = 8;
 var clickX = [];
 var clickY = [];
@@ -28,8 +28,8 @@ var clickSize = [];
 var clickDrag = [];
 var paint = false;
 var curColor = '#ff0000';
-var curTool = 'marker';
-var curSize = 'normal';
+//size of pen
+var radius = 4;
 
 var totalLoadResources = 8;
 var curLoadResNum = 0;
@@ -52,7 +52,7 @@ function prepareCanvas()
 	canvas.setAttribute('width', canvasWidth);
 	canvas.setAttribute('height', canvasHeight);
 	canvas.setAttribute('id', 'canvas');
-	canvas.setAttribute('style', 'position:absolute; left: 0px; top: 0px; border: 1px solid #000000;');
+	canvas.setAttribute('style', 'left: 0px; top: 0px; border: 1px solid #000000;');
 	canvasDiv.appendChild(canvas);
 	if(typeof G_vmlCanvasManager !== 'undefined') {
 		canvas = G_vmlCanvasManager.initElement(canvas);
@@ -152,9 +152,6 @@ function addClick(x, y, dragging)
 	curColor = $('#colorpicker').val();
 	clickX.push(x);
 	clickY.push(y);
-	clickTool.push(curTool);
-	clickColor.push(curColor);
-	clickSize.push(curSize);
 	clickDrag.push(dragging);
 }
 
@@ -184,23 +181,10 @@ function redraw()
 {	
 	clearCanvas();
 	
-	var radius;
+	
 	var i = 0;
 	for(; i < clickX.length; i++)
 	{		
-		if(clickSize[i] === 'small'){
-			radius = 2;
-		}else if(clickSize[i] === 'normal'){
-			radius = 5;
-		}else if(clickSize[i] === 'large'){
-			radius = 10;
-		}else if(clickSize[i] === 'huge'){
-			radius = 20;
-		}else{
-			alert('Error: Radius is zero for click ' + i);
-			radius = 0;	
-		}
-		
 		context.beginPath();
 		if(clickDrag[i] && i){
 			context.moveTo(clickX[i-1], clickY[i-1]);
@@ -213,10 +197,8 @@ function redraw()
 		
 		context.lineJoin = 'round';
 		context.lineWidth = radius;
-
 		//setcolor
 		context.strokeStyle = curColor;
-
 		context.stroke();
 		
 	}
