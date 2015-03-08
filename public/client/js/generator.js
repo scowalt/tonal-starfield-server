@@ -96,6 +96,9 @@ function parseCanvas() {
 	
 	for(var j = minX; j < maxX; j += sectionsize){
 		var notecurmean = getMeanInRange(j, j+sectionsize);
+		if(Math.random() > 0.6){
+			outputNotes.push(0);
+		}
 		outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
 	}
 
