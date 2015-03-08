@@ -84,7 +84,7 @@ function parseCanvas() {
 	var minY = coords[0].y;
 	var maxY = coords[coords.length-1].y;
 
-	var outputChords = [];
+	var outputNotes = [];
 
 	//split signature range into n parts for n notes
 	var sectionsize = range/16;
@@ -98,7 +98,7 @@ function parseCanvas() {
 		outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
 	}
 
-	alert(outputNotes);
+	console.log(outputNotes);
 }
 
 

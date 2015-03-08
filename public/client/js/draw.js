@@ -52,7 +52,7 @@ function prepareCanvas()
 	canvas.setAttribute('width', canvasWidth);
 	canvas.setAttribute('height', canvasHeight);
 	canvas.setAttribute('id', 'canvas');
-	canvas.setAttribute('style', 'absolute; left: 0px; top: 0px; border: 1px solid #000000;');
+	canvas.setAttribute('style', 'position:absolute; left: 0px; top: 0px; border: 1px solid #000000;');
 	canvasDiv.appendChild(canvas);
 	if(typeof G_vmlCanvasManager !== 'undefined') {
 		canvas = G_vmlCanvasManager.initElement(canvas);
