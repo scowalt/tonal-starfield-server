@@ -54,6 +54,13 @@ var Comet = function(position, color){
 		sprite.position.copy(position);
 		sprite.quaternion.copy(quaternion);
 	};
+
+	this.interactWith = function(joint){
+		// apply force
+		var worldPoint = sphereBody.position;
+		var force = new CANNON.Vec3((joint.Position.X)*1000,(joint.Position.Y)*1000,0);
+		sphereBody.applyForce(force, worldPoint);
+	};
 };
 
 // static variables
