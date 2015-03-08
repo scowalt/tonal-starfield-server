@@ -231,9 +231,10 @@ function spawnComet(e, data) {
 	addComet(comet);
 	newLight = true;
 	var message = {
-		'event': 'comet',
-		'color': comet.getLight().color,
-		'lifespan': Comet.lifespan
+		'event': 'comet', // comet spawning
+		'color': comet.getLight().color, // r g b from 0 to 1
+		'colorHSL': comet.getLight().color.getHSL(), // h s l from 0 to 1
+		'lifespan': Comet.lifespan // lifespan in seconds
 	};
 	if (data){
 		message.melody = data.melody;
