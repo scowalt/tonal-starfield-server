@@ -43,7 +43,7 @@ var isRunning = false;
 //holds the order of notes being played
 var melodycount = 0;
 
-var coords = [];
+
 
 //All browsers, hooray
 context1 = new AudioContext();
@@ -204,103 +204,6 @@ var endFunc = function () {
         clearInterval(melodyInt);
         isRunning = false;
     }
-};
-//Enormous function I know, could use refactoring
-//Mostly divs and dropdown menus
-var modifierFunc = function (context1) {
-
- /*   var ddDiv = document.createElement('div');
-    ddDiv.className = 'ddDiv';
-    //key selector
-    var keydd = document.createElement('select');
-    var keyText = document.createTextNode('Key: ');
-    keydd.name = 'KeySelector';
-    keydd.className = 'selector';
-    for (var key in keys) {
-        keydd.options[keydd.length] = new Option(key, keys[key]);
-    }
-
-    keydd.onchange = function () {
-        window.key = keydd.value;
-        restart();
-    }
-    keydd.selectedIndex = 9
-
-    ddDiv.appendChild(keyText);
-    ddDiv.appendChild(keydd);
-
-    //octave selector
-    var octavedd = document.createElement('select');
-    var octaveText = document.createTextNode('Octave: ');
-    octavedd.name = 'OctaveSelector';
-    octavedd.className = 'selector';
-    for (var i = 0; i < 6; i++) {
-        octavedd.options[octavedd.length] = new Option(i, i);
-    }
-    octavedd.onchange = function () {
-        octave = octavedd.value;
-        restart();
-    }
-    octavedd.selectedIndex = 3
-    ddDiv.appendChild(octaveText);
-    ddDiv.appendChild(octavedd);
-
-    //range selector
-    var rangedd = document.createElement('select');
-    var rangeText = document.createTextNode('Range: ');
-    rangedd.name = 'RangeSelector';
-    rangedd.className = 'selector';
-    for (var i = 1; i < 5; i++) {
-        rangedd.options[rangedd.length] = new Option(i, i);
-    }
-
-    rangedd.onchange = function () {
-        window.range = rangedd.value * 8;
-        restart();
-    }
-    rangedd.selectedIndex = 1
-
-    ddDiv.appendChild(rangeText);
-    ddDiv.appendChild(rangedd);
-
-    //waveform selector
-    var waveformdd = document.createElement('select');
-    var waveformText = document.createTextNode('WaveForm: ');
-    waveformdd.name = 'WaveformSelector';
-    waveformdd.className = 'selector';
-    for (var waveform in waveforms) {
-        waveformdd.options[waveformdd.length] = new Option(waveform, waveforms[waveform]);
-        restart();
-    }
-
-    waveformdd.onchange = function () {
-        window.waveform = waveformdd.value;
-        restart();
-    }
-    waveformdd.selectedIndex = 2
-    ddDiv.appendChild(waveformText);
-    ddDiv.appendChild(waveformdd);
-
-    //bpm selector
-    var bpmdd = document.createElement('input');
-    var bpmText = document.createTextNode('BPM: ');
-    bpmdd.name = 'BPMInput';
-    bpmdd.className = 'textInput';
-    bpmdd.type = 'text';
-
-    bpmdd.onchange = function () {
-        checkBpmInput(bpmdd)
-        window.qtrNote = Math.floor(Math.pow(bpmdd.value / 60 / 1000, -1));
-        window.eigthNote = window.qtrNote / 2;
-        window.minNote = window.eigthNote;
-        restart();
-    }
-    bpmdd.value = 100
-    ddDiv.appendChild(bpmText);
-    ddDiv.appendChild(bpmdd);
-
-    context1.appendChild(ddDiv);*/
-
 };
 
 var updateBase = function () {

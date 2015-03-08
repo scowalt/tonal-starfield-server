@@ -3,18 +3,7 @@
 //play these notes
 //play these chords
 
-//var notesList = [];
-var outputNotes = [];
-//if sequencer, only use a few of the densely populated grids
-var chordlist = [
-[0,2,4],
-[1,3,5],
-[2,4,6],
-[3,5,7],
-[4,6,8]
-];
-
-var chord1, chord2, chord3, chord4;
+var coords = [];
 
 //sort ascending x
 function sortX(a, b) {

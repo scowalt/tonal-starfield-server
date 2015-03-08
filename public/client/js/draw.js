@@ -15,10 +15,9 @@
 
 var canvas;
 var context;
-var tempWidth = window.innerWidth;
-var canvasWidth = tempWidth - 100;
+var canvasWidth = window.innerWidth;
 var tempHeight = window.innerHeight;
-var canvasHeight = (tempHeight - 200);
+var canvasHeight = (tempHeight - 100);
 var padding = 25;
 var lineWidth = 8;
 var clickX = [];
@@ -53,7 +52,7 @@ function prepareCanvas()
 	canvas.setAttribute('width', canvasWidth);
 	canvas.setAttribute('height', canvasHeight);
 	canvas.setAttribute('id', 'canvas');
-	canvas.setAttribute('style', 'border:1px solid #000000;');
+	canvas.setAttribute('style', 'absolute; left: 0px; top: 0px; border: 1px solid #000000;');
 	canvasDiv.appendChild(canvas);
 	if(typeof G_vmlCanvasManager !== 'undefined') {
 		canvas = G_vmlCanvasManager.initElement(canvas);
@@ -65,6 +64,7 @@ function prepareCanvas()
 	canvas.addEventListener('touchstart', doTouchStart, false);
 	canvas.addEventListener('touchmove', doTouchMove, false);
 	canvas.addEventListener('touchend', doTouchEnd, false);
+	window.addEventListener('resize', resizeCanvas, false);
 
 	// Add mouse events
 	// ----------------
@@ -98,6 +98,17 @@ function prepareCanvas()
 	$('#canvas').mouseleave(function(e){
 		paint = false;
 	});
+}
+
+function resizeCanvas() {
+	console.log('resized to' + window.innerWidth + 'x' + window.innerHeight);
+	var canvasDiv = document.getElementById('canvasDiv');
+	var canvas = document.getElementById('canvas');
+	canvasDiv.width = window.innerWidth;
+	canvasDiv.height = window.innerHeight - 100;
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight - 100;
+	redraw();
 }
 
 function doTouchEnd(e){

@@ -7,8 +7,13 @@
 	<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/client.css" media="screen"/>
 	<script src="js/draw.js"></script>
-	<script src="js/chordmelody.js"></script>
+	<!--moving towards ChucK-->
+	<!--<script src="js/chordmelody.js"></script>-->
 	<script src="js/generator.js"></script>
+
+	<script src="jquery/dist/jquery.min.js"></script>
+
+
 </head>
 
 
@@ -24,7 +29,7 @@
 		</form>
 	</div>
 
-	<script src="/jquery/dist/jquery.min.js"></script>
+	<!--<script src="/jquery/dist/jquery.min.js"></script>-->
 	<script>
 		$('#colorpicker').on('change', function() {  
 			paint = true;
@@ -38,13 +43,14 @@
 		$(document).ready(function onReady(){
 			$('#client-form').on('submit', function(e){
 				parseCanvas();
-				//console.log(JSON.stringify(outputNotes))
 				e.preventDefault();
 
 				$.ajax({
 					url: $(this).attr('action'),
 					type: $(this).attr('method'),
-					data: {'melody' : outputNotes},
+					data: {'melody' : outputNotes,
+							'color' : curColor
+							},
 					success: function(data){
 						console.log(data);
 					}
@@ -56,5 +62,6 @@
 	<script type="text/javascript"> $(document).ready(function() {
 		prepareCanvas();
 	});</script>
+
 </body>
 </html>
