@@ -35,7 +35,9 @@ var newLight = false;
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+var kinect = new Kinect();
 var sockets = new Sockets();
+sockets.kinect = kinect;
 
 /**
  * render() is used to generate each frame
@@ -91,6 +93,24 @@ function render() {
 		var star = new Star(pos, color, speed);
 		addStar(star);
 	}
+
+	// kinect physics
+	var index = 0;
+	var bodies = kinect.getBodies();
+	for (var id in bodies){
+		var body = bodies[id];
+		var comet = comets[index];
+		if (comet){
+			index++;
+			comet.interactWith(body.Joints.HandLeft);
+		}
+		comet = comets[index];
+		if (comet){
+			index++;
+			comet.interactWith(body.Joints.HandRight);
+		}
+	}
+
 	
 	// rotate camera
 	if (rotationCounter >= rotationSpeed){
