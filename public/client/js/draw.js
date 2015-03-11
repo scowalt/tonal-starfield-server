@@ -98,17 +98,19 @@ function prepareCanvas()
 	$('#canvas').mouseleave(function(e){
 		paint = false;
 	});
+
+	drawHelpText();
 }
 
 function resizeCanvas() {
 	console.log('resized to' + window.innerWidth + 'x' + window.innerHeight);
 	var canvasDiv = document.getElementById('canvasDiv');
 	var canvas = document.getElementById('canvas');
-	canvasDiv.width = canvasDiv.offsetWidth
+	canvasDiv.width = canvasDiv.offsetWidth;
 	canvasDiv.height = window.innerHeight - 150;
-	canvas.width = canvasDiv.offsetWidth
+	canvas.width = canvasDiv.offsetWidth;
 	canvas.height = window.innerHeight - 150;
-	canvasWidth = canvasDiv.offsetWidth
+	canvasWidth = canvasDiv.offsetWidth;
 	canvasHeight = window.innerHeight - 150;
 	redraw();
 }
@@ -168,12 +170,28 @@ function erase()
 	clickDrag = [];
 	coords = [];
 	outputNotes = [];
-	context.clearRect(0, 0, canvasWidth, canvasHeight);
+	clearCanvas();
+	drawHelpText();
 }
 
 function clearCanvas()
 {
 	context.clearRect(0, 0, canvasWidth, canvasHeight);
+}
+
+/**
+ * Draw instructions onto the canvas
+ */
+function drawHelpText()
+{
+	var canvas = document.getElementById('canvas');
+	var context = canvas.getContext('2d');
+	context.font = '48px serif';
+	context.fillStyle = '#cccccc';
+	context.textAlign = 'center';
+	var x = canvas.width / 2;
+	var y = canvas.height / 2;
+	context.fillText('draw something here', x , y);
 }
 
 /**
