@@ -182,7 +182,8 @@ function clearCanvas()
 /**
  * Draw instructions onto the canvas
  */
-function drawHelpText(){
+function drawHelpText()
+{
 	var canvas = document.getElementById('canvas');
 	var context = canvas.getContext('2d');
 	context.font = '48px serif';
@@ -190,7 +191,7 @@ function drawHelpText(){
 	context.textAlign = 'center';
 	var x = canvas.width / 2;
 	var y = canvas.height / 2;
-	context.fillText('draw something', x , y);
+	context.fillText('draw something here', x , y);
 }
 
 /**
