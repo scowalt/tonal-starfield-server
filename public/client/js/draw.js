@@ -98,6 +98,8 @@ function prepareCanvas()
 	$('#canvas').mouseleave(function(e){
 		paint = false;
 	});
+
+	drawHelpText();
 }
 
 function resizeCanvas() {
@@ -169,11 +171,26 @@ function erase()
 	coords = [];
 	outputNotes = [];
 	clearCanvas();
+	drawHelpText();
 }
 
 function clearCanvas()
 {
 	context.clearRect(0, 0, canvasWidth, canvasHeight);
+}
+
+/**
+ * Draw instructions onto the canvas
+ */
+function drawHelpText(){
+	var canvas = document.getElementById('canvas');
+	var context = canvas.getContext('2d');
+	context.font = '48px serif';
+	context.fillStyle = '#cccccc';
+	context.textAlign = 'center';
+	var x = canvas.width / 2;
+	var y = canvas.height / 2;
+	context.fillText('draw something', x , y);
 }
 
 /**
