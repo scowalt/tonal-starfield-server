@@ -18,7 +18,6 @@ var rotationCounter = 0;
 var lastTime = Date.now();
 var stars = [];
 var comets = [];
-var hands = [];
 var windowResize = new THREEx.WindowResize(renderer, camera);
 
 // cannon
@@ -111,7 +110,7 @@ function render() {
 			var x = hand.Position.X * dimensions.width / 2 + (dimensions.width / 2);
 			var y = hand.Position.Y * dimensions.height / 2 + (dimensions.height / 2);
 			var z = camera.far;
-			//addHand(x, y, z, comet);
+
 		});
 	}
 
@@ -200,31 +199,20 @@ function addComet(comet){
 	comets.push(comet);
 }
 
-function addHand(x, y, z, comet){
-	var hand = new Hand(x, y, z, comet);
-	scene.add(hand.getMesh());
-	hands.push(hand);
-}
-
-function removeHand(hand, index){
-	scene.remove(hand.getMesh());
-	delete hands[index];
-}
-
 function removeStar(star, index){
 	scene.remove(star.getMesh());
 	if (star.getLight){
 		scene.remove(star.getLight());
 	}
 	world.remove(star.getBody());
-	delete stars[index];
+	stars.splice(index, 1);
 }
 
 function removeComet(comet, index){
 	scene.remove(comet.getMesh());
 	scene.remove(comet.getLight());
 	world.remove(comet.getBody());
-	delete comets[index];
+	comets.splice(index, 1);
 }
 
 function spawnComet(e, data) {
