@@ -107,10 +107,19 @@ function render() {
 				comet.interactWith(hand);
 			}
 			var dimensions = getBackdropDimensions();
-			var x = hand.Position.X * dimensions.width / 2 + (dimensions.width / 2);
-			var y = hand.Position.Y * dimensions.height / 2 + (dimensions.height / 2);
-			var z = camera.far;
-
+			var x = hand.Position.X * dimensions.width / 4;
+			var y = hand.Position.Y * dimensions.height / 4;
+			//var z = camera.far;d
+			//var x = -100;
+			//var y = -200;
+			var z = -2000;
+			var color = new THREE.Color('0xffffff');
+			if (comet){
+				color = new THREE.Color(comet.getMesh().material.color.getHexString());
+			}
+			var speed = STAR_MIN_SPEED;
+			var star = new Star(new THREE.Vector3(x, y, z), color, speed);
+			addStar(star);
 		});
 	}
 

@@ -4,13 +4,13 @@ var Star = function(position, color, speed){
 	var material = null;
 	if (Math.random() < DULL_STAR_CHANCE) {
 		material = new THREE.MeshBasicMaterial({
-			color: Star.color
+			color: color
 		});
 	} else {
 		material = new THREE.MeshLambertMaterial({
 			combine: THREE.AddOperation,
 			shininess: 100,
-			color: Star.color
+			color: color
 		});
 	}
 	var mesh = new THREE.Mesh(Star.geometry, material);
