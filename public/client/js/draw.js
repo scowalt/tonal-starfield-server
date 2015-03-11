@@ -168,7 +168,7 @@ function erase()
 	clickDrag = [];
 	coords = [];
 	outputNotes = [];
-	context.clearRect(0, 0, canvasWidth, canvasHeight);
+	clearCanvas();
 }
 
 function clearCanvas()
