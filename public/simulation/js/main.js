@@ -229,7 +229,8 @@ function spawnComet(e, data) {
 	}
 
 	// add comet to simulation
-	var comet = new Comet({x:x, y:y, z:z}, color);
+	var pos = {x:x, y:y, z:z};
+	var comet = new Comet(pos, color);
 	addComet(comet);
 	newLight = true;
 
@@ -238,7 +239,8 @@ function spawnComet(e, data) {
 		'event': 'comet', // comet spawning
 		'color': comet.getLight().color, // r g b from 0 to 1
 		'colorHSL': comet.getLight().color.getHSL(), // h s l from 0 to 1
-		'lifespan': Comet.lifespan // lifespan in seconds
+		'lifespan': Comet.lifespan, // lifespan in seconds
+		'position': pos // {x,y,z} with (0,0,z) at center of screen
 	};
 	if (data){
 		message.melody = data.melody;
