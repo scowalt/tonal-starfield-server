@@ -16,7 +16,9 @@ html, body {
 }
 
 #colorpicker {
-	display: none;
+	/* http://stackoverflow.com/a/7302101/1222411 */
+	position: absolute;
+	top: -1000000px;
 	padding: 0;
 	border: 0;
 }
