@@ -9,4 +9,4 @@ deploy:
   provider: heroku
   app: tonal-starfield
   api_key:
-    secure: iyl4Y3/4qXnj16/ksZTQsvvkTHbovZgKrwdaB4NVjRZu0PYDe4SKT+dnYKmosnIQ/AUfHdOne1INdcbTJg3Dk32mEEtutjVIe4QNQmbVZ97JrYuns2RvE3a5VpSzkH8wss0cJh6fqnCPTaqivRsgBtDuk0uv8sp1Q4Pk5yZAEjY=
+    secure: UCaaf2nh4My7e6yT5h4yqLlOwjyio5cT0BGOjlqZK2s3TAyivD++wHoHMJDVmdgxWOkVrpQC9f0VjCvbfMfyOHiOM6rauoa/nRK36Hi5Tl4yR8usZqLX7dbxBFflQ8L4iu8TFnHJy96+sFCtcunn1UzyslrtsYsCOPwQdC1sKow=
