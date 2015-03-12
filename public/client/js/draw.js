@@ -27,19 +27,10 @@ var clickTool = [];
 var clickSize = [];
 var clickDrag = [];
 var paint = false;
-var curColor = '#ff0000';
+var curColor = '#00ff00';
 //size of pen
 var radius = 4;
-
-var totalLoadResources = 8;
-var curLoadResNum = 0;
-/**
-* Calls the redraw function after all neccessary resources are loaded.
-*/
-function resourceLoaded()
-{
-	redraw();
-}
+var isClear = true; // is there nothing drawn by the user on the canvas?
 
 /**
 * Creates a canvas element, loads images, adds events, and draws the canvas for the first time.
@@ -113,6 +104,9 @@ function resizeCanvas() {
 	canvasWidth = canvasDiv.offsetWidth;
 	canvasHeight = window.innerHeight - 150;
 	redraw();
+	if (isClear){
+		drawHelpText();
+	}
 }
 
 function doTouchEnd(e){
@@ -153,6 +147,7 @@ function doTouchMove(e){
 */
 function addClick(x, y, dragging)
 {
+	isClear = false;
 	curColor = $('#colorpicker').val();
 	clickX.push(x);
 	clickY.push(y);
@@ -176,6 +171,7 @@ function erase()
 
 function clearCanvas()
 {
+	isClear = true;
 	context.clearRect(0, 0, canvasWidth, canvasHeight);
 }
 
@@ -191,7 +187,7 @@ function drawHelpText()
 	context.textAlign = 'center';
 	var x = canvas.width / 2;
 	var y = canvas.height / 2;
-	context.fillText('draw something here', x , y);
+	context.fillText('draw', x , y);
 }
 
 /**

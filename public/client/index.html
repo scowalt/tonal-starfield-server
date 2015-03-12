@@ -25,30 +25,35 @@
 			<!-- <button type="button" id="submit" onClick="parseCanvas(); beginFunc();">submit</button> -->
 		</div>
 		
-		<div class="row">		
+		<div class="row">
+			<div class="col-md-4">
+				<input class="btn btn-block" type="color" id="colorpicker" name="color" value="#00ff00"/>
+				<button id="color-picker-button" onClick="$('input#colorpicker').click()" class="btn btn-block">Choose Color</button>
+			</div>
 			<div class="col-md-4">
 				<form id="client-form" action="/client/submit" method="post">
-					<button type="submit" id="new-board-btn" class="btn btn-primary btn-block">Submit</button>
+					<button type="submit" class="btn btn-primary btn-block">Submit</button>
 				</form>
 			</div>
 			<div class="col-md-4">
-				<button onClick="erase()" id="new-board-btn" class="btn btn-danger btn-block ">Clear</button>
+				<button onClick="erase()" class="btn btn-danger btn-block ">Clear</button>
 			</div>
-			<div class="col-md-4">
-
-				<input type="color" id="colorpicker" name="color" value="#ff0000"/>
-			</div>					
 		</div>
 	</div>
 
 	<!--for server-->
 	<script src="/jquery/dist/jquery.min.js"></script>
 	<script>
-		$('#colorpicker').on('change', function() {  
+		$('#colorpicker').on('change', function(e) {
 			paint = true;
+			var picker = e.target;
+
 
 			//LOL this is how I update the color...
 			addClick(0,0,0);
+
+			console.log(picker.val);
+			$('#color-picker-button').css('background-color', picker.value);
 			
 		    redraw();  
 		    paint = false;
@@ -72,9 +77,12 @@
 		}); 
 	</script>
 
-	<script type="text/javascript"> $(document).ready(function() {
-		prepareCanvas();
-	});</script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			prepareCanvas();
+			$('#color-picker-button').css('background-color', $('#colorpicker').val());
+		});
+	</script>
 
 </body>
 </html>
