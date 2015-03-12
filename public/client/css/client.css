@@ -10,11 +10,13 @@ html, body {
 }
 
 .btn {
+	color: white;
     white-space: normal;
     width: 100%;
 }
 
 #colorpicker {
+	display: none;
 	padding: 0;
 	border: 0;
 }
