@@ -46,6 +46,7 @@ function prepareCanvas()
 	canvas.setAttribute('id', 'canvas');
 	canvas.setAttribute('style', 'left: 0px; top: 0px; border: 1px solid #000000;');
 	canvasDiv.appendChild(canvas);
+	resizeCanvas();
 	if(typeof G_vmlCanvasManager !== 'undefined') {
 		canvas = G_vmlCanvasManager.initElement(canvas);
 	}
