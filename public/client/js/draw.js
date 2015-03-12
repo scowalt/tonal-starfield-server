@@ -40,12 +40,7 @@ function prepareCanvas()
 	// Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
 	var canvasDiv = document.getElementById('canvasDiv');
 	canvas = document.createElement('canvas');
-	canvasDiv.width = canvasDiv.offsetWidth;
-	canvasDiv.height = window.innerHeight - 150;
-	canvasWidth = canvasDiv.offsetWidth;
-	canvasHeight = window.innerHeight - 150;
-
-	canvas.setAttribute('width', canvasWidth);
+	canvas.setAttribute('width', canvasDiv.offsetWidth);
 	canvas.setAttribute('height', canvasHeight);
 	canvas.setAttribute('id', 'canvas');
 	canvas.setAttribute('style', 'left: 0px; top: 0px; border: 1px solid #000000;');
