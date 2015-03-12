@@ -170,7 +170,6 @@ document.onkeypress = function onKeyPress(e) {
 		windowResize.trigger();
 	}
 };
-document.onclick = spawnComet;
 window.onresize = windowResize.trigger;
 
 /**
@@ -221,15 +220,25 @@ function spawnComet(e, data) {
 	var y = ((window.innerHeight / 2) - e.y)/2;
 	var z = -100;
 
+	// pick color
 	var color = new THREE.Color();
-	color.setHSL(Math.random(), 1, 0.5);
+	if (data) {
+		color.setHex(parseInt(data.color.replace('#', ''), 16));
+	} else {
+		color.setHSL(Math.random(), 1, 0.5);
+	}
+
+	// add comet to simulation
 	var comet = new Comet({x:x, y:y, z:z}, color);
 	addComet(comet);
 	newLight = true;
+
+	// send outgoing message
 	var message = {
-		'event': 'comet',
-		'color': comet.getLight().color,
-		'lifespan': Comet.lifespan
+		'event': 'comet', // comet spawning
+		'color': comet.getLight().color, // r g b from 0 to 1
+		'colorHSL': comet.getLight().color.getHSL(), // h s l from 0 to 1
+		'lifespan': Comet.lifespan // lifespan in seconds
 	};
 	if (data){
 		message.melody = data.melody;
