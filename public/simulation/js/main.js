@@ -35,9 +35,33 @@ var newLight = false;
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-var kinect = new Kinect();
+var kinect = new Kinect(scene);
 var sockets = new Sockets();
 sockets.kinect = kinect;
+
+var engine = new ParticleEngine();
+var settings = {
+	positionStyle : Type.CUBE,
+	positionBase : new THREE.Vector3( 0, 0, -100 ),
+	positionSpread : new THREE.Vector3( 10, 0, 10 ),
+	velocityStyle : Type.CUBE,
+	velocityBase : new THREE.Vector3( 0, 150, 0 ),
+	velocitySpread : new THREE.Vector3( 80, 50, 80 ),
+	accelerationBase : new THREE.Vector3( 0,-10,0 ),
+	particleTexture : THREE.ImageUtils.loadTexture( 'images/smokeparticle.png'),
+	angleBase : 0,
+	angleSpread : 720,
+	angleVelocityBase : 0,
+	angleVelocitySpread : 720,
+	sizeTween : new Tween( [0, 1], [32, 128] ),
+	opacityTween : new Tween( [0.8, 2], [0.5, 0] ),
+	colorTween : new Tween( [0.4, 1], [ new THREE.Vector3(0,0,0.2), new THREE.Vector3(0, 0, 0.5) ] ),
+	particlesPerSecond : 200,
+	particleDeathAge : 2.0,
+	emitterDeathAge : 60
+};
+engine.setValues(settings);
+engine.initialize();
 
 /**
  * render() is used to generate each frame
@@ -100,7 +124,7 @@ function render() {
 	for (var id in bodies){
 		var body = bodies[id];
 		var hands = [body.Joints.HandLeft, body.Joints.HandRight];
-		hands.forEach(function(hand){
+		hands.forEach(function(hand, index){
 			var comet = comets[index];
 			if (comet){
 				index++;
@@ -109,17 +133,8 @@ function render() {
 			var dimensions = getBackdropDimensions();
 			var x = hand.Position.X * dimensions.width / 4;
 			var y = hand.Position.Y * dimensions.height / 4;
-			//var z = camera.far;d
-			//var x = -100;
-			//var y = -200;
 			var z = -2000;
-			var color = new THREE.Color('0xffffff');
-			if (comet){
-				color = new THREE.Color(comet.getMesh().material.color.getHexString());
-			}
-			var speed = STAR_MIN_SPEED;
-			var star = new Star(new THREE.Vector3(x, y, z), color, speed);
-			addStar(star);
+			kinect.getSprites().id.left.getMesh().position.set(x, y, z);
 		});
 	}
 
@@ -137,6 +152,8 @@ function render() {
 	var dt = (time - lastTime) / 1000;
 	lastTime = time;
 	world.step(dt);
+
+	engine.update( 0.01 * 0.5 );
 
 	// debug info
 	stats.end();

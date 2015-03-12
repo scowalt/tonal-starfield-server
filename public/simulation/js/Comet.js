@@ -12,6 +12,7 @@ var Comet = function(position, color){
 	var sprite = new THREE.Sprite(spriteMaterial);
 	var scale = Comet.radius + 20;
 	sprite.scale.set(scale,scale,scale);
+	sprite.position.set(position.x, position.y, position.z);
 
 	// point light
 	var light = new THREE.PointLight(color.getHex(), 1, 5000);
