@@ -30,6 +30,7 @@ var paint = false;
 var curColor = '#ff0000';
 //size of pen
 var radius = 4;
+var isClear = true;
 
 var totalLoadResources = 8;
 var curLoadResNum = 0;
@@ -113,6 +114,9 @@ function resizeCanvas() {
 	canvasWidth = canvasDiv.offsetWidth;
 	canvasHeight = window.innerHeight - 150;
 	redraw();
+	if (isClear){
+		drawHelpText();
+	}
 }
 
 function doTouchEnd(e){
@@ -153,6 +157,7 @@ function doTouchMove(e){
 */
 function addClick(x, y, dragging)
 {
+	isClear = false;
 	curColor = $('#colorpicker').val();
 	clickX.push(x);
 	clickY.push(y);
@@ -176,6 +181,7 @@ function erase()
 
 function clearCanvas()
 {
+	isClear = true;
 	context.clearRect(0, 0, canvasWidth, canvasHeight);
 }
 
@@ -191,7 +197,7 @@ function drawHelpText()
 	context.textAlign = 'center';
 	var x = canvas.width / 2;
 	var y = canvas.height / 2;
-	context.fillText('draw something here', x , y);
+	context.fillText('draw', x , y);
 }
 
 /**
