@@ -55,6 +55,9 @@
 		    paint = false;
 		});  
 		$(document).ready(function onReady(){
+			prepareCanvas();
+			$('#color-picker-button').css('background-color', $('#colorpicker').val());
+
 			$('#client-form').on('submit', function(e){
 				parseCanvas();
 				e.preventDefault();
@@ -71,13 +74,6 @@
 				})
 			});
 		}); 
-	</script>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			prepareCanvas();
-			$('#color-picker-button').css('background-color', $('#colorpicker').val());
-		});
 	</script>
 
 </body>
