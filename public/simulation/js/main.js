@@ -170,7 +170,6 @@ document.onkeypress = function onKeyPress(e) {
 		windowResize.trigger();
 	}
 };
-document.onclick = spawnComet;
 window.onresize = windowResize.trigger;
 
 /**
