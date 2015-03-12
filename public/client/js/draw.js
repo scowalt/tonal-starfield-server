@@ -40,12 +40,12 @@ function prepareCanvas()
 	// Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
 	var canvasDiv = document.getElementById('canvasDiv');
 	canvas = document.createElement('canvas');
-	canvas.setAttribute('width', canvasDiv.offsetWidth;);
-	canvas.setAttribute('height', window.innerHeight - 150);
+	canvas.setAttribute('width', canvasDiv.offsetWidth);
+	canvas.setAttribute('height', canvasHeight);
 	canvas.setAttribute('id', 'canvas');
 	canvas.setAttribute('style', 'left: 0px; top: 0px; border: 1px solid #000000;');
 	canvasDiv.appendChild(canvas);
-	resizeCanvas();
+	
 	if(typeof G_vmlCanvasManager !== 'undefined') {
 		canvas = G_vmlCanvasManager.initElement(canvas);
 	}
@@ -91,6 +91,7 @@ function prepareCanvas()
 		paint = false;
 	});
 
+	resizeCanvas();
 	drawHelpText();
 }
 
