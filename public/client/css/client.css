@@ -9,7 +9,12 @@ html, body {
   background-color: #000000;
 }
 
-#new-board-btn {
+.btn {
     white-space: normal;
-    width: 100px;
+    width: 100%;
+}
+
+#colorpicker {
+	padding: 0;
+	border: 0;
 }

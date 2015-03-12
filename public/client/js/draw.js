@@ -27,20 +27,10 @@ var clickTool = [];
 var clickSize = [];
 var clickDrag = [];
 var paint = false;
-var curColor = '#ff0000';
+var curColor = '#00ff00';
 //size of pen
 var radius = 4;
-var isClear = true;
-
-var totalLoadResources = 8;
-var curLoadResNum = 0;
-/**
-* Calls the redraw function after all neccessary resources are loaded.
-*/
-function resourceLoaded()
-{
-	redraw();
-}
+var isClear = true; // is there nothing drawn by the user on the canvas?
 
 /**
 * Creates a canvas element, loads images, adds events, and draws the canvas for the first time.

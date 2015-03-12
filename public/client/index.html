@@ -25,19 +25,18 @@
 			<!-- <button type="button" id="submit" onClick="parseCanvas(); beginFunc();">submit</button> -->
 		</div>
 		
-		<div class="row">		
+		<div class="row">
+			<div class="col-md-4">
+				<input class="btn btn-block" type="color" id="colorpicker" name="TEST" value="#00ff00"/>
+			</div>
 			<div class="col-md-4">
 				<form id="client-form" action="/client/submit" method="post">
-					<button type="submit" id="new-board-btn" class="btn btn-primary btn-block">Submit</button>
+					<button type="submit" class="btn btn-primary btn-block">Submit</button>
 				</form>
 			</div>
 			<div class="col-md-4">
-				<button onClick="erase()" id="new-board-btn" class="btn btn-danger btn-block ">Clear</button>
+				<button onClick="erase()" class="btn btn-danger btn-block ">Clear</button>
 			</div>
-			<div class="col-md-4">
-
-				<input type="color" id="colorpicker" name="color" value="#ff0000"/>
-			</div>					
 		</div>
 	</div>
 
