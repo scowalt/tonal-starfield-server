@@ -37,7 +37,6 @@ var isClear = true; // is there nothing drawn by the user on the canvas?
 */
 function prepareCanvas()
 {
-	document.documentElement.requestFullscreen();
 	// Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
 	var canvasDiv = document.getElementById('canvasDiv');
 	canvas = document.createElement('canvas');
