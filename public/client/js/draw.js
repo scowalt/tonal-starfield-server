@@ -1,18 +1,3 @@
-
-// Copyright 2010 William Malone (www.williammalone.com)
-//
-// Licensed under the Apache License, Version 2.0 (the 'License');
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//   http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an 'AS IS' BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 var canvas;
 var context;
 var canvasWidth = window.innerWidth - 15;
@@ -28,6 +13,7 @@ var clickSize = [];
 var clickDrag = [];
 var paint = false;
 var curColor = '#00ff00';
+var colors = ['#ff0000', '#f00000', '#00ff00', '#00f000', '#0000f0', '#0000ff'];
 //size of pen
 var radius = 4;
 var isClear = true; // is there nothing drawn by the user on the canvas?
@@ -35,8 +21,17 @@ var isClear = true; // is there nothing drawn by the user on the canvas?
 /**
 * Creates a canvas element, loads images, adds events, and draws the canvas for the first time.
 */
+function initColor()
+{
+	curColor = colors[Math.floor(Math.random() * colors.length)];
+	var colorpicker = document.getElementById('colorpicker');
+	colorpicker.setAttribute('value', curColor);
+}
+
 function prepareCanvas()
 {
+	//init color to random
+	
 	// Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
 	var canvasDiv = document.getElementById('canvasDiv');
 	canvas = document.createElement('canvas');
