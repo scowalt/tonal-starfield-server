@@ -32,14 +32,16 @@
 					<button type="submit" id="submit" class="btn btn-primary btn-block">Submit</button>
 				</form>
 			</div>
+
+			<div class="col-md-4">
+				<button onClick="erase()" id="erase" class="btn btn-danger btn-block ">Clear</button>
+			</div>
+
 			<div class="col-md-4">
 				<input class="btn btn-block" type="color" id="colorpicker" name="color" value="#00ff00"/>
 				<button id="color-picker-button" onClick="$('input#colorpicker').click()" class="btn btn-block">Choose Color</button>
 			</div>
-			
-			<div class="col-md-4">
-				<button onClick="erase()" id="erase" class="btn btn-danger btn-block ">Clear</button>
-			</div>
+					
 		</div>
 	</div>
 
@@ -78,6 +80,13 @@
 		    paint = false;
 		});  
 		$(document).ready(function onReady(){
+			var is_chrome = navigator.userAgent.indexOf('Chrome') > -1;
+			var is_explorer = navigator.userAgent.indexOf('MSIE') > -1;
+			var is_firefox = navigator.userAgent.indexOf('Firefox') > -1;
+			var is_safari = navigator.userAgent.indexOf("Safari") > -1;
+			var is_Opera = navigator.userAgent.indexOf("Presto") > -1;
+			if ((is_chrome)&&(is_safari)) {is_safari=false;}
+
 			$("#canvasDiv").css("display", "none");
 			$("#erase").css("display", "none");
 			$("#submit").css("display", "none");
@@ -86,9 +95,11 @@
 
             $("#canvasDiv").fadeIn(1000);      
             $("#submit").delay(250).fadeIn(1000);
-            $("#color-picker-button").delay(500).fadeIn(1000);
-            $("#colorpicker").delay(500).fadeIn(1000);
-            $("#erase").delay(750).fadeIn(1000);
+            $("#erase").delay(500).fadeIn(1000);
+            if (!is_safari){
+	            $("#color-picker-button").delay(750).fadeIn(1000);
+	            $("#colorpicker").delay(750).fadeIn(1000);
+        	}
 
 			prepareCanvas();
 			$('#color-picker-button').css('background-color', $('#colorpicker').val());
