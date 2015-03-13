@@ -21,7 +21,7 @@ var Comet = function(position, color){
 		-100 + 200 * Math.random(),
 		-100 + 200 * Math.random(),
 		-1 * Comet.speed
-	)
+	);
 
 	// physics
 	var sphereBody = new CANNON.Body({
