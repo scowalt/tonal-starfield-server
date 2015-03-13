@@ -13,7 +13,7 @@ var clickSize = [];
 var clickDrag = [];
 var paint = false;
 var curColor = '#00ff00';
-var colors = ['#ff0000', '#990000', '#00ff00', '#009900', '#0000ff', '#000099', '#ffff00', '#ff00ff', '#00ffff'];
+var colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
 //size of pen
 var radius = 4;
 var isClear = true; // is there nothing drawn by the user on the canvas?
