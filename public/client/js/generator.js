@@ -5,6 +5,7 @@
 
 var coords = [];
 var outputNotes = [];
+var rangeofnotes = 12;
 
 //sort ascending x
 function sortX(a, b) {
@@ -60,10 +61,12 @@ function getMinInRange(low, high) {
 
 function convertMeanToNum(minY, maxY, mean){
 	//divide into n sections
-	var n = 10;
+	var n = rangeofnotes;
 	var sectionsize = (maxY-minY)/n;
+	console.log('sectionsize: ' + sectionsize);
 	var num = 1;
 	for(var i = minY; i < maxY; i+=sectionsize){
+	//for(var i = 0; i < window.innerHeight; i+=sectionsize){
 
 		if(mean > i && mean < (i + sectionsize)){
 			//console.log(num);
@@ -82,24 +85,27 @@ function parseCanvas() {
 	var range = maxX - minX;
 
 	coords.sort(sortY);
+	/*
 	var minY = coords[0].y;
 	var maxY = coords[coords.length-1].y;
-
+	*/
+	var minY = 0;
+	var maxY = window.innerHeight;
 	outputNotes = [];
 
 	//split signature range into n parts for n notes
-	var sectionsize = range/16;
+	var sectionsize = range/4;
 	for(var i = minX; i < maxX; i += sectionsize){
 		var curmean = getMeanInRange(i, i+sectionsize);
 	}
 
-	
 	for(var j = minX; j < maxX; j += sectionsize){
 		var notecurmean = getMeanInRange(j, j+sectionsize);
-		if(Math.random() > 0.6){
+		if(Math.random() < 0.25){
 			outputNotes.push(0);
 		}
-		outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
+		//outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
+		outputNotes.push(rangeofnotes - convertMeanToNum(minY, maxY, notecurmean));
 	}
 
 	console.log(outputNotes);
