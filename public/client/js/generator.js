@@ -5,7 +5,7 @@
 
 var coords = [];
 var outputNotes = [];
-var rangeofnotes = 12;
+var rangeofnotes = 16;
 var melodyLength = 8;
 var colorname = '';
 
@@ -82,6 +82,7 @@ function convertMeanToNum(minY, maxY, mean){
 }
 
 function parseCanvas() {
+
 	coords.sort(sortX);
 	
 	var minX = coords[0].x;
@@ -94,24 +95,22 @@ function parseCanvas() {
 	var maxY = coords[coords.length-1].y;
 	*/
 	var minY = 0;
-	var maxY = window.innerHeight;
+	var maxY = canvasHeight;
 	outputNotes = [];
 
 	//split signature range into n parts for n notes
 	var sectionsize = range/melodyLength;
-	for(var i = minX; i < maxX; i += sectionsize){
-		var curmean = getMeanInRange(i, i+sectionsize);
-	}
-
 	for(var j = minX; j < maxX; j += sectionsize){
 		var notecurmean = getMeanInRange(j, j+sectionsize);
 		tempsum_ofnotes += (rangeofnotes - convertMeanToNum(minY, maxY, notecurmean));
+		/*
 		if(tempsum_ofnotes > 14){
 			outputNotes.push(0);
 			tempsum_ofnotes = 0;
 		}
+		*/
 		//outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
-		outputNotes.push(rangeofnotes - convertMeanToNum(minY, maxY, notecurmean));
+		outputNotes.push(rangeofnotes - 3 - convertMeanToNum(minY, maxY, notecurmean));
 	}
 
 	var n_match  = ntc.name(curColor);
