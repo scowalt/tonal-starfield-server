@@ -9,6 +9,8 @@ var rangeofnotes = 12;
 var melodyLength = 8;
 var colorname = '';
 
+var tempsum_ofnotes = 0;
+
 //sort ascending x
 function sortX(a, b) {
 	return a.x - b.x;
@@ -103,8 +105,10 @@ function parseCanvas() {
 
 	for(var j = minX; j < maxX; j += sectionsize){
 		var notecurmean = getMeanInRange(j, j+sectionsize);
-		if(Math.random() < 0.25){
+		tempsum_ofnotes += (rangeofnotes - convertMeanToNum(minY, maxY, notecurmean));
+		if(tempsum_ofnotes > 14){
 			outputNotes.push(0);
+			tempsum_ofnotes = 0;
 		}
 		//outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
 		outputNotes.push(rangeofnotes - convertMeanToNum(minY, maxY, notecurmean));
