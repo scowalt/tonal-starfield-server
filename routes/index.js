@@ -8,6 +8,7 @@ module.exports = function(io) {
 
 	router.post('/client/submit', function (req, res) {
 		io.emit('comet', req.body);
+		res.redirect('/thanks');
 		res.status(200).send('ok');
 	});
 
