@@ -117,7 +117,7 @@
 					success: function(data){
 						console.log(data);
 						$('#mymodal').modal('show');
-						var notes = JSON.stringify(outputNotes);
+						var notes = JSON.stringify(outputNotes.slice(0,4));
 						$('.modal-body').text('Your notes are ' + notes + ' and you sent color ' + curColor + '.\n');
 						$('.modal-body').append('Thank you for being a part of our exhibit!');
 					}
