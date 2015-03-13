@@ -13,7 +13,7 @@ var clickSize = [];
 var clickDrag = [];
 var paint = false;
 var curColor = '#00ff00';
-var colors = ['#ff0000', '#f00000', '#00ff00', '#00f000', '#0000f0', '#0000ff'];
+var colors = ['#ff0000', '#990000', '#00ff00', '#009900', '#0000ff', '#000099'];
 //size of pen
 var radius = 4;
 var isClear = true; // is there nothing drawn by the user on the canvas?
@@ -31,7 +31,7 @@ function initColor()
 function prepareCanvas()
 {
 	//init color to random
-	
+	initColor();
 	// Create the canvas (Neccessary for IE because it doesn't know what a canvas element is)
 	var canvasDiv = document.getElementById('canvasDiv');
 	canvas = document.createElement('canvas');
