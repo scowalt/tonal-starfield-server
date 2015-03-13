@@ -20,7 +20,7 @@
 </head>
 
 <body>
-	<div class="container-fluid">
+	<div class="container-fluid" >
 		<div class="row">
 			<div id="canvasDiv" style=""></div>
 			<!-- <button type="button" id="submit" onClick="parseCanvas(); beginFunc();">submit</button> -->
@@ -29,7 +29,7 @@
 		<div class="row">
 			<div class="col-md-4">
 				<form id="client-form" action="/client/submit" method="post">
-					<button type="submit" class="btn btn-primary btn-block">Submit</button>
+					<button type="submit" id="submit" class="btn btn-primary btn-block">Submit</button>
 				</form>
 			</div>
 			<div class="col-md-4">
@@ -38,7 +38,7 @@
 			</div>
 			
 			<div class="col-md-4">
-				<button onClick="erase()" class="btn btn-danger btn-block ">Clear</button>
+				<button onClick="erase()" id="erase" class="btn btn-danger btn-block ">Clear</button>
 			</div>
 		</div>
 	</div>
@@ -78,6 +78,18 @@
 		    paint = false;
 		});  
 		$(document).ready(function onReady(){
+			$("#canvasDiv").css("display", "none");
+			$("#erase").css("display", "none");
+			$("#submit").css("display", "none");
+			$("#color-picker-button").css("display", "none");
+            $("#colorpicker").css("display", "none");
+
+            $("#canvasDiv").fadeIn(1000);      
+            $("#submit").delay(250).fadeIn(1000);
+            $("#color-picker-button").delay(500).fadeIn(1000);
+            $("#colorpicker").delay(500).fadeIn(1000);
+            $("#erase").delay(750).fadeIn(1000);
+
 			prepareCanvas();
 			$('#color-picker-button').css('background-color', $('#colorpicker').val());
 
