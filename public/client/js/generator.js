@@ -6,6 +6,8 @@
 var coords = [];
 var outputNotes = [];
 var rangeofnotes = 12;
+var melodyLength = 8;
+var colorname = '';
 
 //sort ascending x
 function sortX(a, b) {
@@ -94,7 +96,7 @@ function parseCanvas() {
 	outputNotes = [];
 
 	//split signature range into n parts for n notes
-	var sectionsize = range/4;
+	var sectionsize = range/melodyLength;
 	for(var i = minX; i < maxX; i += sectionsize){
 		var curmean = getMeanInRange(i, i+sectionsize);
 	}
@@ -108,6 +110,9 @@ function parseCanvas() {
 		outputNotes.push(rangeofnotes - convertMeanToNum(minY, maxY, notecurmean));
 	}
 
+	var n_match  = ntc.name(curColor);
+	colorname = n_match[1];
+	console.log(colorname);
 	console.log(outputNotes);
 }
 
