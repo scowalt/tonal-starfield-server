@@ -15,7 +15,7 @@
 
 	<script src="js/draw.js"></script>
 	<script src="js/generator.js"></script>
-	<script src="js/client.js"></script>
+	<script src="js/ntc.js"></script>
 	
 </head>
 
@@ -99,6 +99,7 @@
             if (!is_safari){
 	            $("#color-picker-button").delay(750).fadeIn(1000);
 	            $("#colorpicker").delay(750).fadeIn(1000);
+	            initColor();
         	}
 
 			prepareCanvas();
@@ -117,8 +118,8 @@
 					success: function(data){
 						console.log(data);
 						$('#mymodal').modal('show');
-						var notes = JSON.stringify(outputNotes);
-						$('.modal-body').text('Your notes are ' + notes + ' and you sent color ' + curColor + '.\n');
+						var notes = JSON.stringify(outputNotes.slice(0,8));
+						$('.modal-body').text('Your notes are ' + notes + ' and you sent color ' + colorname + '.\n');
 						$('.modal-body').append('Thank you for being a part of our exhibit!');
 					}
 				})
