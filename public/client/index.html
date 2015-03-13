@@ -6,13 +6,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta charset="UTF-8"/>
     <title>Client</title>
+    <script src="/jquery/dist/jquery.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css"/>
+	
 	<link rel="stylesheet" type="text/css" href="css/client.css" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="css/modal.css" media="screen"/>
 	<script src="js/draw.js"></script>
 	<script src="js/generator.js"></script>
+	<script src="js/client.js"></script>
+	
 </head>
-
 
 <body>
 	<div class="container-fluid">
@@ -38,8 +43,24 @@
 		</div>
 	</div>
 
-	<!--for server-->
-	<script src="/jquery/dist/jquery.min.js"></script>
+	<!-- Modal -->
+	<div id="mymodal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Your comet has been sent!</h4>
+		      </div>
+		      <div class="modal-body">
+		      
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+	</div>
+
 	<script>
 		$('#colorpicker').on('change', function(e) {
 			paint = true;
@@ -71,6 +92,10 @@
 							},
 					success: function(data){
 						console.log(data);
+						$('#mymodal').modal('show');
+						var notes = JSON.stringify(outputNotes);
+						$('.modal-body').text('Your notes are ' + notes + ' and you sent color ' + curColor + '.\n');
+						$('.modal-body').append('Thank you for being a part of our exhibit!');
 					}
 				})
 			});
