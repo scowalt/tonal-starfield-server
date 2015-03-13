@@ -101,9 +101,10 @@ function resizeCanvas() {
 	canvasWidth = canvasDiv.offsetWidth;
 	canvasHeight = window.innerHeight - 150;
 	redraw();
+	/*
 	if (isClear){
 		drawHelpText();
-	}
+	}*/
 }
 
 function doTouchEnd(e){
@@ -144,7 +145,7 @@ function doTouchMove(e){
 */
 function addClick(x, y, dragging)
 {
-	isClear = false;
+	//isClear = false;
 	curColor = $('#colorpicker').val();
 	clickX.push(x);
 	clickY.push(y);
@@ -157,7 +158,7 @@ function addClick(x, y, dragging)
 
 function erase()
 {
-	isClear = true;
+	//isClear = true;
 	clickX = [];
 	clickY = [];
 	clickDrag = [];
