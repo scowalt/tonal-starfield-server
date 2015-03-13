@@ -17,16 +17,18 @@ var Comet = function(position, color){
 	var light = new THREE.PointLight(color.getHex(), 1, 5000);
 	light.position.set(position.x, position.y, position.z);
 
+	this.velocity = new CANNON.Vec3(
+		-100 + 200 * Math.random(),
+		-100 + 200 * Math.random(),
+		-1 * Comet.speed
+	)
+
 	// physics
 	var sphereBody = new CANNON.Body({
 		mass: 5,
 		position: new CANNON.Vec3(position.x, position.y, position.z),
 		shape: new CANNON.Sphere(Comet.radius),
-		velocity: new CANNON.Vec3(
-			-100 + 200 * Math.random(),
-			-100 + 200 * Math.random(),
-			-1 * Comet.speed
-		)
+		velocity: this.velocity
 	});
 
 	this.getLight = function(){

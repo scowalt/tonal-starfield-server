@@ -240,7 +240,9 @@ function spawnComet(e, data) {
 		'color': comet.getLight().color, // r g b from 0 to 1
 		'colorHSL': comet.getLight().color.getHSL(), // h s l from 0 to 1
 		'lifespan': Comet.lifespan, // lifespan in seconds
-		'position': pos // {x,y,z} with (0,0,z) at center of screen
+		'position': pos, // {x,y,z} with (0,0,z) at center of screen
+		'velocity': comet.velocity,
+		'far': camera.far
 	};
 	if (data){
 		message.melody = data.melody;
