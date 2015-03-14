@@ -22,6 +22,7 @@ function sortY(a, b) {
 }
 
 
+//for finding 
 function getMeanInRange(low, high) {
 	var sum = 0;
 	var count = 1;
@@ -103,14 +104,15 @@ function parseCanvas() {
 	for(var j = minX; j < maxX; j += sectionsize){
 		var notecurmean = getMeanInRange(j, j+sectionsize);
 		tempsum_ofnotes += (rangeofnotes - convertMeanToNum(minY, maxY, notecurmean));
-		/*
+		
 		if(tempsum_ofnotes > 14){
+			outputNotes.pop();
 			outputNotes.push(0);
 			tempsum_ofnotes = 0;
 		}
-		*/
+		
 		//outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
-		outputNotes.push(rangeofnotes - 3 - convertMeanToNum(minY, maxY, notecurmean));
+		outputNotes.push(1 + rangeofnotes - convertMeanToNum(minY, maxY, notecurmean));
 	}
 
 	var n_match  = ntc.name(curColor);
