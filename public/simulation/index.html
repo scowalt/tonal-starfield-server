@@ -9,14 +9,12 @@
 	<div class="debug">
 		lightsSocket = <span id="lightsStatus" data-bind="text: open()">unknown</span> |
 		soundSocket = <span id="soundStatus" data-bind="text: open()">unknown</span> |
-		kinectSocket = <span id="kinectStatus" data-bind="text: open()">unknown</span> |
 		<a href="#" onclick="sockets.reconnect()">reconnect</a>
 	</div>
 
 	<!-- Libraries-->
 	<script src="/knockout/dist/knockout.js"></script>
 	<script src="/jquery/dist/jquery.min.js"></script>
-	<script src="/cannon.js/build/cannon.min.js"></script>
 	<script src="/three.js/three.min.js"></script>
 	<script src="/stats.js/build/stats.min.js"></script>
 	<script src="/timbre/timbre.dev.js"></script> <!-- TODO Pull minified version -->
@@ -35,17 +33,16 @@
 		var KINECT_PORT = 7446;
 
 		// simulation
-		var STARS_PER_FRAME = 15;
-		var STAR_MIN_SPEED = 500;
-		var STAR_SPEED_RANGE = 200;
-		var FIELD_OF_VIEW = 90;
+		var STARS_PER_FRAME = 9;
+		var STAR_MIN_SPEED = 10;
+		var STAR_SPEED_RANGE = 2;
+		var FIELD_OF_VIEW = 110;
 		var FAR = 5000;
 		var DULL_STAR_CHANCE = 0.2;
 		var rotationSpeed = 0.05; // speed of camera rotation
 	</script>
 
 	<!-- Javascript -->
-	<script src="./js/Kinect.js"></script>
 	<script src="./js/sockets.js"></script>
 	<script src="./js/Star.js"></script>
 	<script src="./js/Comet.js"></script>

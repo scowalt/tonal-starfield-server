@@ -20,10 +20,6 @@ var stars = [];
 var comets = [];
 var windowResize = new THREEx.WindowResize(renderer, camera);
 
-// cannon
-var world = new CANNON.World();
-world.gravity.set(0,0,0); // no gravity
-
 // lighting
 var light = new THREE.AmbientLight(0x3e3e3e);
 scene.add(light);
@@ -35,9 +31,7 @@ var newLight = false;
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-var kinect = new Kinect();
 var sockets = new Sockets();
-sockets.kinect = kinect;
 
 /**
  * render() is used to generate each frame
@@ -94,24 +88,6 @@ function render() {
 		addStar(star);
 	}
 
-	// kinect physics
-	var index = 0;
-	var bodies = kinect.getBodies();
-	for (var id in bodies){
-		var body = bodies[id];
-		var comet = comets[index];
-		if (comet){
-			index++;
-			comet.interactWith(body.Joints.HandLeft);
-		}
-		comet = comets[index];
-		if (comet){
-			index++;
-			comet.interactWith(body.Joints.HandRight);
-		}
-	}
-
-	
 	// rotate camera
 	if (rotationCounter >= rotationSpeed){
 		camera.rotateOnAxis(new THREE.Vector3(0,0,1), degInRad(rotationSpeed));
@@ -120,11 +96,6 @@ function render() {
 		camera.rotateOnAxis(new THREE.Vector3(0,0,1), degInRad(-rotationSpeed));
 		rotationCounter += rotationSpeed;
 	}
-
-	var time = Date.now();
-	var dt = (time - lastTime) / 1000;
-	lastTime = time;
-	world.step(dt);
 
 	// debug info
 	stats.end();
@@ -184,14 +155,12 @@ function addStar(star) {
 	if (star.getLight){
 		scene.add(star.getLight());
 	}
-	world.add(star.getBody());
 	stars.push(star);
 }
 
 function addComet(comet){
 	scene.add(comet.getMesh());
 	scene.add(comet.getLight());
-	world.add(comet.getBody());
 	comets.push(comet);
 }
 
@@ -200,14 +169,12 @@ function removeStar(star, index){
 	if (star.getLight){
 		scene.remove(star.getLight());
 	}
-	world.remove(star.getBody());
 	stars.splice(index, 1);
 }
 
 function removeComet(comet, index){
 	scene.remove(comet.getMesh());
 	scene.remove(comet.getLight());
-	world.remove(comet.getBody());
 	comets.splice(index, 1);
 }
 
@@ -242,7 +209,8 @@ function spawnComet(e, data) {
 		'lifespan': Comet.lifespan, // lifespan in seconds
 		'position': pos, // {x,y,z} with (0,0,z) at center of screen
 		'velocity': comet.velocity,
-		'far': camera.far
+		'far': camera.far,
+		'id': comet.id
 	};
 	if (data){
 		message.melody = data.melody;
