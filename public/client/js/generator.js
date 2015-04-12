@@ -5,7 +5,7 @@
 
 var coords = [];
 var outputNotes = [];
-var rangeofnotes = 14;
+var rangeofnotes = 16;
 var melodyLength = 8;
 var colorname = '';
 
@@ -112,7 +112,7 @@ function parseCanvas() {
 		}
 		
 		//outputNotes.push(convertMeanToNum(getMinInRange(j, j+sectionsize), getMaxInRange(j, j+sectionsize), notecurmean));
-		outputNotes.push(1 + rangeofnotes - convertMeanToNum(minY, maxY, notecurmean));
+		outputNotes.push(Math.max(1 + rangeofnotes - convertMeanToNum(minY, maxY, notecurmean), 0));
 	}
 
 	var n_match  = ntc.name(curColor);
