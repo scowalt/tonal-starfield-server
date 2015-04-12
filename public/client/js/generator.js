@@ -5,7 +5,7 @@
 
 var coords = [];
 var outputNotes = [];
-var rangeofnotes = 16;
+var rangeofnotes = 14;
 var melodyLength = 8;
 var colorname = '';
 

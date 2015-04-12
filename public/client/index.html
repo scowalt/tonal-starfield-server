@@ -12,10 +12,8 @@
 	<link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css"/>
 	
 	<link rel="stylesheet" type="text/css" href="css/client.css" media="screen"/>
-
-	<script src="js/draw.js"></script>
-	<script src="js/generator.js"></script>
-	<script src="js/ntc.js"></script>
+	
+	
 	
 </head>
 
@@ -54,9 +52,12 @@
 		        <h4 class="modal-title" id="myModalLabel">Your comet has been sent!</h4>
 		      </div>
 		      <div class="modal-body">
-		      
+		      	
 		      </div>
-		      <div class="modal-footer">
+
+		      
+		      <div class="modal-footer">	
+		      	<canvas id="nCanvas" width="500" height="100px" style='display: block; margin: 0 auto;'></canvas>
 		        <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
 		        SIGMusic 2015: Tonal Starfield
 		      </div>
@@ -64,6 +65,12 @@
 		  </div>
 	</div>
 
+	<!--SCRIPTS-->
+
+	<script src="js/notetocanvas.js"></script>
+	<script src="js/draw.js"></script>
+	<script src="js/generator.js"></script>
+	<script src="js/ntc.js"></script>
 	<script>
 		$('#colorpicker').on('change', function(e) {
 			paint = true;
@@ -102,14 +109,18 @@
 	            initColor();
         	}
 
+
 			prepareCanvas();
 			drawHelpText();
+
+
+
 			$('#color-picker-button').css('background-color', $('#colorpicker').val());
 
 			$('#client-form').on('submit', function(e){
 				parseCanvas();
 				e.preventDefault();
-
+				fillNoteCanvas();
 				$.ajax({
 					url: $(this).attr('action'),
 					type: $(this).attr('method'),
@@ -117,7 +128,9 @@
 							'color' : curColor
 							},
 					success: function(data){
-						console.log(data);
+						//console.log(data);
+						fillNoteCanvas();
+						//drawNotes();
 						$('#mymodal').modal('show');
 						var notes = JSON.stringify(outputNotes.slice(0,8));
 						$('.modal-body').text('Your notes are ' + notes + ' and you sent color ' + colorname + '.\n');
