@@ -1,5 +1,5 @@
 var nCanvas;
-var notesCanvasHeight = 100;
+var notesCanvasHeight = 125;
 var notesCanvasWidth = 500;
 //onload get img ready
 var restimg = new Image();
@@ -16,9 +16,14 @@ function makeNoteCanvas(){
 function fillNoteCanvas(){
 
 	var nCanvas = document.getElementById('nCanvas');
+    nCanvas.width = $(".modal-footer").width();
+    notesCanvasWidth = $(".modal-footer").width();
+    console.log('canvas width:' + nCanvas.width);
+    //nCanvas.setAttribute('width', '100%');
+    nCanvas.setAttribute('height', notesCanvasHeight);
     var c = nCanvas.getContext('2d');
     var whitespace = 0;
-    var ycoordinate = 10;
+    var ycoordinate = 20;
 
     //clearing
     c.clearRect ( 0 , 0 , canvas.width, canvas.height );
@@ -26,17 +31,19 @@ function fillNoteCanvas(){
     for (var i = 1; i <= 5; i++){
         c.strokeStyle = 'black';
         c.moveTo(0,ycoordinate);
-        c.lineTo(canvas.width,ycoordinate);
+        c.lineTo(nCanvas.width-10, ycoordinate);
         c.stroke();
         ycoordinate = ycoordinate + 15;
     }
 
+    /*
     //draw 4 beat measure line
-    c.moveTo(500/2, 10);
-    c.lineTo(500/2, 4*15 + 10);
+    c.moveTo(nCanvas.width/2, 10);
+    c.lineTo(nCanvas.width/2, 4*15 + 10);
     c.stroke();
+    */
 
-    drawNotes()
+    drawNotes();
 }
 
 function drawNotes(){
@@ -51,13 +58,13 @@ function drawNotes(){
     console.log(outputNotes.slice(0,8));
 
     /*offset by 50px on each side*/
-    var spacing = (notesCanvasWidth-100) / 8;
-    var cur_time = 15;
+    var spacing = (notesCanvasWidth-75) / 8;
+    var cur_time = 10;
     for (var i = 0; i < 8; i++){
         cur_time += spacing;
 
-        if (outputNotes[i] == 0){
-            c.drawImage(restimg, cur_time, 20, 20, 40);
+        if (outputNotes[i] === 0){
+            c.drawImage(restimg, cur_time-10, 30, 20, 40);
 
         }
         else {
