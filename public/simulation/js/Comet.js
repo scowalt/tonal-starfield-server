@@ -17,19 +17,11 @@ var Comet = function(position, color){
 	var light = new THREE.PointLight(color.getHex(), 1, 5000);
 	light.position.set(position.x, position.y, position.z);
 
-	this.velocity = new CANNON.Vec3(
-		-100 + 200 * Math.random(),
-		-100 + 200 * Math.random(),
+	this.velocity = new THREE.Vector3(
+		-1 + 2 * Math.random(),
+		-1 + 2 * Math.random(),
 		-1 * Comet.speed
 	);
-
-	// physics
-	var sphereBody = new CANNON.Body({
-		mass: 5,
-		position: new CANNON.Vec3(position.x, position.y, position.z),
-		shape: new CANNON.Sphere(Comet.radius),
-		velocity: this.velocity
-	});
 
 	this.getLight = function(){
 		return light;
@@ -39,27 +31,20 @@ var Comet = function(position, color){
 		return sprite;
 	};
 
-	this.getBody = function () {
-		return sphereBody;
-	};
-
 	this.updateMaterial = function(){
 		// do nothing, as this function is just here to match the
 		// Star prototype
 	};
 
 	this.updatePosition = function() {
-		var position = sphereBody.position;
-		var quaternion = sphereBody.quaternion;
+		var position = light.position.add(this.velocity);
 		light.position.copy(position);
-		light.quaternion.copy(quaternion);
 		sprite.position.copy(position);
-		sprite.quaternion.copy(quaternion);
 	};
 };
 
 // static variables
 Comet.radius = 30;
 Comet.geometry = new THREE.SphereGeometry(Comet.radius, 12, 12);
-Comet.speed = 100;
+Comet.speed = 2;
 Comet.lifespan = FAR / Comet.speed;

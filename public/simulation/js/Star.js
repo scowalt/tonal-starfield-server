@@ -17,21 +17,10 @@ var Star = function(position, color, speed){
 	mesh.position.set(position.x, position.y, position.z);
 	mesh.material.color.setRGB(color.red, color.blue, color.green);
 
-	// physics
-	var velocity = new CANNON.Vec3(-50 + Math.random() * 100, -50 + Math.random() * 100, speed);
-	var sphereBody = new CANNON.Body({
-		mass: 5,
-		position: new CANNON.Vec3(position.x, position.y, position.z),
-		shape: new CANNON.Sphere(Star.radius),
-		velocity: velocity
-	});
+	var velocity = new THREE.Vector3(Math.random(), Math.random(), speed);
 
 	this.getMesh = function(){
 		return mesh;
-	};
-
-	this.getBody = function () {
-		return sphereBody;
 	};
 
 	this.updateMaterial = function(){
@@ -39,8 +28,7 @@ var Star = function(position, color, speed){
 	};
 
 	this.updatePosition = function() {
-		mesh.position.copy(sphereBody.position);
-		mesh.quaternion.copy(sphereBody.quaternion);
+		mesh.position.copy(mesh.position.add(velocity));
 	};
 };
 

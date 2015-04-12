@@ -20,10 +20,6 @@ var stars = [];
 var comets = [];
 var windowResize = new THREEx.WindowResize(renderer, camera);
 
-// cannon
-var world = new CANNON.World();
-world.gravity.set(0,0,0); // no gravity
-
 // lighting
 var light = new THREE.AmbientLight(0x3e3e3e);
 scene.add(light);
@@ -101,11 +97,6 @@ function render() {
 		rotationCounter += rotationSpeed;
 	}
 
-	var time = Date.now();
-	var dt = (time - lastTime) / 1000;
-	lastTime = time;
-	world.step(dt);
-
 	// debug info
 	stats.end();
 }
@@ -164,14 +155,12 @@ function addStar(star) {
 	if (star.getLight){
 		scene.add(star.getLight());
 	}
-	world.add(star.getBody());
 	stars.push(star);
 }
 
 function addComet(comet){
 	scene.add(comet.getMesh());
 	scene.add(comet.getLight());
-	world.add(comet.getBody());
 	comets.push(comet);
 }
 
@@ -180,14 +169,12 @@ function removeStar(star, index){
 	if (star.getLight){
 		scene.remove(star.getLight());
 	}
-	world.remove(star.getBody());
 	stars.splice(index, 1);
 }
 
 function removeComet(comet, index){
 	scene.remove(comet.getMesh());
 	scene.remove(comet.getLight());
-	world.remove(comet.getBody());
 	comets.splice(index, 1);
 }
 

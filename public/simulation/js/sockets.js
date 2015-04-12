@@ -33,7 +33,6 @@ var Sockets = function(){
 		ko.cleanNode($('#soundStatus')[0]);
 		this.lightsSocketConnect();
 		this.soundSocketConnect();
-		this.kinectSocketConnect();
 		ko.applyBindings(this.lights, $('#lightsStatus')[0]);
 		ko.applyBindings(this.sound, $('#soundStatus')[0]);
 	};
