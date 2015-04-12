@@ -28,6 +28,7 @@ html, body {
 }
 
 .modal-dialog {
+  color: white;
   top: -10px;
   left: -10px;
   width: 100%;
@@ -36,6 +37,7 @@ html, body {
 }
 
 .modal-content {
+  background-color: black;
   top: 0px;
   left: 0px;
   width: 100%;

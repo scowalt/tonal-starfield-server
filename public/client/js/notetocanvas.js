@@ -29,7 +29,7 @@ function fillNoteCanvas(){
     c.clearRect ( 0 , 0 , canvas.width, canvas.height );
 	// draw the staff
     for (var i = 1; i <= 5; i++){
-        c.strokeStyle = 'black';
+        c.strokeStyle = 'white';
         c.moveTo(0,ycoordinate);
         c.lineTo(nCanvas.width-10, ycoordinate);
         c.stroke();
@@ -48,7 +48,8 @@ function fillNoteCanvas(){
 
 function drawNotes(){
 
-    restimg.src = 'http://www.clipartbest.com/cliparts/Rcd/g6k/Rcdg6koc9.svg';
+    restimg.src = 'img/rest.png';
+    restimg.style.fill = 'white';
     var nCanvas = document.getElementById('nCanvas');
     var c = nCanvas.getContext('2d');
     notesCanvasWidth = nCanvas.width;
@@ -70,6 +71,7 @@ function drawNotes(){
         else {
             var vertpos = notesCanvasHeight - outputNotes[i]*7.5;
             console.log(vertpos);
+            c.fillStyle = 'white';
             c.beginPath();
             c.arc(cur_time, vertpos, 7.5, 0, Math.PI*2, true); 
             c.closePath();
