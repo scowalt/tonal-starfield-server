@@ -23,6 +23,9 @@ var Comet = function(position, color){
 		-1 * Comet.speed
 	);
 
+	this.id = Comet.id;
+	Comet.id += 1;
+
 	this.getLight = function(){
 		return light;
 	};
@@ -48,3 +51,4 @@ Comet.radius = 30;
 Comet.geometry = new THREE.SphereGeometry(Comet.radius, 12, 12);
 Comet.speed = 2;
 Comet.lifespan = FAR / Comet.speed;
+Comet.id = 1;

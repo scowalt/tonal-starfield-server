@@ -209,7 +209,8 @@ function spawnComet(e, data) {
 		'lifespan': Comet.lifespan, // lifespan in seconds
 		'position': pos, // {x,y,z} with (0,0,z) at center of screen
 		'velocity': comet.velocity,
-		'far': camera.far
+		'far': camera.far,
+		'id': comet.id
 	};
 	if (data){
 		message.melody = data.melody;
