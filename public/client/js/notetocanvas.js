@@ -16,8 +16,8 @@ function makeNoteCanvas(){
 function fillNoteCanvas(){
 
 	var nCanvas = document.getElementById('nCanvas');
-    nCanvas.width = $(".modal-footer").width();
-    notesCanvasWidth = $(".modal-footer").width();
+    nCanvas.width = $('.modal-footer').width();
+    notesCanvasWidth = $('.modal-footer').width();
     console.log('canvas width:' + nCanvas.width);
     //nCanvas.setAttribute('width', '100%');
     nCanvas.setAttribute('height', notesCanvasHeight);

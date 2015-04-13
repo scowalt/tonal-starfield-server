@@ -10,6 +10,7 @@
     "knockout": "~3.3.0",
     "screenfull": "~2.0.0",
     "threex.windowresize": "*",
-    "bootstrap": "~3.3.2"
+    "bootstrap": "~3.3.2",
+    "ntc": "http://chir.ag/projects/ntc/ntc.js"
   }
 }
