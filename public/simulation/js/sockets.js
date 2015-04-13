@@ -1,4 +1,4 @@
-var Sockets = function(){
+var Sockets = function(soundsSocketListener){
 	this.lights = null;
 	this.sound = null;
 
@@ -14,6 +14,7 @@ var Sockets = function(){
 			this.sound.close();
 		}
 		this.sound = createSocket(SOUND_PORT);
+		this.sound.onmessage = soundsSocketListener;
 	};
 
 	function createSocket(port){

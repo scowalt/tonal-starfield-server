@@ -40,15 +40,23 @@ var Comet = function(position, color){
 	};
 
 	this.updatePosition = function() {
+		sprite.material.color.multiplyScalar(1 - COMET_FADE_RATE);
+		light.intensity = light.intensity * (1 - COMET_FADE_RATE);
 		var position = light.position.add(this.velocity);
 		light.position.copy(position);
 		sprite.position.copy(position);
 	};
+
+	this.ping = function(){
+		sprite.material.color.setHex(color.getHex());
+		light.intensity = Comet.intensity;
+	}
 };
 
 // static variables
 Comet.radius = 30;
 Comet.geometry = new THREE.SphereGeometry(Comet.radius, 12, 12);
 Comet.speed = 2;
-Comet.lifespan = FAR / Comet.speed;
+Comet.lifespan = 30; // TODO this obviously shouldn't be hard-coded
 Comet.id = 1;
+Comet.intensity = 1;

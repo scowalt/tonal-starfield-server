@@ -31,7 +31,7 @@ var newLight = false;
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-var sockets = new Sockets();
+var sockets = new Sockets(soundsSocketListener);
 
 /**
  * render() is used to generate each frame
@@ -234,6 +234,15 @@ function randomSpawnLocation(){
 	var y = 2 * Math.random() * height - height / 2 + camera.position.y;
 	var z = camera.position.z - dist;
 	return new THREE.Vector3(x,y,z);
+}
+
+function soundsSocketListener(message){
+	for(var i in comets){
+		var c = comets[i];
+		if (c.id.toString() === message.data){
+			return c.ping();
+		}
+	}
 }
 
 /**
